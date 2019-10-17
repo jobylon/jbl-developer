@@ -4,55 +4,57 @@
 #
 version: 2
 jobs:
-  build:
+  docs-build:
     branches:
       only:
         - master
     docker:
-      # specify the version you desire here
-      # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
-      - image: circleci/python:3.6.1
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
-
-    working_directory: ~/repo
+      - image: circleci/ruby:latest
 
     steps:
       - checkout
 
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "requirements.txt" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-
       - run:
-          name: install dependencies
-          command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            pip install -r requirements.txt
-
-      - save_cache:
-          paths:
-            - ./venv
-          key: v1-dependencies-{{ checksum "requirements.txt" }}
-
-      # run tests!
-      # this example uses Django's built-in test-runner
-      # other common Python testing frameworks include pytest and nose
-      # https://pytest.org
-      # https://nose.readthedocs.io
+          name: Install dependencies
+          command: bundle install
       - run:
-          name: run tests
+          name: Build docs
+          command: bundle exec middleman build --clean
+      - persist_to_workspace:
+          root: build
+          paths: html
+  docs-deploy:
+    docker:
+      - image: node:8.10.0
+    steps:
+      - checkout
+      - attach_workspace:
+          at: html
+      - run:
+          name: Disable jekyll builds
+          command: touch html/.nojekyll
+      - run:
+          name: Install and configure dependencies
           command: |
-            . venv/bin/activate
-            python manage.py test
+            npm install -g --silent gh-pages@2.0.1
+            git config user.email "it@jobylon.com"
+            git config user.name "ci-build"
+      - add_ssh_keys:
+          fingerprints:
+            - "59:ad:fd:64:71:eb:81:01:6a:d7:1a:c9:0c:19:39:af"
+      - run:
+          name: Deploy docs to gh-pages branch
+          command: gh-pages --dotfiles --message "[skip ci] Updates" --dist html
 
-      - store_artifacts:
-          path: test-reports
-          destination: test-reports
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - docs-build
+      - docs-deploy
+        requires:
+          - docs-build
+        filters:
+          branches:
+            only: master
