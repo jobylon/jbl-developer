@@ -52,7 +52,7 @@ workflows:
   build:
     jobs:
       - docs-build
-      - docs-deploy
+      - docs-deploy:
         requires:
           - docs-build
         filters:
