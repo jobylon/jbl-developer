@@ -1,0 +1,60 @@
+version: 2
+jobs:
+  docs-build:
+    docker:
+      - image: circleci/ruby:2.4-node
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: circlev2-{{ checksum "Gemfile.lock" }}
+      - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+      - save_cache:
+          key: circlev2-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - save_cache:
+          paths:
+            - ~/.bundle
+          key: v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Build docs
+          command: bundle exec middleman build --clean
+      - persist_to_workspace:
+          root: /home/circleci/project
+          paths: build
+  docs-deploy:
+    docker:
+      - image: node:8.10.0
+    steps:
+      - checkout
+      - attach_workspace:
+          at: build
+      - run:
+          name: Install and configure dependencies
+          command: |
+            npm install -g --silent gh-pages@2.1.1
+            git config user.email "it@jobylon.com"
+            git config user.name "ci-build"
+      - add_ssh_keys:
+          fingerprints:
+            - "37:e3:bb:ac:24:a4:1d:4d:a1:b0:11:f3:2a:10:db:86"
+      - run:
+          name: Deploy docs to gh-pages branch
+          command: gh-pages --dotfiles --message "[skip ci] Updates" --dist build/build
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - docs-build:
+          filters:
+            branches:
+              only: master
+      - docs-deploy:
+          requires:
+            - docs-build
+          filters:
+            branches:
+              only: master

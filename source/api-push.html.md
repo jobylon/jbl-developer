@@ -1,11 +1,9 @@
 ---
-title: API Reference
+title: Push API and Webhooks
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
-  - ruby
-  - python
-  - javascript
+  - http
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
@@ -17,223 +15,533 @@ includes:
 search: true
 ---
 
-# Introduction
+# Push API and Webhooks
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Documentation for Push API and Webhook integration.
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+# Table of Contents
 
-This example API documentation page was created with [Slate](https://github.com/lord/slate). Feel free to edit it and use it as a base for your own API's documentation.
+1. [Push API](#push-api)
+2. [Webhook](#webhooks)
+3. [A/B testing](#ab-testing)
 
-# Authentication
+## Push API
 
-> To authorize, use this code:
+> To run the examples:
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
+```
+export HOST='https://staging.jobylon.com'
+export API_VERSION='p1'
+export APP_ID='0123456789123456'
+export APP_KEY='AbC123XyZ'
 ```
 
-```python
-import kittn
+> Example:
 
-api = kittn.authorize('meowmeowmeow')
+```shell
+# Request
+curl -i \
+    -X POST "$HOST/$API_VERSION/applications/" \
+    -H "X-App-Id: $APP_ID" \
+    -H "X-App-Key: $APP_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{
+        "job_id": 123456789,
+        "first_name": "Kalle",
+        "last_name": "Kula",
+        "email": "kalle@kula.se",
+        "phone": "+4670-123456789",
+        "ln_url": "https://www.linkedin.com/in/kalle-kula-123a4567",
+        "message": "Message from the applicant...",
+        "source_type": "applied",
+        "source_json": {
+            "partner_name": "best-source",
+            "message": "Some other message...",
+            "referrer": {
+                "name": "Kella Kalu",
+                "email": "kello@kalu.se",
+                "phone": "+46123456789",
+                "avatar": "https://gravatar.com/avatar/ce757a5d51e6285434134e7b6c96ab86?s=200&d=robohash&r=g"
+            }
+            "questions": [
+                {
+                    "order": 1,
+                    "question": "Why should we hire the person?",
+                    "question_type": "text",
+                    "answer": "Because she is great!"
+                }, {
+                    "order": 2,
+                    "question": "Rank the skills",
+                    "question_type": "range",
+                    "question_args": {
+                        "min": 1,
+                        "max": 5,
+                        "step": 1,
+                        "unit": "star"
+                    },
+                    "answer": 4
+                }, {
+                    "order": 3,
+                    "question": "Where can they be located?",
+                    "question_type": "select-multiple",
+                    "question_alternatives": [
+                        "Avesta",
+                        "London",
+                        "Moskva",
+                        "New York",
+                        "Paris",
+                        "Stockholm"
+                    ],
+                    "answer": [
+                        "London",
+                        "New York",
+                        "Paris",
+                        "Stockholm"
+                    ]
+                }, {
+                  "order": 4,
+                  "question": "Do they have a EU work permit?", 
+                  "question_type": "select-one",
+                  "answer": "yes"
+                }
+            ]
+        }
+        "original_referrer": "https://bestreferrals.com/?utm_source=google&utm_medium=cpc&utm_term=earn_referrals",
+        "ab_test": 'ABTestId'
+    }'
 ```
 
 ```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+# Response
+Status Code: 201 Created
+Content-Type: application/json
+
+{'id': 123}
 ```
 
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
+> Example with files attached (multipart/form-data):
 
 ```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
+# Request
+curl -i \
+    -X POST "$HOST/$API_VERSION/applications/" \
+    -H "X-App-Id: $APP_ID" \
+    -H "X-App-Key: $APP_KEY" \
+    -F "job_id=55" \
+    -F "first_name=Kalle" \
+    -F "last_name=Kula" \
+    -F "email=kalle@kula.se" \
+    -F "phone=+4670-123456789" \
+    -F "message=Message from the applicant..." \
+    -F "source_type=applied" \
+    -F "source_json={
+        \"partner_name\": \"best-source\",
+        \"message\": \"Some other message...\"
+    }" \
+    -F "cv=@cv.pdf" \
+    -F "cover_letter=@cover_letter.pdf" \
+    -F "other_1=@other_1.pdf" \
+    -F "other_2=@other_2.pdf" \
+    -F "other_3=@other_3.pdf" \
+    -F "other_4=@other_4.pdf" \
+    -F "other_5=@other_5.pdf"
 ```
 
-```javascript
-const kittn = require('kittn');
+API for our integration partners, who want to push candidates into Jobylon.
 
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
+### Model In Jobylon every candidate can be represented by one or more
+applications, where every application relates to a job.
+
+### Workflow The 3:rd party app registers with Jobylon and gets one or more
+sets of credentials plus one or more feeds, that contains the promotions or
+jobs for one or more companies. The app uses the credentials and a job_id
+(found in the feed) to push new applications to Jobylon.
+
+The type of feed (promotion or job) depends on the type of data required by the
+app and how our clients' contract work with the 3:rd party. If the 3:rd party
+do not require any extra information (such as purchase information) a simple
+job feed will be provided, otherwise a promotion feed will be provided. The
+promotion feed wraps a job and contains extra information.
+
+### Application
+
+#### Create <a name="create-application"></a>
+
+POST /applications/
+
+**Query String Parameters**
+
+None
+
+**Request Payload**
+
+| Name               | Type    | Mandatory? | Description                                |
+| ---                | ---     | ---        | ---                                        |
+| job_id             | integer | yes        | Applicant first name                       |
+| first_name         | string  | yes        | Applicant first name                       |
+| last_name          | string  | yes        | Applicant last name                        |
+| email              | string  |            | Applicant email                            |
+| phone              | string  |            | Applicant phone                            |
+| ln_url             | URL     |            | Applicant LinkedIn URL (will be validated) |
+| message            | string  |            | Message from the applicant                 |
+| source_type        | string  | yes        | Source type (applied/applied-silent/recommended/sourced). If set to applied, a thank-you email will be sent to the applicant. |
+| source_json        | object  | yes        | Additional source data (partner dependent, but using the data from the example will be nicely styled in Jobylon. |
+| cv                 | file    |            | Application file (supported using multipart/form-data)  |
+| cover_letter       | file    |            | Application file (supported using multipart/form-data)  |
+| other_1            | file    |            | Application file (supported using multipart/form-data)  |
+| other_2            | file    |            | Application file (supported using multipart/form-data)  |
+| other_3            | file    |            | Application file (supported using multipart/form-data)  |
+| other_4            | file    |            | Application file (supported using multipart/form-data)  |
+| other_5            | file    |            | Application file (supported using multipart/form-data)  |
+| ab_test            | string  |            | A unique identifier used for A/B testing                |
+| original_referrer  | string  |            | Value used to keep track on the application origin (used in analytics) |
+
+
+**Response**
+
+| Name | Type    | Description    |
+| ---  | ---     | ---            |
+| id   | integer | Application ID |
+
+**Exceptions**
+
+| Status | Description                                          |
+| ---    | ---                                                  |
+| 400    | Bad request, job_id that app doesn't have access to. |
+| 403    | Permission denied                                    |
+| 405    | Method not supported                                 |
+
+## Webhooks
+
+Callback API for our intergration partners who want to receive and act upon
+different Jobylon events.
+
+### Model
+
+In Jobylon every webhook has a client url and an event type that it is
+subscribed to.
+
+### Workflow
+
+After the third-party party app registers with Jobylon; they can request
+webhook intergration by providing a url and the type of events it should
+subscribe to. The webhook will use these details to send notifications when an
+event occurs.
+
+When the event is sent to the url the webhook expects a successful response
+(HTTP 2XX).  In the case it does not receive a valid response, it will retry
+again immediately and then after 10 seconds, 100 seconds, 1000 seconds (~17
+minutes), 10000 seconds (~2.8 hours) and 100000 seconds (~a day and three
+hours).
+
+### Headers
+
+You can request us to provide you with custom headers if you so choose.
+
+### Authentication
+
+You can request us to provide `basic authentication` by providing a username and password of your choosing.
+
+### Limit IP
+
+You can limit the IPs that the callback comes from by letting us know.
+
+### Event Types
+
+i. [Application Event](#applicationevent)  
+ii. [Job Event](#jobevent)
+
+
+#### ApplicationEvent
+
+**Actions**
+
+| Name           | Description                              |
+| ---            | ---                                      |
+| created        | Application created                      |
+| rejection_sent | Rejection communicated/sent to applicant |
+| status_changed | Application status updated               |
+
+**Request Payload**
+
+| Name        | Type   | Description                               |
+| ---         | ---    | ---                                       |
+| event_type  | string | "application"                             |
+| action      | string | Action triggering the event (see above)   |
+| application | object | The [application](#application-1) object  |
+
+#### JobEvent
+
+**Actions**
+
+| Name           | Description                         |
+| ---            | ---                                 |
+| created        | Job created                         |
+| updated        | Job was updated                     |
+| status_changed | Job status was specifically updated |
+
+**Request Payload**
+
+| Name       | Type   | Description                             |
+| ---        | ---    | ---                                     |
+| event_type | string | "job"                                   |
+| action     | string | Action triggering the event (see above) |
+| job        | object | The [job](#job) object                  |
+
+> Example:
+
 ```
+# Note this example is for an application event
+# Request
+Request Method: POST
+Content-Type: application/json
 
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
+{
+  "event_type": "application",
+  "action": "status_changed",
+  "application": {
     "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
+    "first_name": "Kalle",
+    "last_name": "Kula",
+    "email": "kalle@kula.se",
+    "source_type": "applied",
+    "status": {
+      "id": 2,
+      "name": "In Progress",
+      "group": 1,
+    },
+    "owner": {
+      "id": 1,
+      "name": "Application Owner",
+    },
+    "rejection_sent": false,
+    "ab_test": 'ab-test-1',
+    "job": {
+      "id": 1,
+      "title": "Some title",
+      "from_date": "2018-01-01T00:00:00.001Z",
+      "to_date": null,
+      "status": 1,
+      "contact_name": "Manager's Name",
+      "contact_email": "manager@company.com",
+      "employment_type": {
+        "id": 1,
+        "text": "Full-time",
+      },
+      "experience": {
+        "id": 1,
+        "text": "Entry level",
+      },
+      "function": {
+        "id": 1,
+        "text": "IT & Infrastructure",
+      },
+      "language": "sv",
+      "location_set": [
+        {
+          "location": "Stockholm",
+          "location_json": {
+            "country_short": "SE", 
+            "city": "Stockholm", 
+            "url": "https://maps.google.com/?q=Stockholm,+Sweden&ftid=0x465f763119640bcb:0xa80d27d3679d7766", 
+            "country": "Sweden", 
+            "place_id": "ChIJywtkGTF2X0YRZnedZ9MnDag", 
+            "area_1_short": "Stockholm County", 
+            "area_1": "Stockholm County", 
+            "city_short": "Stockholm"
+          },
+        },
+      ],
+      "categories": [
+        {
+          "id": 1,
+          "text": "Technology",
+        },
+      ],
+      "departments": [
+        {
+          "id": 1,
+          "text": "IT",
+        },
+      ],
+      "company": {
+        "id": 1,
+        "name": "Some Company",
+      },
+      "owner": {
+        "id": 2,
+        "name": "Job Owner",
+      },
+    },
   },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
 }
 ```
 
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
+```
+# Response
+Status Code: 2XX
 ```
 
-```python
-import kittn
+### Appendix
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
+#### Application
 
-```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
-```
+| Name           | Type    | Description                                                                   |
+| ---            | ---     | ---                                                                           |
+| id             | integer | Application ID                                                                |
+| first_name     | string  | First name                                                                    |
+| last_name      | string  | Last name                                                                     |
+| email          | string  | Email                                                                         |
+| rejection_sent | boolean | Info regarding if the rejection has been communicated to the applicant or not |
+| status         | object  | The [status](#status) object                                                  |
+| source_type    | string  | The [source](#source-type) where the application was received                 |
+| job            | object  | The [job](#job) object                                                        |
+| owner          | object  | The [user](#user) that owns the application                                   |
+| ab_test        | string  | A unique identifier used for A/B testing                                      |
 
-```javascript
-const kittn = require('kittn');
+##### Source Type
 
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
+| Value            | Description                                                        |
+| ---              | ---                                                                |
+| 'applied'        | Applied (thank-you email sent by Jobylon)                          |
+| 'applied-silent' | Applied through partner (thank-you email possibly sent by partner) |
+| 'imported'       | Imported                                                           |
+| 'recommended'    | Recommended                                                        |
+| 'sourced'        | Sourced                                                            |
+| 'uploaded'       | Uploaded                                                           |
 
-> The above command returns JSON structured like this:
+##### Status
 
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
-```
+| Name  | Type    | Description                             |
+| ---   | ---     | ---                                     |
+| id    | integer | Status ID                               |
+| name  | string  | Status name                             |
+| group | integer | The [status group](#status-group) value |
 
-This endpoint deletes a specific kitten.
+##### Status Group
 
-### HTTP Request
+| Value | Description |
+| ---   | ---         |
+| 0     | New         |
+| 1     | In progress |
+| 19    | Rejected    |
+| 20    | Hired       |
+| 21    | On hold     |
 
-`DELETE http://example.com/kittens/<ID>`
+##### Job
 
-### URL Parameters
+| Name            | Type                   | Description                                             |
+| ---             | ---                    | ---                                                     |
+| id              | integer                | Job ID                                                  |
+| title           | string                 | Title of the job                                        |
+| from_date       | string (date-time UTC) | Datetime job first created                              |
+| to_date         | string (date-time UTC) | Deadline for the job                                    |
+| contact_name    | string                 | Contact name                                            |
+| contact_email   | string                 | Contact email                                           |
+| language        | string                 | The [language](#language) of the job                    |
+| location_set    | array                  | The [location(s)](#location) of the job                 |
+| categories      | array                  | The [categories](#category) that this job belongs to    |
+| departments     | array                  | The [departments](#department) that this job belongs to |
+| status          | string                 | The [job status](#job-status) value                     |
+| company         | object                 | The [company](#company) object                          |
+| owner           | object                 | The [user](#user) that owns the job                     |
+| employment_type | object                 | The [employment type](#employtment-type) object         |
+| experience      | object                 | The [experience](#experience) object                    |
+| function        | object                 | The [function](#function) object                        |
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
+##### Job Status
 
+| Value       | Description |
+| ---         | ---         |
+| 'draft'     | Draft       |
+| 'published' | Published   |
+| 'closed'    | Closed      |
+| 'archived'  | Archived    |
+
+##### Category
+
+| Name    | Type    | Description          |
+| ---     | ---     | ---                  |
+| id      | integer | Category ID          |
+| text    | string  | Category description |
+
+##### Company
+
+| Name  | Type    | Description  |
+| ---   | ---     | ---          |
+| id    | integer | Company ID   |
+| name  | string  | Name         |
+
+##### Department
+
+| Name    | Type    | Description     |
+| ---     | ---     | ---             |
+| id      | integer | Department ID   |
+| name    | string  | Department name |
+
+##### Experience
+
+| Name    | Type    | Description            |
+| ---     | ---     | ---                    |
+| id      | integer | Experience ID          |
+| text    | string  | Experience description |
+
+##### Employment Type
+
+| Name    | Type    | Description            |
+| ---     | ---     | ---                    |
+| id      | integer | EmploymentType ID          |
+| text    | string  | EmploymentType description |
+
+##### Function
+
+| Name    | Type    | Description          |
+| ---     | ---     | ---                  |
+| id      | integer | Function ID          |
+| text    | string  | Function description |
+
+##### Language
+
+| Value | Description |
+| ---   | ---         |
+| 'da'  | Dansk       |
+| 'de'  | Deutsch     |
+| 'en'  | English     |
+| 'fi'  | Suomi       |
+| 'fr'  | Français    |
+| 'nb'  | Norsk       |
+| 'nl'  | Nederlands  |
+| 'sv'  | Svenska     |
+
+##### Location
+
+| Name          | Type   | Description                                    |
+| ---           | ---    | ---                                            |
+| location      | string | name of the location                           |
+| location_json | object | object based on the data from Google's map API |
+
+##### User
+
+| Name  | Type    | Description  |
+| ---   | ---     | ---          |
+| id    | integer | User ID      |
+| name  | string  | Name         |
+
+
+## AB Testing
+
+A/B testing for customers who want to try different application flows
+
+### Usage
+
+#### Through Jobylon
+
+You can pass the name of the A/B test as a query parameter on the Jobylon URL. The query parameter should be called `jbl_ab_test`. We will store it in the browser session storage for 30 minutes or until the session expires, whichever is shorter. In other words, it will be stored for a maximum of 30 minutes. If a new A/B testing query parameter is found on the URL, the existing one will be overridden and the timeout will be reset to 30 minutes. As long as the user ends up on the application form within 30 minutes, the A/B testing query parameter value will be stored with the application. A `ab_test` parameter is added to the application data sent to your [webhook](#webhooks).
+
+#### Through the [Push API](#push-api)
+
+Just add the `ab_test` parameter when pushing to Jobylon and the data will be stored in Jobylon.
+
+#### Notes
+
+Please ensure that the `ab_test` parameter is less than `20 characters`

@@ -4,25 +4,51 @@
   <meta charset="utf-8">
   <title>Jobylon Developer</title>
   <meta name="description" content="The Jobylon Developer Portal">
-  <!-- link rel="stylesheet" href="index.css" -->
+  <link rel="stylesheet" href="index.css">
+  <link href="https://fonts.googleapis.com/css?family=Questrial&display=swap" rel="stylesheet">
+
 </head>
 <body>
   <!-- script src="index.js"></script -->
-  <h1>Jobylon Developer Portal</h1>
-
-  <a href="api-v3.html">
-    <h2>V3 API</h2>
-    <p>Our new V3 API</p>
-  </a>
-
-  <a href="api-push.html">
-    <h2>Push API and Webhooks</h2>
-    <p>Our push api and webhooks, allowing you to push applications into Jobylon and to trigger work on application/job actions.</p>
-  </a>
-
-  <a href="api-feed.html">
-    <h2>Feed API</h2>
-    <p>Our feed api, allowing you to list details about your available jobs. Perfect for building your own career widget or promotion platforms to read published jobs.</p>
-  </a>
+  <div class="content-wrapper">
+    <header class="header">
+      <img src="images/Logo_mark_gradient_RGB.png" class="logo"/>
+      <h1 class="header-title">Jobylon Developer Portal</h1>
+    </header>
+    
+    <main class="main-wrapper">
+      <!--
+      <a href="api-v3.html" title="Joblyon V3 API" class="card jbl-lilac">
+        <h2 class="card-title">V3 API</h2>
+        <div class="line white"></div>
+        <p class="card-description">Our new V3 API</p>
+      </a>-->
+      
+      <a href="api-push.html" title="Jobylon push/webhooks api" class="card jbl-salmon">
+        <h2 class="card-title">Push API and Webhooks</h2>
+        <div class="line white"></div>
+        <p class="card-description">Our push api and webhooks, allowing you to push applications into Jobylon and to trigger work on application/job actions.</p>
+      </a>
+      
+      <!--
+      <a href="api-feed.html" title="Jobylon Feed API" class="card jbl-blue">
+        <h2 class="card-title">Feed API</h2>
+        <div class="line white"></div>
+        <p class="card-description">Our feed api, allowing you to list details about your available jobs. Perfect for building your own career widget or promotion platforms to read published jobs.</p>
+      </a>
+      -->
+    </main>
+    <footer class="footer">
+      <div class="line black"></div>
+      <div class="footer-content">
+        <a href="https://www.jobylon.com/" title="Visit us">
+          <span>
+            <img src="images/Colour_wordmark_RGB.png" class="footer-logo"/>
+          </span>
+        </a>
+        <a href="https://github.com/jobylon/" title="Jobylon on github">Github</a>
+      </div>
+    </footer>
+  </div>
 </body>
 </html>
