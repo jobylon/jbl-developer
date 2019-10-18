@@ -1,0 +1,205 @@
+/* --- CSS reset --- */
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* --- own css --- */
+/* -- General -- */
+body {
+  width: 100vw;
+  background-color: #f4f4f4;
+  color: #3b3f45;
+  font-family: 'Questrial', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.content-wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* -- header -- */
+.header {
+  width: 100%;
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.logo {
+  height: 90px;
+}
+
+.header-title {
+  font-size: 35px;
+}
+
+/* -- main content -- */
+
+.main-wrapper {
+  flex-grow: 1;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin: 10px auto;
+}
+
+.card {
+  min-width: 260px;
+  min-height: 300px;
+  max-height: 500px;
+  margin: 10px 10px;
+  padding: 10px;
+  flex-basis: 26%;
+  border-radius: 6px;
+  box-shadow: 3px 3px 4px 0px #cfd1d8;
+}
+
+.jbl-blue {
+  background-color: #4992fc;
+  /* background: linear-gradient(0deg, rgba(129,185,252,1) 0%, rgba(73,146,252,1) 100%);*/
+}
+.jbl-blue:hover {
+  /* background-color: #096bfa; /* 20% darkern than not-hover */
+  background-color: #6da7fc;
+}
+
+.jbl-salmon {
+  background-color: #ff7a6d;
+}
+.jbl-salmon:hover {
+  /*background-color: #ff3724; /* 20% darkern than not-hover */
+  background-color: #ff948a;
+}
+
+.jbl-lilac {
+  background-color: #7f73ff;
+}
+.jbl-lilac:hover {
+  /*background-color: #3b29ff; /* 20% darkern than not-hover */
+  background-color: #988ffe;
+}
+
+.card-title {
+  font-size: 24px;
+  text-align: center;
+  margin: 15px 0px;
+}
+
+.line {
+  width: 80%;
+  height: 1px;
+  opacity: 0.15;
+  margin: 0 auto;
+}
+
+.black {
+  background-color: #000;
+}
+
+.white {
+  background-color: #fff;
+}
+
+.card-description {
+  width: 80%;
+  margin: 20px auto;
+  text-align: center;
+  font-size: 18px;
+  line-height: 21px;
+}
+
+/* -- footer -- */
+.footer {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-content a {
+  padding: 0 80px;
+  color: #000;
+}
+
+.footer-content a:hover {
+  color: #4992fc;
+}
+
+.footer-logo {
+  height: 30px;
+  padding: 8px 0px;
+}
+
+.footer-logo:hover {
+  opacity: 0.5;
+}
+
+/* -- Media queries -- */
+@media (max-width: 410px) {
+  .header-title {
+    font-size: 27px;
+  }
+}
