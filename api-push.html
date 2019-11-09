@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Push API and Webhooks</title>
+    <title>API Documentation</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -198,10 +198,10 @@
     </style>
     <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print.css" rel="stylesheet" media="print" />
-      <script src="javascripts/all.js"></script>
+      <script src="javascripts/all_nosearch.js"></script>
   </head>
 
-  <body class="api-push" data-languages="[&quot;shell&quot;,&quot;http&quot;]">
+  <body class="api-push" data-languages="[]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -210,20 +210,9 @@
     </a>
     <div class="toc-wrapper">
       <img src="images/logo.png" class="logo" alt="Logo" />
-        <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="http">http</a>
-        </div>
-        <div class="search">
-          <input type="text" class="search" id="input-search" placeholder="Search">
-        </div>
-        <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
           <li>
             <a href="#push-api-and-webhooks" class="toc-h1 toc-link" data-title="Push API and Webhooks">Push API and Webhooks</a>
-          </li>
-          <li>
-            <a href="#table-of-contents" class="toc-h1 toc-link" data-title="Table of Contents">Table of Contents</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#push-api" class="toc-h2 toc-link" data-title="Push API">Push API</a>
@@ -236,26 +225,13 @@
                   </li>
               </ul>
           </li>
-          <li>
-            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
-          </li>
       </ul>
-        <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
-        </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='push-api-and-webhooks'>Push API and Webhooks</h1>
 <p>Documentation for Push API and Webhook integration.</p>
-<h1 id='table-of-contents'>Table of Contents</h1>
-<ol>
-<li><a href="#push-api">Push API</a></li>
-<li><a href="#webhooks">Webhook</a></li>
-<li><a href="#ab-testing">A/B testing</a></li>
-</ol>
 <h2 id='push-api'>Push API</h2>
 <blockquote>
 <p>To run the examples:</p>
@@ -372,10 +348,12 @@ curl -i <span class="se">\</span>
     -F <span class="s2">"other_5=@other_5.pdf"</span>
 </code></pre>
 <p>API for our integration partners, who want to push candidates into Jobylon.</p>
-<h3 id='model-in-jobylon-every-candidate-can-be-represented-by-one-or-more'>Model In Jobylon every candidate can be represented by one or more</h3>
-<p>applications, where every application relates to a job.</p>
-<h3 id='workflow-the-3-rd-party-app-registers-with-jobylon-and-gets-one-or-more'>Workflow The 3:rd party app registers with Jobylon and gets one or more</h3>
-<p>sets of credentials plus one or more feeds, that contains the promotions or
+<h3 id='model'>Model</h3>
+<p>In Jobylon every candidate can be represented by one or more
+applications, where every application relates to a job.</p>
+<h3 id='workflow'>Workflow</h3>
+<p>The 3:rd party app registers with Jobylon and gets one or more
+sets of credentials plus one or more feeds, that contains the promotions or
 jobs for one or more companies. The app uses the credentials and a job_id
 (found in the feed) to push new applications to Jobylon.</p>
 
@@ -551,10 +529,10 @@ promotion feed wraps a job and contains extra information.</p>
 <h2 id='webhooks'>Webhooks</h2>
 <p>Callback API for our intergration partners who want to receive and act upon
 different Jobylon events.</p>
-<h3 id='model'>Model</h3>
+<h3 id='model-2'>Model</h3>
 <p>In Jobylon every webhook has a client url and an event type that it is
 subscribed to.</p>
-<h3 id='workflow'>Workflow</h3>
+<h3 id='workflow-2'>Workflow</h3>
 <p>After the third-party party app registers with Jobylon; they can request
 webhook intergration by providing a url and the type of events it should
 subscribe to. The webhook will use these details to send notifications when an
@@ -572,7 +550,7 @@ hours).</p>
 <h3 id='limit-ip'>Limit IP</h3>
 <p>You can limit the IPs that the callback comes from by letting us know.</p>
 <h3 id='event-types'>Event Types</h3>
-<p>i. <a href="#applicationevent">Application Event</a><br>
+<p>i. <a href="#applicationevent">Application Event</a>
 ii. <a href="#jobevent">Job Event</a></p>
 <h4 id='applicationevent'>ApplicationEvent</h4>
 <p><strong>Actions</strong></p>
@@ -1214,73 +1192,13 @@ Status Code: 2XX
 <p>You can pass the name of the A/B test as a query parameter on the Jobylon URL. The query parameter should be called <code>jbl_ab_test</code>. We will store it in the browser session storage for 30 minutes or until the session expires, whichever is shorter. In other words, it will be stored for a maximum of 30 minutes. If a new A/B testing query parameter is found on the URL, the existing one will be overridden and the timeout will be reset to 30 minutes. As long as the user ends up on the application form within 30 minutes, the A/B testing query parameter value will be stored with the application. A <code>ab_test</code> parameter is added to the application data sent to your <a href="#webhooks">webhook</a>.</p>
 <h4 id='through-the-push-api'>Through the <a href="#push-api">Push API</a></h4>
 <p>Just add the <code>ab_test</code> parameter when pushing to Jobylon and the data will be stored in Jobylon.</p>
-<h4 id='notes'>Notes</h4>
-<p>Please ensure that the <code>ab_test</code> parameter is less than <code>20 characters</code></p>
-<h1 id='errors'>Errors</h1>
+
 <aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
+Please ensure that the <code>ab_test</code> parameter is less than <code>20 characters</code>
 </aside>
-
-<p>The Kittn API uses the following error codes:</p>
-
-<table><thead>
-<tr>
-<th>Error Code</th>
-<th>Meaning</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>400</td>
-<td>Bad Request -- Your request is invalid.</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
-</tr>
-</tbody></table>
 
       </div>
       <div class="dark-box">
-          <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="http">http</a>
-          </div>
       </div>
     </div>
   </body>
