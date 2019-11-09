@@ -6,8 +6,8 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - shell
 
 toc_footers:
-  - [Email us to get your credentials](mailto:info@jobylon.com?subject=API-key)
-  - [Documentation Powered by Slate](https://github.com/lord/slate)
+  - <a href='mailto:info@jobylon.com?subject=PushAPI-credentials'>Email us to get your credentials</a>
+  - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
 
 includes:
   - errors
