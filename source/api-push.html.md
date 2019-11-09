@@ -2,12 +2,12 @@
 title: Push API and Webhooks
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
   - http
+  - shell
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
+  - [Email us to get your credentials](mailto:info@jobylon.com?subject=API-key)
+  - [Documentation Powered by Slate](https://github.com/lord/slate)
 
 includes:
   - errors
@@ -19,11 +19,6 @@ search: true
 
 Documentation for Push API and Webhook integration.
 
-# Table of Contents
-
-1. [Push API](#push-api)
-2. [Webhook](#webhooks)
-3. [A/B testing](#ab-testing)
 
 ## Push API
 
@@ -149,10 +144,14 @@ curl -i \
 
 API for our integration partners, who want to push candidates into Jobylon.
 
-### Model In Jobylon every candidate can be represented by one or more
+### Model
+
+In Jobylon every candidate can be represented by one or more
 applications, where every application relates to a job.
 
-### Workflow The 3:rd party app registers with Jobylon and gets one or more
+### Workflow
+
+The 3:rd party app registers with Jobylon and gets one or more
 sets of credentials plus one or more feeds, that contains the promotions or
 jobs for one or more companies. The app uses the credentials and a job_id
 (found in the feed) to push new applications to Jobylon.
@@ -211,6 +210,7 @@ None
 | 403    | Permission denied                                    |
 | 405    | Method not supported                                 |
 
+
 ## Webhooks
 
 Callback API for our intergration partners who want to receive and act upon
@@ -248,7 +248,7 @@ You can limit the IPs that the callback comes from by letting us know.
 
 ### Event Types
 
-i. [Application Event](#applicationevent)  
+i. [Application Event](#applicationevent)
 ii. [Job Event](#jobevent)
 
 
@@ -542,6 +542,6 @@ You can pass the name of the A/B test as a query parameter on the Jobylon URL. T
 
 Just add the `ab_test` parameter when pushing to Jobylon and the data will be stored in Jobylon.
 
-#### Notes
-
-Please ensure that the `ab_test` parameter is less than `20 characters`
+<aside class="notice">
+Please ensure that the <code>ab_test</code> parameter is less than <code>20 characters</code>
+</aside>
