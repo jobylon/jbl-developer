@@ -2,7 +2,6 @@
 title: Push API and Webhooks
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - http
   - shell
 
 toc_footers:
@@ -15,12 +14,79 @@ includes:
 search: true
 ---
 
-# Push API and Webhooks
 
-Documentation for Push API and Webhook integration.
+# Push API
+
+API for our integration partners, who want to push candidates into Jobylon.
+
+## Model
+
+In Jobylon every candidate can be represented by one or more
+applications, where every application relates to a job.
+
+## Workflow
+
+The 3:rd party app registers with Jobylon and gets one or more
+sets of credentials plus one or more feeds, that contains the promotions or
+jobs for one or more companies. The app uses the credentials and a job_id
+(found in the feed) to push new applications to Jobylon.
+
+The type of feed (promotion or job) depends on the type of data required by the
+app and how our clients' contract work with the 3:rd party. If the 3:rd party
+do not require any extra information (such as purchase information) a simple
+job feed will be provided, otherwise a promotion feed will be provided. The
+promotion feed wraps a job and contains extra information.
+
+## Application
+
+### Create
+
+POST /applications/
+
+**Query String Parameters**
+
+None
+
+**Request Payload**
+
+| Name               | Type    | Mandatory? | Description                                |
+| ---                | ---     | ---        | ---                                        |
+| job_id             | integer | yes        | Applicant first name                       |
+| first_name         | string  | yes        | Applicant first name                       |
+| last_name          | string  | yes        | Applicant last name                        |
+| email              | string  |            | Applicant email                            |
+| phone              | string  |            | Applicant phone                            |
+| ln_url             | URL     |            | Applicant LinkedIn URL (will be validated) |
+| message            | string  |            | Message from the applicant                 |
+| source_type        | string  | yes        | Source type (applied/applied-silent/recommended/sourced). If set to applied, a thank-you email will be sent to the applicant. |
+| source_json        | object  | yes        | Additional source data (partner dependent, but using the data from the example will be nicely styled in Jobylon. |
+| cv                 | file    |            | Application file (supported using multipart/form-data)  |
+| cover_letter       | file    |            | Application file (supported using multipart/form-data)  |
+| other_1            | file    |            | Application file (supported using multipart/form-data)  |
+| other_2            | file    |            | Application file (supported using multipart/form-data)  |
+| other_3            | file    |            | Application file (supported using multipart/form-data)  |
+| other_4            | file    |            | Application file (supported using multipart/form-data)  |
+| other_5            | file    |            | Application file (supported using multipart/form-data)  |
+| ab_test            | string  |            | A unique identifier used for A/B testing                |
+| original_referrer  | string  |            | Value used to keep track on the application origin (used in analytics) |
 
 
-## Push API
+**Response**
+
+| Name | Type    | Description    |
+| ---  | ---     | ---            |
+| id   | integer | Application ID |
+
+**Exceptions**
+
+| Status | Description                                          |
+| ---    | ---                                                  |
+| 400    | Bad request, job_id that app doesn't have access to. |
+| 403    | Permission denied                                    |
+| 405    | Method not supported                                 |
+
+
+## Examples
 
 > To run the examples:
 
@@ -31,7 +97,7 @@ export APP_ID='0123456789123456'
 export APP_KEY='AbC123XyZ'
 ```
 
-> Example:
+### Basic example
 
 ```shell
 # Request
@@ -114,7 +180,7 @@ Content-Type: application/json
 {'id': 123}
 ```
 
-> Example with files attached (multipart/form-data):
+### Example with files attached (multipart/form-data)
 
 ```shell
 # Request
@@ -142,86 +208,17 @@ curl -i \
     -F "other_5=@other_5.pdf"
 ```
 
-API for our integration partners, who want to push candidates into Jobylon.
-
-### Model
-
-In Jobylon every candidate can be represented by one or more
-applications, where every application relates to a job.
-
-### Workflow
-
-The 3:rd party app registers with Jobylon and gets one or more
-sets of credentials plus one or more feeds, that contains the promotions or
-jobs for one or more companies. The app uses the credentials and a job_id
-(found in the feed) to push new applications to Jobylon.
-
-The type of feed (promotion or job) depends on the type of data required by the
-app and how our clients' contract work with the 3:rd party. If the 3:rd party
-do not require any extra information (such as purchase information) a simple
-job feed will be provided, otherwise a promotion feed will be provided. The
-promotion feed wraps a job and contains extra information.
-
-### Application
-
-#### Create <a name="create-application"></a>
-
-POST /applications/
-
-**Query String Parameters**
-
-None
-
-**Request Payload**
-
-| Name               | Type    | Mandatory? | Description                                |
-| ---                | ---     | ---        | ---                                        |
-| job_id             | integer | yes        | Applicant first name                       |
-| first_name         | string  | yes        | Applicant first name                       |
-| last_name          | string  | yes        | Applicant last name                        |
-| email              | string  |            | Applicant email                            |
-| phone              | string  |            | Applicant phone                            |
-| ln_url             | URL     |            | Applicant LinkedIn URL (will be validated) |
-| message            | string  |            | Message from the applicant                 |
-| source_type        | string  | yes        | Source type (applied/applied-silent/recommended/sourced). If set to applied, a thank-you email will be sent to the applicant. |
-| source_json        | object  | yes        | Additional source data (partner dependent, but using the data from the example will be nicely styled in Jobylon. |
-| cv                 | file    |            | Application file (supported using multipart/form-data)  |
-| cover_letter       | file    |            | Application file (supported using multipart/form-data)  |
-| other_1            | file    |            | Application file (supported using multipart/form-data)  |
-| other_2            | file    |            | Application file (supported using multipart/form-data)  |
-| other_3            | file    |            | Application file (supported using multipart/form-data)  |
-| other_4            | file    |            | Application file (supported using multipart/form-data)  |
-| other_5            | file    |            | Application file (supported using multipart/form-data)  |
-| ab_test            | string  |            | A unique identifier used for A/B testing                |
-| original_referrer  | string  |            | Value used to keep track on the application origin (used in analytics) |
-
-
-**Response**
-
-| Name | Type    | Description    |
-| ---  | ---     | ---            |
-| id   | integer | Application ID |
-
-**Exceptions**
-
-| Status | Description                                          |
-| ---    | ---                                                  |
-| 400    | Bad request, job_id that app doesn't have access to. |
-| 403    | Permission denied                                    |
-| 405    | Method not supported                                 |
-
-
-## Webhooks
+# Webhooks
 
 Callback API for our intergration partners who want to receive and act upon
 different Jobylon events.
 
-### Model
+## Model
 
 In Jobylon every webhook has a client url and an event type that it is
 subscribed to.
 
-### Workflow
+## Workflow
 
 After the third-party party app registers with Jobylon; they can request
 webhook intergration by providing a url and the type of events it should
@@ -234,19 +231,19 @@ again immediately and then after 10 seconds, 100 seconds, 1000 seconds (~17
 minutes), 10000 seconds (~2.8 hours) and 100000 seconds (~a day and three
 hours).
 
-### Headers
+## Headers
 
 You can request us to provide you with custom headers if you so choose.
 
-### Authentication
+## Authentication
 
 You can request us to provide `basic authentication` by providing a username and password of your choosing.
 
-### Limit IP
+## Limit IP
 
 You can limit the IPs that the callback comes from by letting us know.
 
-### Event Types
+## Event Types
 
 i. [Application Event](#applicationevent)
 ii. [Job Event](#jobevent)
