@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="api-push" data-languages="[&quot;http&quot;,&quot;shell&quot;]">
+  <body class="api-push" data-languages="[&quot;shell&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -211,7 +211,6 @@
     <div class="toc-wrapper">
       <img src="images/logo.png" class="logo" alt="Logo" />
         <div class="lang-selector">
-              <a href="#" data-language-name="http">http</a>
               <a href="#" data-language-name="shell">shell</a>
         </div>
         <div class="search">
@@ -220,13 +219,42 @@
         <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
           <li>
-            <a href="#push-api-and-webhooks" class="toc-h1 toc-link" data-title="Push API and Webhooks">Push API and Webhooks</a>
+            <a href="#push-api" class="toc-h1 toc-link" data-title="Push API">Push API</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#push-api" class="toc-h2 toc-link" data-title="Push API">Push API</a>
+                    <a href="#model" class="toc-h2 toc-link" data-title="Model">Model</a>
                   </li>
                   <li>
-                    <a href="#webhooks" class="toc-h2 toc-link" data-title="Webhooks">Webhooks</a>
+                    <a href="#workflow" class="toc-h2 toc-link" data-title="Workflow">Workflow</a>
+                  </li>
+                  <li>
+                    <a href="#application" class="toc-h2 toc-link" data-title="Application">Application</a>
+                  </li>
+                  <li>
+                    <a href="#examples" class="toc-h2 toc-link" data-title="Examples">Examples</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#webhooks" class="toc-h1 toc-link" data-title="Webhooks">Webhooks</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#model-2" class="toc-h2 toc-link" data-title="Model">Model</a>
+                  </li>
+                  <li>
+                    <a href="#workflow-2" class="toc-h2 toc-link" data-title="Workflow">Workflow</a>
+                  </li>
+                  <li>
+                    <a href="#headers" class="toc-h2 toc-link" data-title="Headers">Headers</a>
+                  </li>
+                  <li>
+                    <a href="#authentication" class="toc-h2 toc-link" data-title="Authentication">Authentication</a>
+                  </li>
+                  <li>
+                    <a href="#limit-ip" class="toc-h2 toc-link" data-title="Limit IP">Limit IP</a>
+                  </li>
+                  <li>
+                    <a href="#event-types" class="toc-h2 toc-link" data-title="Event Types">Event Types</a>
                   </li>
                   <li>
                     <a href="#ab-testing" class="toc-h2 toc-link" data-title="AB Testing">AB Testing</a>
@@ -245,128 +273,12 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='push-api-and-webhooks'>Push API and Webhooks</h1>
-<p>Documentation for Push API and Webhook integration.</p>
-<h2 id='push-api'>Push API</h2>
-<blockquote>
-<p>To run the examples:</p>
-</blockquote>
-<pre class="highlight plaintext"><code>export HOST='https://staging.jobylon.com'
-export API_VERSION='p1'
-export APP_ID='0123456789123456'
-export APP_KEY='AbC123XyZ'
-</code></pre>
-<blockquote>
-<p>Example:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># Request</span>
-curl -i <span class="se">\</span>
-    -X POST <span class="s2">"</span><span class="nv">$HOST</span><span class="s2">/</span><span class="nv">$API_VERSION</span><span class="s2">/applications/"</span> <span class="se">\</span>
-    -H <span class="s2">"X-App-Id: </span><span class="nv">$APP_ID</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"X-App-Key: </span><span class="nv">$APP_KEY</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    -d <span class="s1">'{
-        "job_id": 123456789,
-        "first_name": "Kalle",
-        "last_name": "Kula",
-        "email": "kalle@kula.se",
-        "phone": "+4670-123456789",
-        "ln_url": "https://www.linkedin.com/in/kalle-kula-123a4567",
-        "message": "Message from the applicant...",
-        "source_type": "applied",
-        "source_json": {
-            "partner_name": "best-source",
-            "message": "Some other message...",
-            "referrer": {
-                "name": "Kella Kalu",
-                "email": "kello@kalu.se",
-                "phone": "+46123456789",
-                "avatar": "https://gravatar.com/avatar/ce757a5d51e6285434134e7b6c96ab86?s=200&amp;d=robohash&amp;r=g"
-            }
-            "questions": [
-                {
-                    "order": 1,
-                    "question": "Why should we hire the person?",
-                    "question_type": "text",
-                    "answer": "Because she is great!"
-                }, {
-                    "order": 2,
-                    "question": "Rank the skills",
-                    "question_type": "range",
-                    "question_args": {
-                        "min": 1,
-                        "max": 5,
-                        "step": 1,
-                        "unit": "star"
-                    },
-                    "answer": 4
-                }, {
-                    "order": 3,
-                    "question": "Where can they be located?",
-                    "question_type": "select-multiple",
-                    "question_alternatives": [
-                        "Avesta",
-                        "London",
-                        "Moskva",
-                        "New York",
-                        "Paris",
-                        "Stockholm"
-                    ],
-                    "answer": [
-                        "London",
-                        "New York",
-                        "Paris",
-                        "Stockholm"
-                    ]
-                }, {
-                  "order": 4,
-                  "question": "Do they have a EU work permit?", 
-                  "question_type": "select-one",
-                  "answer": "yes"
-                }
-            ]
-        }
-        "original_referrer": "https://bestreferrals.com/?utm_source=google&amp;utm_medium=cpc&amp;utm_term=earn_referrals",
-        "ab_test": '</span>ABTestId<span class="s1">'
-    }'</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># Response</span>
-Status Code: 201 Created
-Content-Type: application/json
-
-<span class="o">{</span><span class="s1">'id'</span>: 123<span class="o">}</span>
-</code></pre>
-<blockquote>
-<p>Example with files attached (multipart/form-data):</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># Request</span>
-curl -i <span class="se">\</span>
-    -X POST <span class="s2">"</span><span class="nv">$HOST</span><span class="s2">/</span><span class="nv">$API_VERSION</span><span class="s2">/applications/"</span> <span class="se">\</span>
-    -H <span class="s2">"X-App-Id: </span><span class="nv">$APP_ID</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"X-App-Key: </span><span class="nv">$APP_KEY</span><span class="s2">"</span> <span class="se">\</span>
-    -F <span class="s2">"job_id=55"</span> <span class="se">\</span>
-    -F <span class="s2">"first_name=Kalle"</span> <span class="se">\</span>
-    -F <span class="s2">"last_name=Kula"</span> <span class="se">\</span>
-    -F <span class="s2">"email=kalle@kula.se"</span> <span class="se">\</span>
-    -F <span class="s2">"phone=+4670-123456789"</span> <span class="se">\</span>
-    -F <span class="s2">"message=Message from the applicant..."</span> <span class="se">\</span>
-    -F <span class="s2">"source_type=applied"</span> <span class="se">\</span>
-    -F <span class="s2">"source_json={
-        </span><span class="se">\"</span><span class="s2">partner_name</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">best-source</span><span class="se">\"</span><span class="s2">,
-        </span><span class="se">\"</span><span class="s2">message</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Some other message...</span><span class="se">\"</span><span class="s2">
-    }"</span> <span class="se">\</span>
-    -F <span class="s2">"cv=@cv.pdf"</span> <span class="se">\</span>
-    -F <span class="s2">"cover_letter=@cover_letter.pdf"</span> <span class="se">\</span>
-    -F <span class="s2">"other_1=@other_1.pdf"</span> <span class="se">\</span>
-    -F <span class="s2">"other_2=@other_2.pdf"</span> <span class="se">\</span>
-    -F <span class="s2">"other_3=@other_3.pdf"</span> <span class="se">\</span>
-    -F <span class="s2">"other_4=@other_4.pdf"</span> <span class="se">\</span>
-    -F <span class="s2">"other_5=@other_5.pdf"</span>
-</code></pre>
+        <h1 id='push-api'>Push API</h1>
 <p>API for our integration partners, who want to push candidates into Jobylon.</p>
-<h3 id='model'>Model</h3>
+<h2 id='model'>Model</h2>
 <p>In Jobylon every candidate can be represented by one or more
 applications, where every application relates to a job.</p>
-<h3 id='workflow'>Workflow</h3>
+<h2 id='workflow'>Workflow</h2>
 <p>The 3:rd party app registers with Jobylon and gets one or more
 sets of credentials plus one or more feeds, that contains the promotions or
 jobs for one or more companies. The app uses the credentials and a job_id
@@ -377,7 +289,7 @@ app and how our clients&#39; contract work with the 3:rd party. If the 3:rd part
 do not require any extra information (such as purchase information) a simple
 job feed will be provided, otherwise a promotion feed will be provided. The
 promotion feed wraps a job and contains extra information.</p>
-<h3 id='application'>Application</h3><h4 id='create'>Create <a name="create-application"></a></h4>
+<h2 id='application'>Application</h2><h3 id='create'>Create</h3>
 <p>POST /applications/</p>
 
 <p><strong>Query String Parameters</strong></p>
@@ -541,13 +453,119 @@ promotion feed wraps a job and contains extra information.</p>
 <td>Method not supported</td>
 </tr>
 </tbody></table>
-<h2 id='webhooks'>Webhooks</h2>
+<h2 id='examples'>Examples</h2>
+<blockquote>
+<p>To run the examples:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>export HOST='https://staging.jobylon.com'
+export API_VERSION='p1'
+export APP_ID='0123456789123456'
+export APP_KEY='AbC123XyZ'
+</code></pre><h3 id='basic-example'>Basic example</h3><pre class="highlight shell tab-shell"><code><span class="c"># Request</span>
+curl -i <span class="se">\</span>
+    -X POST <span class="s2">"</span><span class="nv">$HOST</span><span class="s2">/</span><span class="nv">$API_VERSION</span><span class="s2">/applications/"</span> <span class="se">\</span>
+    -H <span class="s2">"X-App-Id: </span><span class="nv">$APP_ID</span><span class="s2">"</span> <span class="se">\</span>
+    -H <span class="s2">"X-App-Key: </span><span class="nv">$APP_KEY</span><span class="s2">"</span> <span class="se">\</span>
+    -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+    -d <span class="s1">'{
+        "job_id": 123456789,
+        "first_name": "Kalle",
+        "last_name": "Kula",
+        "email": "kalle@kula.se",
+        "phone": "+4670-123456789",
+        "ln_url": "https://www.linkedin.com/in/kalle-kula-123a4567",
+        "message": "Message from the applicant...",
+        "source_type": "applied",
+        "source_json": {
+            "partner_name": "best-source",
+            "message": "Some other message...",
+            "referrer": {
+                "name": "Kella Kalu",
+                "email": "kello@kalu.se",
+                "phone": "+46123456789",
+                "avatar": "https://gravatar.com/avatar/ce757a5d51e6285434134e7b6c96ab86?s=200&amp;d=robohash&amp;r=g"
+            }
+            "questions": [
+                {
+                    "order": 1,
+                    "question": "Why should we hire the person?",
+                    "question_type": "text",
+                    "answer": "Because she is great!"
+                }, {
+                    "order": 2,
+                    "question": "Rank the skills",
+                    "question_type": "range",
+                    "question_args": {
+                        "min": 1,
+                        "max": 5,
+                        "step": 1,
+                        "unit": "star"
+                    },
+                    "answer": 4
+                }, {
+                    "order": 3,
+                    "question": "Where can they be located?",
+                    "question_type": "select-multiple",
+                    "question_alternatives": [
+                        "Avesta",
+                        "London",
+                        "Moskva",
+                        "New York",
+                        "Paris",
+                        "Stockholm"
+                    ],
+                    "answer": [
+                        "London",
+                        "New York",
+                        "Paris",
+                        "Stockholm"
+                    ]
+                }, {
+                  "order": 4,
+                  "question": "Do they have a EU work permit?", 
+                  "question_type": "select-one",
+                  "answer": "yes"
+                }
+            ]
+        }
+        "original_referrer": "https://bestreferrals.com/?utm_source=google&amp;utm_medium=cpc&amp;utm_term=earn_referrals",
+        "ab_test": '</span>ABTestId<span class="s1">'
+    }'</span>
+</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># Response</span>
+Status Code: 201 Created
+Content-Type: application/json
+
+<span class="o">{</span><span class="s1">'id'</span>: 123<span class="o">}</span>
+</code></pre><h3 id='example-with-files-attached-multipart-form-data'>Example with files attached (multipart/form-data)</h3><pre class="highlight shell tab-shell"><code><span class="c"># Request</span>
+curl -i <span class="se">\</span>
+    -X POST <span class="s2">"</span><span class="nv">$HOST</span><span class="s2">/</span><span class="nv">$API_VERSION</span><span class="s2">/applications/"</span> <span class="se">\</span>
+    -H <span class="s2">"X-App-Id: </span><span class="nv">$APP_ID</span><span class="s2">"</span> <span class="se">\</span>
+    -H <span class="s2">"X-App-Key: </span><span class="nv">$APP_KEY</span><span class="s2">"</span> <span class="se">\</span>
+    -F <span class="s2">"job_id=55"</span> <span class="se">\</span>
+    -F <span class="s2">"first_name=Kalle"</span> <span class="se">\</span>
+    -F <span class="s2">"last_name=Kula"</span> <span class="se">\</span>
+    -F <span class="s2">"email=kalle@kula.se"</span> <span class="se">\</span>
+    -F <span class="s2">"phone=+4670-123456789"</span> <span class="se">\</span>
+    -F <span class="s2">"message=Message from the applicant..."</span> <span class="se">\</span>
+    -F <span class="s2">"source_type=applied"</span> <span class="se">\</span>
+    -F <span class="s2">"source_json={
+        </span><span class="se">\"</span><span class="s2">partner_name</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">best-source</span><span class="se">\"</span><span class="s2">,
+        </span><span class="se">\"</span><span class="s2">message</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Some other message...</span><span class="se">\"</span><span class="s2">
+    }"</span> <span class="se">\</span>
+    -F <span class="s2">"cv=@cv.pdf"</span> <span class="se">\</span>
+    -F <span class="s2">"cover_letter=@cover_letter.pdf"</span> <span class="se">\</span>
+    -F <span class="s2">"other_1=@other_1.pdf"</span> <span class="se">\</span>
+    -F <span class="s2">"other_2=@other_2.pdf"</span> <span class="se">\</span>
+    -F <span class="s2">"other_3=@other_3.pdf"</span> <span class="se">\</span>
+    -F <span class="s2">"other_4=@other_4.pdf"</span> <span class="se">\</span>
+    -F <span class="s2">"other_5=@other_5.pdf"</span>
+</code></pre><h1 id='webhooks'>Webhooks</h1>
 <p>Callback API for our intergration partners who want to receive and act upon
 different Jobylon events.</p>
-<h3 id='model-2'>Model</h3>
+<h2 id='model-2'>Model</h2>
 <p>In Jobylon every webhook has a client url and an event type that it is
 subscribed to.</p>
-<h3 id='workflow-2'>Workflow</h3>
+<h2 id='workflow-2'>Workflow</h2>
 <p>After the third-party party app registers with Jobylon; they can request
 webhook intergration by providing a url and the type of events it should
 subscribe to. The webhook will use these details to send notifications when an
@@ -558,13 +576,13 @@ event occurs.</p>
 again immediately and then after 10 seconds, 100 seconds, 1000 seconds (~17
 minutes), 10000 seconds (~2.8 hours) and 100000 seconds (~a day and three
 hours).</p>
-<h3 id='headers'>Headers</h3>
+<h2 id='headers'>Headers</h2>
 <p>You can request us to provide you with custom headers if you so choose.</p>
-<h3 id='authentication'>Authentication</h3>
+<h2 id='authentication'>Authentication</h2>
 <p>You can request us to provide <code>basic authentication</code> by providing a username and password of your choosing.</p>
-<h3 id='limit-ip'>Limit IP</h3>
+<h2 id='limit-ip'>Limit IP</h2>
 <p>You can limit the IPs that the callback comes from by letting us know.</p>
-<h3 id='event-types'>Event Types</h3>
+<h2 id='event-types'>Event Types</h2>
 <p>i. <a href="#applicationevent">Application Event</a>
 ii. <a href="#jobevent">Job Event</a></p>
 <h4 id='applicationevent'>ApplicationEvent</h4>
@@ -1269,7 +1287,6 @@ Please ensure that the <code>ab_test</code> parameter is less than <code>20 char
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="http">http</a>
                 <a href="#" data-language-name="shell">shell</a>
           </div>
       </div>
