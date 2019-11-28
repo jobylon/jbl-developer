@@ -39,55 +39,6 @@ promotion feed wraps a job and contains extra information.
 
 ## Application
 
-### Create
-
-POST /applications/
-
-**Query String Parameters**
-
-None
-
-**Request Payload**
-
-| Name               | Type    | Mandatory? | Description                                |
-| ---                | ---     | ---        | ---                                        |
-| job_id             | integer | yes        | Applicant first name                       |
-| first_name         | string  | yes        | Applicant first name                       |
-| last_name          | string  | yes        | Applicant last name                        |
-| email              | string  |            | Applicant email                            |
-| phone              | string  |            | Applicant phone                            |
-| ln_url             | URL     |            | Applicant LinkedIn URL (will be validated) |
-| message            | string  |            | Message from the applicant                 |
-| source_type        | string  | yes        | Source type (applied/applied-silent/recommended/sourced). If set to applied, a thank-you email will be sent to the applicant. |
-| source_json        | object  | yes        | Additional source data (partner dependent, but using the data from the example will be nicely styled in Jobylon. |
-| cv                 | file    |            | Application file (supported using multipart/form-data)  |
-| cover_letter       | file    |            | Application file (supported using multipart/form-data)  |
-| other_1            | file    |            | Application file (supported using multipart/form-data)  |
-| other_2            | file    |            | Application file (supported using multipart/form-data)  |
-| other_3            | file    |            | Application file (supported using multipart/form-data)  |
-| other_4            | file    |            | Application file (supported using multipart/form-data)  |
-| other_5            | file    |            | Application file (supported using multipart/form-data)  |
-| ab_test            | string  |            | A unique identifier used for A/B testing                |
-| original_referrer  | string  |            | Value used to keep track on the application origin (used in analytics) |
-
-
-**Response**
-
-| Name | Type    | Description    |
-| ---  | ---     | ---            |
-| id   | integer | Application ID |
-
-**Exceptions**
-
-| Status | Description                                          |
-| ---    | ---                                                  |
-| 400    | Bad request, job_id that app doesn't have access to. |
-| 403    | Permission denied                                    |
-| 405    | Method not supported                                 |
-
-
-## Examples
-
 > To run the examples:
 
 ```
@@ -97,7 +48,7 @@ export APP_ID='0123456789123456'
 export APP_KEY='AbC123XyZ'
 ```
 
-### Basic example
+> Basic example:
 
 ```shell
 # Request
@@ -180,9 +131,10 @@ Content-Type: application/json
 {'id': 123}
 ```
 
-### Example with files attached (multipart/form-data)
+> Example with files attached (multipart/form-data):
 
 ```shell
+
 # Request
 curl -i \
     -X POST "$HOST/$API_VERSION/applications/" \
@@ -207,6 +159,52 @@ curl -i \
     -F "other_4=@other_4.pdf" \
     -F "other_5=@other_5.pdf"
 ```
+
+### Create
+
+POST /applications/
+
+**Query String Parameters**
+
+None
+
+**Request Payload**
+
+| Name               | Type    | Mandatory? | Description                                |
+| ---                | ---     | ---        | ---                                        |
+| job_id             | integer | yes        | Applicant first name                       |
+| first_name         | string  | yes        | Applicant first name                       |
+| last_name          | string  | yes        | Applicant last name                        |
+| email              | string  |            | Applicant email                            |
+| phone              | string  |            | Applicant phone                            |
+| ln_url             | URL     |            | Applicant LinkedIn URL (will be validated) |
+| message            | string  |            | Message from the applicant                 |
+| source_type        | string  | yes        | Source type (applied/applied-silent/recommended/sourced). If set to applied, a thank-you email will be sent to the applicant. |
+| source_json        | object  | yes        | Additional source data (partner dependent, but using the data from the example will be nicely styled in Jobylon. |
+| cv                 | file    |            | Application file (supported using multipart/form-data)  |
+| cover_letter       | file    |            | Application file (supported using multipart/form-data)  |
+| other_1            | file    |            | Application file (supported using multipart/form-data)  |
+| other_2            | file    |            | Application file (supported using multipart/form-data)  |
+| other_3            | file    |            | Application file (supported using multipart/form-data)  |
+| other_4            | file    |            | Application file (supported using multipart/form-data)  |
+| other_5            | file    |            | Application file (supported using multipart/form-data)  |
+| ab_test            | string  |            | A unique identifier used for A/B testing                |
+| original_referrer  | string  |            | Value used to keep track on the application origin (used in analytics) |
+
+
+**Response**
+
+| Name | Type    | Description    |
+| ---  | ---     | ---            |
+| id   | integer | Application ID |
+
+**Exceptions**
+
+| Status | Description                                          |
+| ---    | ---                                                  |
+| 400    | Bad request, job_id that app doesn't have access to. |
+| 403    | Permission denied                                    |
+| 405    | Method not supported                                 |
 
 # Webhooks
 
@@ -248,42 +246,7 @@ You can limit the IPs that the callback comes from by letting us know.
 i. [Application Event](#applicationevent)
 ii. [Job Event](#jobevent)
 
-
-#### ApplicationEvent
-
-**Actions**
-
-| Name           | Description                              |
-| ---            | ---                                      |
-| created        | Application created                      |
-| rejection_sent | Rejection communicated/sent to applicant |
-| status_changed | Application status updated               |
-
-**Request Payload**
-
-| Name        | Type   | Description                               |
-| ---         | ---    | ---                                       |
-| event_type  | string | "application"                             |
-| action      | string | Action triggering the event (see above)   |
-| application | object | The [application](#application-1) object  |
-
-#### JobEvent
-
-**Actions**
-
-| Name           | Description                         |
-| ---            | ---                                 |
-| created        | Job created                         |
-| updated        | Job was updated                     |
-| status_changed | Job status was specifically updated |
-
-**Request Payload**
-
-| Name       | Type   | Description                             |
-| ---        | ---    | ---                                     |
-| event_type | string | "job"                                   |
-| action     | string | Action triggering the event (see above) |
-| job        | object | The [job](#job) object                  |
+### ApplicationEvent
 
 > Example:
 
@@ -379,9 +342,43 @@ Content-Type: application/json
 Status Code: 2XX
 ```
 
+**Actions**
+
+| Name           | Description                              |
+| ---            | ---                                      |
+| created        | Application created                      |
+| rejection_sent | Rejection communicated/sent to applicant |
+| status_changed | Application status updated               |
+
+**Request Payload**
+
+| Name        | Type   | Description                               |
+| ---         | ---    | ---                                       |
+| event_type  | string | "application"                             |
+| action      | string | Action triggering the event (see above)   |
+| application | object | The application object  |
+
+### JobEvent
+
+**Actions**
+
+| Name           | Description                         |
+| ---            | ---                                 |
+| created        | Job created                         |
+| updated        | Job was updated                     |
+| status_changed | Job status was specifically updated |
+
+**Request Payload**
+
+| Name       | Type   | Description                             |
+| ---        | ---    | ---                                     |
+| event_type | string | "job"                                   |
+| action     | string | Action triggering the event (see above) |
+| job        | object | The [job](#job) object                  |
+
 ### Appendix
 
-#### Application
+### Application
 
 | Name           | Type    | Description                                                                   |
 | ---            | ---     | ---                                                                           |
@@ -396,7 +393,7 @@ Status Code: 2XX
 | owner          | object  | The [user](#user) that owns the application                                   |
 | ab_test        | string  | A unique identifier used for A/B testing                                      |
 
-##### Source Type
+### Source Type
 
 | Value            | Description                                                        |
 | ---              | ---                                                                |
@@ -407,7 +404,7 @@ Status Code: 2XX
 | 'sourced'        | Sourced                                                            |
 | 'uploaded'       | Uploaded                                                           |
 
-##### Status
+### Status
 
 | Name  | Type    | Description                             |
 | ---   | ---     | ---                                     |
@@ -415,7 +412,7 @@ Status Code: 2XX
 | name  | string  | Status name                             |
 | group | integer | The [status group](#status-group) value |
 
-##### Status Group
+### Status Group
 
 | Value | Description |
 | ---   | ---         |
@@ -425,7 +422,7 @@ Status Code: 2XX
 | 20    | Hired       |
 | 21    | On hold     |
 
-##### Job
+### Job
 
 | Name            | Type                   | Description                                             |
 | ---             | ---                    | ---                                                     |
@@ -446,7 +443,7 @@ Status Code: 2XX
 | experience      | object                 | The [experience](#experience) object                    |
 | function        | object                 | The [function](#function) object                        |
 
-##### Job Status
+### Job Status
 
 | Value       | Description |
 | ---         | ---         |
@@ -455,49 +452,49 @@ Status Code: 2XX
 | 'closed'    | Closed      |
 | 'archived'  | Archived    |
 
-##### Category
+### Category
 
 | Name    | Type    | Description          |
 | ---     | ---     | ---                  |
 | id      | integer | Category ID          |
 | text    | string  | Category description |
 
-##### Company
+### Company
 
 | Name  | Type    | Description  |
 | ---   | ---     | ---          |
 | id    | integer | Company ID   |
 | name  | string  | Name         |
 
-##### Department
+### Department
 
 | Name    | Type    | Description     |
 | ---     | ---     | ---             |
 | id      | integer | Department ID   |
 | name    | string  | Department name |
 
-##### Experience
+### Experience
 
 | Name    | Type    | Description            |
 | ---     | ---     | ---                    |
 | id      | integer | Experience ID          |
 | text    | string  | Experience description |
 
-##### Employment Type
+### Employment Type
 
 | Name    | Type    | Description            |
 | ---     | ---     | ---                    |
 | id      | integer | EmploymentType ID          |
 | text    | string  | EmploymentType description |
 
-##### Function
+### Function
 
 | Name    | Type    | Description          |
 | ---     | ---     | ---                  |
 | id      | integer | Function ID          |
 | text    | string  | Function description |
 
-##### Language
+### Language
 
 | Value | Description |
 | ---   | ---         |
@@ -510,32 +507,29 @@ Status Code: 2XX
 | 'nl'  | Nederlands  |
 | 'sv'  | Svenska     |
 
-##### Location
+### Location
 
 | Name          | Type   | Description                                    |
 | ---           | ---    | ---                                            |
 | location      | string | name of the location                           |
 | location_json | object | object based on the data from Google's map API |
 
-##### User
+### User
 
 | Name  | Type    | Description  |
 | ---   | ---     | ---          |
 | id    | integer | User ID      |
 | name  | string  | Name         |
 
-
 ## AB Testing
 
 A/B testing for customers who want to try different application flows
 
-### Usage
-
-#### Through Jobylon
+### Through Jobylon
 
 You can pass the name of the A/B test as a query parameter on the Jobylon URL. The query parameter should be called `jbl_ab_test`. We will store it in the browser session storage for 30 minutes or until the session expires, whichever is shorter. In other words, it will be stored for a maximum of 30 minutes. If a new A/B testing query parameter is found on the URL, the existing one will be overridden and the timeout will be reset to 30 minutes. As long as the user ends up on the application form within 30 minutes, the A/B testing query parameter value will be stored with the application. A `ab_test` parameter is added to the application data sent to your [webhook](#webhooks).
 
-#### Through the [Push API](#push-api)
+### Through the Push API
 
 Just add the `ab_test` parameter when pushing to Jobylon and the data will be stored in Jobylon.
 
