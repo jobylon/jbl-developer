@@ -229,9 +229,11 @@
                   </li>
                   <li>
                     <a href="#application" class="toc-h2 toc-link" data-title="Application">Application</a>
-                  </li>
-                  <li>
-                    <a href="#examples" class="toc-h2 toc-link" data-title="Examples">Examples</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#create" class="toc-h3 toc-link" data-title="Create">Create</a>
+                          </li>
+                      </ul>
                   </li>
               </ul>
           </li>
@@ -255,9 +257,70 @@
                   </li>
                   <li>
                     <a href="#event-types" class="toc-h2 toc-link" data-title="Event Types">Event Types</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#applicationevent" class="toc-h3 toc-link" data-title="ApplicationEvent">ApplicationEvent</a>
+                          </li>
+                          <li>
+                            <a href="#jobevent" class="toc-h3 toc-link" data-title="JobEvent">JobEvent</a>
+                          </li>
+                          <li>
+                            <a href="#application-2" class="toc-h3 toc-link" data-title="Application">Application</a>
+                          </li>
+                          <li>
+                            <a href="#source-type" class="toc-h3 toc-link" data-title="Source Type">Source Type</a>
+                          </li>
+                          <li>
+                            <a href="#status" class="toc-h3 toc-link" data-title="Status">Status</a>
+                          </li>
+                          <li>
+                            <a href="#status-group" class="toc-h3 toc-link" data-title="Status Group">Status Group</a>
+                          </li>
+                          <li>
+                            <a href="#job" class="toc-h3 toc-link" data-title="Job">Job</a>
+                          </li>
+                          <li>
+                            <a href="#job-status" class="toc-h3 toc-link" data-title="Job Status">Job Status</a>
+                          </li>
+                          <li>
+                            <a href="#category" class="toc-h3 toc-link" data-title="Category">Category</a>
+                          </li>
+                          <li>
+                            <a href="#company" class="toc-h3 toc-link" data-title="Company">Company</a>
+                          </li>
+                          <li>
+                            <a href="#department" class="toc-h3 toc-link" data-title="Department">Department</a>
+                          </li>
+                          <li>
+                            <a href="#experience" class="toc-h3 toc-link" data-title="Experience">Experience</a>
+                          </li>
+                          <li>
+                            <a href="#employment-type" class="toc-h3 toc-link" data-title="Employment Type">Employment Type</a>
+                          </li>
+                          <li>
+                            <a href="#function" class="toc-h3 toc-link" data-title="Function">Function</a>
+                          </li>
+                          <li>
+                            <a href="#language" class="toc-h3 toc-link" data-title="Language">Language</a>
+                          </li>
+                          <li>
+                            <a href="#location" class="toc-h3 toc-link" data-title="Location">Location</a>
+                          </li>
+                          <li>
+                            <a href="#user" class="toc-h3 toc-link" data-title="User">User</a>
+                          </li>
+                      </ul>
                   </li>
                   <li>
                     <a href="#ab-testing" class="toc-h2 toc-link" data-title="AB Testing">AB Testing</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#through-jobylon" class="toc-h3 toc-link" data-title="Through Jobylon">Through Jobylon</a>
+                          </li>
+                          <li>
+                            <a href="#through-the-push-api" class="toc-h3 toc-link" data-title="Through the Push API">Through the Push API</a>
+                          </li>
+                      </ul>
                   </li>
               </ul>
           </li>
@@ -289,7 +352,122 @@ app and how our clients&#39; contract work with the 3:rd party. If the 3:rd part
 do not require any extra information (such as purchase information) a simple
 job feed will be provided, otherwise a promotion feed will be provided. The
 promotion feed wraps a job and contains extra information.</p>
-<h2 id='application'>Application</h2><h3 id='create'>Create</h3>
+<h2 id='application'>Application</h2>
+<blockquote>
+<p>To run the examples:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>export HOST='https://staging.jobylon.com'
+export API_VERSION='p1'
+export APP_ID='0123456789123456'
+export APP_KEY='AbC123XyZ'
+</code></pre>
+<blockquote>
+<p>Basic example:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="c"># Request</span>
+curl -i <span class="se">\</span>
+    -X POST <span class="s2">"</span><span class="nv">$HOST</span><span class="s2">/</span><span class="nv">$API_VERSION</span><span class="s2">/applications/"</span> <span class="se">\</span>
+    -H <span class="s2">"X-App-Id: </span><span class="nv">$APP_ID</span><span class="s2">"</span> <span class="se">\</span>
+    -H <span class="s2">"X-App-Key: </span><span class="nv">$APP_KEY</span><span class="s2">"</span> <span class="se">\</span>
+    -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+    -d <span class="s1">'{
+        "job_id": 123456789,
+        "first_name": "Kalle",
+        "last_name": "Kula",
+        "email": "kalle@kula.se",
+        "phone": "+4670-123456789",
+        "ln_url": "https://www.linkedin.com/in/kalle-kula-123a4567",
+        "message": "Message from the applicant...",
+        "source_type": "applied",
+        "source_json": {
+            "partner_name": "best-source",
+            "message": "Some other message...",
+            "referrer": {
+                "name": "Kella Kalu",
+                "email": "kello@kalu.se",
+                "phone": "+46123456789",
+                "avatar": "https://gravatar.com/avatar/ce757a5d51e6285434134e7b6c96ab86?s=200&amp;d=robohash&amp;r=g"
+            }
+            "questions": [
+                {
+                    "order": 1,
+                    "question": "Why should we hire the person?",
+                    "question_type": "text",
+                    "answer": "Because she is great!"
+                }, {
+                    "order": 2,
+                    "question": "Rank the skills",
+                    "question_type": "range",
+                    "question_args": {
+                        "min": 1,
+                        "max": 5,
+                        "step": 1,
+                        "unit": "star"
+                    },
+                    "answer": 4
+                }, {
+                    "order": 3,
+                    "question": "Where can they be located?",
+                    "question_type": "select-multiple",
+                    "question_alternatives": [
+                        "Avesta",
+                        "London",
+                        "Moskva",
+                        "New York",
+                        "Paris",
+                        "Stockholm"
+                    ],
+                    "answer": [
+                        "London",
+                        "New York",
+                        "Paris",
+                        "Stockholm"
+                    ]
+                }, {
+                  "order": 4,
+                  "question": "Do they have a EU work permit?", 
+                  "question_type": "select-one",
+                  "answer": "yes"
+                }
+            ]
+        }
+        "original_referrer": "https://bestreferrals.com/?utm_source=google&amp;utm_medium=cpc&amp;utm_term=earn_referrals",
+        "ab_test": '</span>ABTestId<span class="s1">'
+    }'</span>
+</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># Response</span>
+Status Code: 201 Created
+Content-Type: application/json
+
+<span class="o">{</span><span class="s1">'id'</span>: 123<span class="o">}</span>
+</code></pre>
+<blockquote>
+<p>Example with files attached (multipart/form-data):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+<span class="c"># Request</span>
+curl -i <span class="se">\</span>
+    -X POST <span class="s2">"</span><span class="nv">$HOST</span><span class="s2">/</span><span class="nv">$API_VERSION</span><span class="s2">/applications/"</span> <span class="se">\</span>
+    -H <span class="s2">"X-App-Id: </span><span class="nv">$APP_ID</span><span class="s2">"</span> <span class="se">\</span>
+    -H <span class="s2">"X-App-Key: </span><span class="nv">$APP_KEY</span><span class="s2">"</span> <span class="se">\</span>
+    -F <span class="s2">"job_id=55"</span> <span class="se">\</span>
+    -F <span class="s2">"first_name=Kalle"</span> <span class="se">\</span>
+    -F <span class="s2">"last_name=Kula"</span> <span class="se">\</span>
+    -F <span class="s2">"email=kalle@kula.se"</span> <span class="se">\</span>
+    -F <span class="s2">"phone=+4670-123456789"</span> <span class="se">\</span>
+    -F <span class="s2">"message=Message from the applicant..."</span> <span class="se">\</span>
+    -F <span class="s2">"source_type=applied"</span> <span class="se">\</span>
+    -F <span class="s2">"source_json={
+        </span><span class="se">\"</span><span class="s2">partner_name</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">best-source</span><span class="se">\"</span><span class="s2">,
+        </span><span class="se">\"</span><span class="s2">message</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Some other message...</span><span class="se">\"</span><span class="s2">
+    }"</span> <span class="se">\</span>
+    -F <span class="s2">"cv=@cv.pdf"</span> <span class="se">\</span>
+    -F <span class="s2">"cover_letter=@cover_letter.pdf"</span> <span class="se">\</span>
+    -F <span class="s2">"other_1=@other_1.pdf"</span> <span class="se">\</span>
+    -F <span class="s2">"other_2=@other_2.pdf"</span> <span class="se">\</span>
+    -F <span class="s2">"other_3=@other_3.pdf"</span> <span class="se">\</span>
+    -F <span class="s2">"other_4=@other_4.pdf"</span> <span class="se">\</span>
+    -F <span class="s2">"other_5=@other_5.pdf"</span>
+</code></pre><h3 id='create'>Create</h3>
 <p>POST /applications/</p>
 
 <p><strong>Query String Parameters</strong></p>
@@ -453,113 +631,7 @@ promotion feed wraps a job and contains extra information.</p>
 <td>Method not supported</td>
 </tr>
 </tbody></table>
-<h2 id='examples'>Examples</h2>
-<blockquote>
-<p>To run the examples:</p>
-</blockquote>
-<pre class="highlight plaintext"><code>export HOST='https://staging.jobylon.com'
-export API_VERSION='p1'
-export APP_ID='0123456789123456'
-export APP_KEY='AbC123XyZ'
-</code></pre><h3 id='basic-example'>Basic example</h3><pre class="highlight shell tab-shell"><code><span class="c"># Request</span>
-curl -i <span class="se">\</span>
-    -X POST <span class="s2">"</span><span class="nv">$HOST</span><span class="s2">/</span><span class="nv">$API_VERSION</span><span class="s2">/applications/"</span> <span class="se">\</span>
-    -H <span class="s2">"X-App-Id: </span><span class="nv">$APP_ID</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"X-App-Key: </span><span class="nv">$APP_KEY</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    -d <span class="s1">'{
-        "job_id": 123456789,
-        "first_name": "Kalle",
-        "last_name": "Kula",
-        "email": "kalle@kula.se",
-        "phone": "+4670-123456789",
-        "ln_url": "https://www.linkedin.com/in/kalle-kula-123a4567",
-        "message": "Message from the applicant...",
-        "source_type": "applied",
-        "source_json": {
-            "partner_name": "best-source",
-            "message": "Some other message...",
-            "referrer": {
-                "name": "Kella Kalu",
-                "email": "kello@kalu.se",
-                "phone": "+46123456789",
-                "avatar": "https://gravatar.com/avatar/ce757a5d51e6285434134e7b6c96ab86?s=200&amp;d=robohash&amp;r=g"
-            }
-            "questions": [
-                {
-                    "order": 1,
-                    "question": "Why should we hire the person?",
-                    "question_type": "text",
-                    "answer": "Because she is great!"
-                }, {
-                    "order": 2,
-                    "question": "Rank the skills",
-                    "question_type": "range",
-                    "question_args": {
-                        "min": 1,
-                        "max": 5,
-                        "step": 1,
-                        "unit": "star"
-                    },
-                    "answer": 4
-                }, {
-                    "order": 3,
-                    "question": "Where can they be located?",
-                    "question_type": "select-multiple",
-                    "question_alternatives": [
-                        "Avesta",
-                        "London",
-                        "Moskva",
-                        "New York",
-                        "Paris",
-                        "Stockholm"
-                    ],
-                    "answer": [
-                        "London",
-                        "New York",
-                        "Paris",
-                        "Stockholm"
-                    ]
-                }, {
-                  "order": 4,
-                  "question": "Do they have a EU work permit?", 
-                  "question_type": "select-one",
-                  "answer": "yes"
-                }
-            ]
-        }
-        "original_referrer": "https://bestreferrals.com/?utm_source=google&amp;utm_medium=cpc&amp;utm_term=earn_referrals",
-        "ab_test": '</span>ABTestId<span class="s1">'
-    }'</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># Response</span>
-Status Code: 201 Created
-Content-Type: application/json
-
-<span class="o">{</span><span class="s1">'id'</span>: 123<span class="o">}</span>
-</code></pre><h3 id='example-with-files-attached-multipart-form-data'>Example with files attached (multipart/form-data)</h3><pre class="highlight shell tab-shell"><code><span class="c"># Request</span>
-curl -i <span class="se">\</span>
-    -X POST <span class="s2">"</span><span class="nv">$HOST</span><span class="s2">/</span><span class="nv">$API_VERSION</span><span class="s2">/applications/"</span> <span class="se">\</span>
-    -H <span class="s2">"X-App-Id: </span><span class="nv">$APP_ID</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"X-App-Key: </span><span class="nv">$APP_KEY</span><span class="s2">"</span> <span class="se">\</span>
-    -F <span class="s2">"job_id=55"</span> <span class="se">\</span>
-    -F <span class="s2">"first_name=Kalle"</span> <span class="se">\</span>
-    -F <span class="s2">"last_name=Kula"</span> <span class="se">\</span>
-    -F <span class="s2">"email=kalle@kula.se"</span> <span class="se">\</span>
-    -F <span class="s2">"phone=+4670-123456789"</span> <span class="se">\</span>
-    -F <span class="s2">"message=Message from the applicant..."</span> <span class="se">\</span>
-    -F <span class="s2">"source_type=applied"</span> <span class="se">\</span>
-    -F <span class="s2">"source_json={
-        </span><span class="se">\"</span><span class="s2">partner_name</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">best-source</span><span class="se">\"</span><span class="s2">,
-        </span><span class="se">\"</span><span class="s2">message</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Some other message...</span><span class="se">\"</span><span class="s2">
-    }"</span> <span class="se">\</span>
-    -F <span class="s2">"cv=@cv.pdf"</span> <span class="se">\</span>
-    -F <span class="s2">"cover_letter=@cover_letter.pdf"</span> <span class="se">\</span>
-    -F <span class="s2">"other_1=@other_1.pdf"</span> <span class="se">\</span>
-    -F <span class="s2">"other_2=@other_2.pdf"</span> <span class="se">\</span>
-    -F <span class="s2">"other_3=@other_3.pdf"</span> <span class="se">\</span>
-    -F <span class="s2">"other_4=@other_4.pdf"</span> <span class="se">\</span>
-    -F <span class="s2">"other_5=@other_5.pdf"</span>
-</code></pre><h1 id='webhooks'>Webhooks</h1>
+<h1 id='webhooks'>Webhooks</h1>
 <p>Callback API for our intergration partners who want to receive and act upon
 different Jobylon events.</p>
 <h2 id='model-2'>Model</h2>
@@ -585,103 +657,7 @@ hours).</p>
 <h2 id='event-types'>Event Types</h2>
 <p>i. <a href="#applicationevent">Application Event</a>
 ii. <a href="#jobevent">Job Event</a></p>
-<h4 id='applicationevent'>ApplicationEvent</h4>
-<p><strong>Actions</strong></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>created</td>
-<td>Application created</td>
-</tr>
-<tr>
-<td>rejection_sent</td>
-<td>Rejection communicated/sent to applicant</td>
-</tr>
-<tr>
-<td>status_changed</td>
-<td>Application status updated</td>
-</tr>
-</tbody></table>
-
-<p><strong>Request Payload</strong></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>event_type</td>
-<td>string</td>
-<td>&quot;application&quot;</td>
-</tr>
-<tr>
-<td>action</td>
-<td>string</td>
-<td>Action triggering the event (see above)</td>
-</tr>
-<tr>
-<td>application</td>
-<td>object</td>
-<td>The <a href="#application-1">application</a> object</td>
-</tr>
-</tbody></table>
-<h4 id='jobevent'>JobEvent</h4>
-<p><strong>Actions</strong></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>created</td>
-<td>Job created</td>
-</tr>
-<tr>
-<td>updated</td>
-<td>Job was updated</td>
-</tr>
-<tr>
-<td>status_changed</td>
-<td>Job status was specifically updated</td>
-</tr>
-</tbody></table>
-
-<p><strong>Request Payload</strong></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>event_type</td>
-<td>string</td>
-<td>&quot;job&quot;</td>
-</tr>
-<tr>
-<td>action</td>
-<td>string</td>
-<td>Action triggering the event (see above)</td>
-</tr>
-<tr>
-<td>job</td>
-<td>object</td>
-<td>The <a href="#job">job</a> object</td>
-</tr>
-</tbody></table>
-
+<h3 id='applicationevent'>ApplicationEvent</h3>
 <blockquote>
 <p>Example:</p>
 </blockquote>
@@ -771,7 +747,103 @@ Content-Type: application/json
 }
 </code></pre><pre class="highlight plaintext"><code># Response
 Status Code: 2XX
-</code></pre><h3 id='appendix'>Appendix</h3><h4 id='application-2'>Application</h4>
+</code></pre>
+<p><strong>Actions</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>created</td>
+<td>Application created</td>
+</tr>
+<tr>
+<td>rejection_sent</td>
+<td>Rejection communicated/sent to applicant</td>
+</tr>
+<tr>
+<td>status_changed</td>
+<td>Application status updated</td>
+</tr>
+</tbody></table>
+
+<p><strong>Request Payload</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>event_type</td>
+<td>string</td>
+<td>&quot;application&quot;</td>
+</tr>
+<tr>
+<td>action</td>
+<td>string</td>
+<td>Action triggering the event (see above)</td>
+</tr>
+<tr>
+<td>application</td>
+<td>object</td>
+<td>The application object</td>
+</tr>
+</tbody></table>
+<h3 id='jobevent'>JobEvent</h3>
+<p><strong>Actions</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>created</td>
+<td>Job created</td>
+</tr>
+<tr>
+<td>updated</td>
+<td>Job was updated</td>
+</tr>
+<tr>
+<td>status_changed</td>
+<td>Job status was specifically updated</td>
+</tr>
+</tbody></table>
+
+<p><strong>Request Payload</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>event_type</td>
+<td>string</td>
+<td>&quot;job&quot;</td>
+</tr>
+<tr>
+<td>action</td>
+<td>string</td>
+<td>Action triggering the event (see above)</td>
+</tr>
+<tr>
+<td>job</td>
+<td>object</td>
+<td>The <a href="#job">job</a> object</td>
+</tr>
+</tbody></table>
+<h3 id='application-2'>Application</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -830,7 +902,7 @@ Status Code: 2XX
 <td>A unique identifier used for A/B testing</td>
 </tr>
 </tbody></table>
-<h5 id='source-type'>Source Type</h5>
+<h3 id='source-type'>Source Type</h3>
 <table><thead>
 <tr>
 <th>Value</th>
@@ -862,7 +934,7 @@ Status Code: 2XX
 <td>Uploaded</td>
 </tr>
 </tbody></table>
-<h5 id='status'>Status</h5>
+<h3 id='status'>Status</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -886,7 +958,7 @@ Status Code: 2XX
 <td>The <a href="#status-group">status group</a> value</td>
 </tr>
 </tbody></table>
-<h5 id='status-group'>Status Group</h5>
+<h3 id='status-group'>Status Group</h3>
 <table><thead>
 <tr>
 <th>Value</th>
@@ -914,7 +986,7 @@ Status Code: 2XX
 <td>On hold</td>
 </tr>
 </tbody></table>
-<h5 id='job'>Job</h5>
+<h3 id='job'>Job</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1003,7 +1075,7 @@ Status Code: 2XX
 <td>The <a href="#function">function</a> object</td>
 </tr>
 </tbody></table>
-<h5 id='job-status'>Job Status</h5>
+<h3 id='job-status'>Job Status</h3>
 <table><thead>
 <tr>
 <th>Value</th>
@@ -1027,7 +1099,7 @@ Status Code: 2XX
 <td>Archived</td>
 </tr>
 </tbody></table>
-<h5 id='category'>Category</h5>
+<h3 id='category'>Category</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1046,7 +1118,7 @@ Status Code: 2XX
 <td>Category description</td>
 </tr>
 </tbody></table>
-<h5 id='company'>Company</h5>
+<h3 id='company'>Company</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1065,7 +1137,7 @@ Status Code: 2XX
 <td>Name</td>
 </tr>
 </tbody></table>
-<h5 id='department'>Department</h5>
+<h3 id='department'>Department</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1084,7 +1156,7 @@ Status Code: 2XX
 <td>Department name</td>
 </tr>
 </tbody></table>
-<h5 id='experience'>Experience</h5>
+<h3 id='experience'>Experience</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1103,7 +1175,7 @@ Status Code: 2XX
 <td>Experience description</td>
 </tr>
 </tbody></table>
-<h5 id='employment-type'>Employment Type</h5>
+<h3 id='employment-type'>Employment Type</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1122,7 +1194,7 @@ Status Code: 2XX
 <td>EmploymentType description</td>
 </tr>
 </tbody></table>
-<h5 id='function'>Function</h5>
+<h3 id='function'>Function</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1141,7 +1213,7 @@ Status Code: 2XX
 <td>Function description</td>
 </tr>
 </tbody></table>
-<h5 id='language'>Language</h5>
+<h3 id='language'>Language</h3>
 <table><thead>
 <tr>
 <th>Value</th>
@@ -1181,7 +1253,7 @@ Status Code: 2XX
 <td>Svenska</td>
 </tr>
 </tbody></table>
-<h5 id='location'>Location</h5>
+<h3 id='location'>Location</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1200,7 +1272,7 @@ Status Code: 2XX
 <td>object based on the data from Google&#39;s map API</td>
 </tr>
 </tbody></table>
-<h5 id='user'>User</h5>
+<h3 id='user'>User</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1221,9 +1293,9 @@ Status Code: 2XX
 </tbody></table>
 <h2 id='ab-testing'>AB Testing</h2>
 <p>A/B testing for customers who want to try different application flows</p>
-<h3 id='usage'>Usage</h3><h4 id='through-jobylon'>Through Jobylon</h4>
+<h3 id='through-jobylon'>Through Jobylon</h3>
 <p>You can pass the name of the A/B test as a query parameter on the Jobylon URL. The query parameter should be called <code>jbl_ab_test</code>. We will store it in the browser session storage for 30 minutes or until the session expires, whichever is shorter. In other words, it will be stored for a maximum of 30 minutes. If a new A/B testing query parameter is found on the URL, the existing one will be overridden and the timeout will be reset to 30 minutes. As long as the user ends up on the application form within 30 minutes, the A/B testing query parameter value will be stored with the application. A <code>ab_test</code> parameter is added to the application data sent to your <a href="#webhooks">webhook</a>.</p>
-<h4 id='through-the-push-api'>Through the <a href="#push-api">Push API</a></h4>
+<h3 id='through-the-push-api'>Through the Push API</h3>
 <p>Just add the <code>ab_test</code> parameter when pushing to Jobylon and the data will be stored in Jobylon.</p>
 
 <aside class="notice">
