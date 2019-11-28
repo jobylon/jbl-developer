@@ -376,8 +376,6 @@ Status Code: 2XX
 | action     | string | Action triggering the event (see above) |
 | job        | object | The [job](#job) object                  |
 
-### Appendix
-
 ### Application
 
 | Name           | Type    | Description                                                                   |
