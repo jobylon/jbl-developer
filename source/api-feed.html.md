@@ -25,27 +25,28 @@ Our customer support can set up feeds on request. Once configured, you will reci
 
 ### Job list
 
-GET /feeds/<hash>/
+GET `/feeds/<hash>/`
 
 **Query String Parameters**
 
-[comment]: <> | Name      | Type    | Description                     |
-[comment]: <> |-----------|---------|---------------------------------|
-[comment]: <> | internal  | string  | Show internal/external/all jobs |
-[comment]: <> The options asre the strings  internal/external/all and defaults to external
+<!-- | Name     | Type   | Description                     | -->
+<!-- |----------|--------|---------------------------------| -->
+<!-- | internal | string | Show internal/external/all jobs | -->
+<!-- The options asre the strings  internal/external/all and defaults to external -->
+
 None
 
 
 **Response**
 
-| Name  | Type    | Description                     |
-|-------|---------|---------------------------------|
-| jobs  | array   | Collection of [Job](?json#job)  |
+| Name | Type   | Description               |
+|------|--------|---------------------------|
+| jobs | array  | Collection of [Job](#job) |
 
 
 ### Job detail
 
-GET /feeds/<hash>/<job_id>
+GET `/feeds/<hash>/<job_id>`
 
 **Query String Parameters**
 
@@ -53,9 +54,9 @@ None
 
 **Response**
 
-| Name  | Type    | Description       |
-|-------|---------|-------------------|
-| job   | object  | [Job](?json#job)  |
+| Name | Type   | Description        |
+|------|--------|--------------------|
+| job  | object | [Job](#job) object |
 
 
 ## Structure
@@ -342,26 +343,26 @@ None
 
 **Fields**
 
-| Name            | Type    | Description                                  |
-|-----------------|---------|----------------------------------------------|
-| id              | integer | Job ID                                       |
-| categories      | array   | Collection of [Category](?json#category)     |
-| company         | object  | [Company](?json#company) object              |
-| contact         | object  | [Contact](?json#contact) object              |
-| departments     | array   | Collection of [Department](?json#department) |
-| descr           | string  | HTML-formatted string of text                |
-| employment_type | string  | Employment type                              |
-| experience      | string  | Experience level                             |
-| from_date       | string  | Job ad advertised from this date             |
-| function        | string  | Job function                                 |
-| language        | string  | Language used in job ad                      |
-| locations       | array   | Collection of [Location](?json#location)     |
-| skills          | string  | HTML-formatted string of text                |
-| slug            | string  | Job slug, without complete URL               |
-| title           | string  | Job title                                    |
-| to_date         | string  | Job ad advertised from to date               |
-| urls            | object  | [URL](?json#url) object                      |
-| video           | object  | [Video](?json#video) object                  |
+| Name            | Type    | Description                             |
+|-----------------|---------|-----------------------------------------|
+| id              | integer | Job ID                                  |
+| categories      | array   | Collection of [Category](#category)     |
+| company         | object  | [Company](#company) object              |
+| contact         | object  | [Contact](#contact) object              |
+| departments     | array   | Collection of [Department](#department) |
+| descr           | string  | HTML-formatted string of text           |
+| employment_type | string  | Employment type                         |
+| experience      | string  | Experience level                        |
+| from_date       | string  | Job ad advertised from this date        |
+| function        | string  | Job function                            |
+| language        | string  | Language used in job ad                 |
+| locations       | array   | Collection of [Location](#location)     |
+| skills          | string  | HTML-formatted string of text           |
+| slug            | string  | Job slug, without complete URL          |
+| title           | string  | Job title                               |
+| to_date         | string  | Job ad advertised from to date          |
+| urls            | object  | [URL](#url) object                      |
+| video           | object  | [Video](#video) object                  |
 
 ### Category
 
