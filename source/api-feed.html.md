@@ -20,6 +20,44 @@ The Feed API allows you as a Jobylon-customer to retrieve job data in XML/JSON-f
 
 Our customer support can set up feeds on request. Once configured, you will recieve a URL for the specific feed. The default content format is XML, but by appending ?format=json to any URL the content will be formatted in JSON.
 
+
+## Endpoints
+
+### Job list
+
+GET /feeds/<hash>/
+
+**Query String Parameters**
+
+[comment]: <> | Name      | Type    | Description                     |
+[comment]: <> |-----------|---------|---------------------------------|
+[comment]: <> | internal  | string  | Show internal/external/all jobs |
+[comment]: <> The options asre the strings  internal/external/all and defaults to external
+None
+
+
+**Response**
+
+| Name  | Type    | Description                     |
+|-------|---------|---------------------------------|
+| jobs  | array   | Collection of [Job](?json#job)  |
+
+
+### Job detail
+
+GET /feeds/<hash>/<job_id>
+
+**Query String Parameters**
+
+None
+
+**Response**
+
+| Name  | Type    | Description       |
+|-------|---------|-------------------|
+| job   | object  | [Job](?json#job)  |
+
+
 ## Structure
 
 ### Job
