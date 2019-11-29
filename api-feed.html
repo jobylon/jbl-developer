@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="api-feed" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="api-feed" data-languages="[&quot;xml&quot;,&quot;json&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -211,10 +211,8 @@
     <div class="toc-wrapper">
       <img src="images/logo.png" class="logo" alt="Logo" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
-              <a href="#" data-language-name="javascript">javascript</a>
+              <a href="#" data-language-name="xml">xml</a>
+              <a href="#" data-language-name="json">json</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -222,302 +220,735 @@
         <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
           <li>
-            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
-          </li>
-          <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
-          </li>
-          <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#feed-api" class="toc-h1 toc-link" data-title="Feed API">Feed API</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#getting-started" class="toc-h2 toc-link" data-title="Getting started">Getting started</a>
+                  </li>
+                  <li>
+                    <a href="#endpoints" class="toc-h2 toc-link" data-title="Endpoints">Endpoints</a>
                       <ul class="toc-list-h3">
                           <li>
-                            <a href="#http-request" class="toc-h3 toc-link" data-title="HTTP Request">HTTP Request</a>
+                            <a href="#job-list" class="toc-h3 toc-link" data-title="Job list">Job list</a>
                           </li>
                           <li>
-                            <a href="#query-parameters" class="toc-h3 toc-link" data-title="Query Parameters">Query Parameters</a>
+                            <a href="#job-detail" class="toc-h3 toc-link" data-title="Job detail">Job detail</a>
                           </li>
                       </ul>
                   </li>
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
+                    <a href="#structure" class="toc-h2 toc-link" data-title="Structure">Structure</a>
                       <ul class="toc-list-h3">
                           <li>
-                            <a href="#http-request-2" class="toc-h3 toc-link" data-title="HTTP Request">HTTP Request</a>
+                            <a href="#job" class="toc-h3 toc-link" data-title="Job">Job</a>
                           </li>
                           <li>
-                            <a href="#url-parameters" class="toc-h3 toc-link" data-title="URL Parameters">URL Parameters</a>
-                          </li>
-                      </ul>
-                  </li>
-                  <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
-                      <ul class="toc-list-h3">
-                          <li>
-                            <a href="#http-request-3" class="toc-h3 toc-link" data-title="HTTP Request">HTTP Request</a>
+                            <a href="#category" class="toc-h3 toc-link" data-title="Category">Category</a>
                           </li>
                           <li>
-                            <a href="#url-parameters-2" class="toc-h3 toc-link" data-title="URL Parameters">URL Parameters</a>
+                            <a href="#company" class="toc-h3 toc-link" data-title="Company">Company</a>
+                          </li>
+                          <li>
+                            <a href="#contact" class="toc-h3 toc-link" data-title="Contact">Contact</a>
+                          </li>
+                          <li>
+                            <a href="#department" class="toc-h3 toc-link" data-title="Department">Department</a>
+                          </li>
+                          <li>
+                            <a href="#location" class="toc-h3 toc-link" data-title="Location">Location</a>
+                          </li>
+                          <li>
+                            <a href="#video" class="toc-h3 toc-link" data-title="Video">Video</a>
+                          </li>
+                          <li>
+                            <a href="#url" class="toc-h3 toc-link" data-title="URL">URL</a>
                           </li>
                       </ul>
                   </li>
               </ul>
           </li>
-          <li>
-            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
-          </li>
       </ul>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='mailto:info@jobylon.com?subject=FeedAPI-credentials'>Email us to get your credentials</a></li>
             <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+        <h1 id='feed-api'>Feed API</h1>
+<p>The Feed API allows you as a Jobylon-customer to retrieve job data in XML/JSON-format and display in your own interface. This is suitable for more advanced implementations than what our job widget can provide.</p>
+<h2 id='getting-started'>Getting started</h2>
+<p>Our customer support can set up feeds on request. Once configured, you will recieve a URL for the specific feed. The default content format is XML, but by appending ?format=json to any URL the content will be formatted in JSON.</p>
+<h2 id='endpoints'>Endpoints</h2><h3 id='job-list'>Job list</h3>
+<p>GET /feeds/<hash>/</p>
 
-<p>We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<p><strong>Query String Parameters</strong></p>
 
-<p>This example API documentation page was created with <a href="https://github.com/lord/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
-<h1 id='authentication'>Authentication</h1>
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<p>[comment]: &lt;&gt; | Name      | Type    | Description                     |
+[comment]: &lt;&gt; |-----------|---------|---------------------------------|
+[comment]: &lt;&gt; | internal  | string  | Show internal/external/all jobs |
+[comment]: &lt;&gt; The options asre the strings  internal/external/all and defaults to external
+None</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p><strong>Response</strong></p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>jobs</td>
+<td>array</td>
+<td>Collection of <a href="?json#job">Job</a></td>
+</tr>
+</tbody></table>
+<h3 id='job-detail'>Job detail</h3>
+<p>GET /feeds/<hash>/<job_id></p>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
-</blockquote>
+<p><strong>Query String Parameters</strong></p>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<p>None</p>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+<p><strong>Response</strong></p>
 
-<p><code>Authorization: meowmeowmeow</code></p>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>job</td>
+<td>object</td>
+<td><a href="?json#job">Job</a></td>
+</tr>
+</tbody></table>
+<h2 id='structure'>Structure</h2><h3 id='job'>Job</h3><pre class="highlight xml tab-xml"><code>&gt; XSD Schema:
+<span class="nt">&lt;xs:schema</span> <span class="na">attributeFormDefault=</span><span class="s">"unqualified"</span> <span class="na">elementFormDefault=</span><span class="s">"qualified"</span> <span class="na">xmlns:xs=</span><span class="s">"http://www.w3.org/2001/XMLSchema"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">"job"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;xs:complexType&gt;</span>
+      <span class="nt">&lt;xs:sequence&gt;</span>
+        <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:short"</span> <span class="na">name=</span><span class="s">"id"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">"categories"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;xs:complexType&gt;</span>
+            <span class="nt">&lt;xs:sequence&gt;</span>
+              <span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">"category"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;xs:complexType&gt;</span>
+                  <span class="nt">&lt;xs:sequence&gt;</span>
+                    <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:short"</span> <span class="na">name=</span><span class="s">"id"</span><span class="nt">/&gt;</span>
+                    <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"text"</span><span class="nt">/&gt;</span>
+                  <span class="nt">&lt;/xs:sequence&gt;</span>
+                <span class="nt">&lt;/xs:complexType&gt;</span>
+              <span class="nt">&lt;/xs:element&gt;</span>
+            <span class="nt">&lt;/xs:sequence&gt;</span>
+          <span class="nt">&lt;/xs:complexType&gt;</span>
+        <span class="nt">&lt;/xs:element&gt;</span>
+        <span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">"company"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;xs:complexType&gt;</span>
+            <span class="nt">&lt;xs:sequence&gt;</span>
+              <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:byte"</span> <span class="na">name=</span><span class="s">"id"</span><span class="nt">/&gt;</span>
+              <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"slug"</span><span class="nt">/&gt;</span>
+              <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"logo"</span><span class="nt">/&gt;</span>
+              <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"cover"</span><span class="nt">/&gt;</span>
+              <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"industry"</span><span class="nt">/&gt;</span>
+              <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"name"</span><span class="nt">/&gt;</span>
+              <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"descr"</span><span class="nt">/&gt;</span>
+              <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:anyURI"</span> <span class="na">name=</span><span class="s">"website"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/xs:sequence&gt;</span>
+          <span class="nt">&lt;/xs:complexType&gt;</span>
+        <span class="nt">&lt;/xs:element&gt;</span>
+        <span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">"contact"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;xs:complexType&gt;</span>
+            <span class="nt">&lt;xs:sequence&gt;</span>
+              <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"name"</span><span class="nt">/&gt;</span>
+              <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"email"</span><span class="nt">/&gt;</span>
+              <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"photo"</span><span class="nt">/&gt;</span>
+              <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"phone"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/xs:sequence&gt;</span>
+          <span class="nt">&lt;/xs:complexType&gt;</span>
+        <span class="nt">&lt;/xs:element&gt;</span>
+        <span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">"departments"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;xs:complexType&gt;</span>
+            <span class="nt">&lt;xs:sequence&gt;</span>
+              <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"descr"</span><span class="nt">/&gt;</span>
+              <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:short"</span> <span class="na">name=</span><span class="s">"id"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/xs:sequence&gt;</span>
+          <span class="nt">&lt;/xs:complexType&gt;</span>
+        <span class="nt">&lt;/xs:element&gt;</span>
+        <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"title"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"slug"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"descr"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"skills"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"function"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"experience"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"employment_type"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:date"</span> <span class="na">name=</span><span class="s">"from_date"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:date"</span> <span class="na">name=</span><span class="s">"to_date"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"language"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">"locations"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;xs:complexType&gt;</span>
+            <span class="nt">&lt;xs:sequence&gt;</span>
+              <span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">"location"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;xs:complexType&gt;</span>
+                  <span class="nt">&lt;xs:sequence&gt;</span>
+                    <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"city_short"</span><span class="nt">/&gt;</span>
+                    <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"area_1"</span><span class="nt">/&gt;</span>
+                    <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"postal_code"</span><span class="nt">/&gt;</span>
+                    <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"area_1_short"</span><span class="nt">/&gt;</span>
+                    <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"municipality"</span><span class="nt">/&gt;</span>
+                    <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"country"</span><span class="nt">/&gt;</span>
+                    <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"url"</span><span class="nt">/&gt;</span>
+                    <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"place_id"</span><span class="nt">/&gt;</span>
+                    <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"text"</span><span class="nt">/&gt;</span>
+                    <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"city"</span><span class="nt">/&gt;</span>
+                    <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"postal_code_short"</span><span class="nt">/&gt;</span>
+                    <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"country_short"</span><span class="nt">/&gt;</span>
+                  <span class="nt">&lt;/xs:sequence&gt;</span>
+                <span class="nt">&lt;/xs:complexType&gt;</span>
+              <span class="nt">&lt;/xs:element&gt;</span>
+            <span class="nt">&lt;/xs:sequence&gt;</span>
+          <span class="nt">&lt;/xs:complexType&gt;</span>
+        <span class="nt">&lt;/xs:element&gt;</span>
+        <span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">"video"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;xs:complexType&gt;</span>
+            <span class="nt">&lt;xs:sequence&gt;</span>
+              <span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">"content"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;xs:complexType&gt;</span>
+                  <span class="nt">&lt;xs:sequence&gt;</span>
+                    <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"id"</span><span class="nt">/&gt;</span>
+                    <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"url"</span><span class="nt">/&gt;</span>
+                    <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"src"</span><span class="nt">/&gt;</span>
+                  <span class="nt">&lt;/xs:sequence&gt;</span>
+                <span class="nt">&lt;/xs:complexType&gt;</span>
+              <span class="nt">&lt;/xs:element&gt;</span>
+              <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"url"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/xs:sequence&gt;</span>
+          <span class="nt">&lt;/xs:complexType&gt;</span>
+        <span class="nt">&lt;/xs:element&gt;</span>
+        <span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">"urls"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;xs:complexType&gt;</span>
+            <span class="nt">&lt;xs:sequence&gt;</span>
+              <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"ad"</span><span class="nt">/&gt;</span>
+              <span class="nt">&lt;xs:element</span> <span class="na">type=</span><span class="s">"xs:string"</span> <span class="na">name=</span><span class="s">"apply"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/xs:sequence&gt;</span>
+          <span class="nt">&lt;/xs:complexType&gt;</span>
+        <span class="nt">&lt;/xs:element&gt;</span>
+      <span class="nt">&lt;/xs:sequence&gt;</span>
+    <span class="nt">&lt;/xs:complexType&gt;</span>
+  <span class="nt">&lt;/xs:element&gt;</span>
+<span class="nt">&lt;/xs:schema&gt;</span>
 
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+&gt; XML Example:
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<span class="nt">&lt;job&gt;</span>
+   <span class="nt">&lt;id&gt;</span>4069<span class="nt">&lt;/id&gt;</span>
+   <span class="nt">&lt;categories&gt;</span>
+      <span class="nt">&lt;category&gt;</span>
+         <span class="nt">&lt;id&gt;</span>159<span class="nt">&lt;/id&gt;</span>
+         <span class="nt">&lt;text&gt;</span><span class="cp">&lt;![CDATA[Tech]]&gt;</span><span class="nt">&lt;/text&gt;</span>
+      <span class="nt">&lt;/category&gt;</span>
+   <span class="nt">&lt;/categories&gt;</span>
+   <span class="nt">&lt;company&gt;</span>
+      <span class="nt">&lt;id&gt;</span>6<span class="nt">&lt;/id&gt;</span>
+      <span class="nt">&lt;slug&gt;</span><span class="cp">&lt;![CDATA[jobylon]]&gt;</span><span class="nt">&lt;/slug&gt;</span>
+      <span class="nt">&lt;logo&gt;</span><span class="cp">&lt;![CDATA[https://media-eu.jobylon.com/companies/company-logo/jobylon/social_squared_rgb.911b9470.png]]&gt;</span><span class="nt">&lt;/logo&gt;</span>
+      <span class="nt">&lt;cover&gt;</span><span class="cp">&lt;![CDATA[https://media-eu.jobylon.com/jobs/company-cover/full-stack-pythondjango-developer/cover.940fe1cc.jpg]]&gt;</span><span class="nt">&lt;/cover&gt;</span>
+      <span class="nt">&lt;industry&gt;</span><span class="cp">&lt;![CDATA[Startup]]&gt;</span><span class="nt">&lt;/industry&gt;</span>
+      <span class="nt">&lt;name&gt;</span><span class="cp">&lt;![CDATA[Jobylon]]&gt;</span><span class="nt">&lt;/name&gt;</span>
+      <span class="nt">&lt;descr&gt;</span><span class="cp">&lt;![CDATA[&lt;p&gt;Jobylon develops and offers a modern hiring software (SaaS) to companies who want to create and share &lt;strong&gt;beautiful job ads and manage their applicants with ease.&lt;/strong&gt; The recruitment industry has stayed unchanged for too long whilst the need for a simple and efficient tool has increased.&lt;/p&gt; &lt;p&gt;Jobylon was founded in 2011 and since then we've launched a number of exciting projects and ventures within the HR tech space. We've always had the same goal - &lt;strong&gt;to use technology and innovation to change and simplify what is today a traditional space.&lt;/strong&gt;&lt;/p&gt; &lt;p&gt;During this time we've also been awarded as one of &lt;strong&gt;Sweden's hottest entrepreneurs&lt;/strong&gt; and nominated for the &lt;strong&gt;Red Herring&lt;/strong&gt; award - we've done this with a small but dedicated team!&lt;/p&gt; &lt;p&gt;Today, we work with nearly &lt;strong&gt;1000 employers&lt;/strong&gt; from more than &lt;strong&gt;80 countries worldwide&lt;/strong&gt;, including amazing organisations such as 7-Eleven, Schibsted, Scandic Hotels, Vaimo, Bonnier and &lt;a href="https://www.jobylon.com/testimonials/"&gt;many more!&lt;/a&gt;&lt;/p&gt;]]&gt;</span><span class="nt">&lt;/descr&gt;</span>
+      <span class="nt">&lt;website&gt;</span><span class="cp">&lt;![CDATA[http://emp.jobylon.com/]]&gt;</span><span class="nt">&lt;/website&gt;</span>
+   <span class="nt">&lt;/company&gt;</span>
+   <span class="nt">&lt;contact&gt;</span>
+      <span class="nt">&lt;name&gt;</span><span class="cp">&lt;![CDATA[Niklas Emanuelsson]]&gt;</span><span class="nt">&lt;/name&gt;</span>
+      <span class="nt">&lt;email&gt;</span><span class="cp">&lt;![CDATA[niklas@jobylon.com]]&gt;</span><span class="nt">&lt;/email&gt;</span>
+      <span class="nt">&lt;photo&gt;</span><span class="cp">&lt;![CDATA[https://media-eu.jobylon.com/main_contact/f299a79d289ca240b00bc57529552caa.0622460b.jpg]]&gt;</span><span class="nt">&lt;/photo&gt;</span>
+      <span class="nt">&lt;phone&gt;</span><span class="cp">&lt;![CDATA[+4670 487 25 18]]&gt;</span><span class="nt">&lt;/phone&gt;</span>
+   <span class="nt">&lt;/contact&gt;</span>
+   <span class="nt">&lt;departments&gt;</span>
+     <span class="nt">&lt;descr&gt;</span>IT<span class="nt">&lt;/descr&gt;</span>
+     <span class="nt">&lt;id&gt;</span>1473<span class="nt">&lt;/id&gt;</span>
+   <span class="nt">&lt;/departments&gt;</span>
+   <span class="nt">&lt;title&gt;</span><span class="cp">&lt;![CDATA[Full-stack Python/Django developer]]&gt;</span><span class="nt">&lt;/title&gt;</span>
+   <span class="nt">&lt;slug&gt;</span><span class="cp">&lt;![CDATA[full-stack-pythondjango-developer]]&gt;</span><span class="nt">&lt;/slug&gt;</span>
+   <span class="nt">&lt;descr&gt;</span><span class="cp">&lt;![CDATA[&lt;p&gt;We're a growing start-up with big ambitions and even though we've come a long way, we have a lot of exciting challenges left to tackle! We are now looking for another &lt;strong&gt;dedicated, eager and passionate&lt;/strong&gt; developer to further help us realise our vision. We have &lt;a href="https://emp.jobylon.com/customers"&gt;amazing clients&lt;/a&gt;, loads of ideas and an exciting roadmap, but mainly we're looking to change a traditional space and create value for our customers. &lt;strong&gt;That's why we need you!&lt;/strong&gt;&lt;/p&gt; &lt;p&gt;On a day to day basis, you'll be involved in all phases of the software life cycle, from specification to design, implementation and deployment.&lt;/p&gt; &lt;p&gt;You are keen to contribute with your own ideas and we expect that you'll grow into an important part in our expansion, owning and driving parts of the system.&lt;/p&gt;]]&gt;</span><span class="nt">&lt;/descr&gt;</span>
+   <span class="nt">&lt;skills&gt;</span><span class="cp">&lt;![CDATA[&lt;p&gt;You are an experienced full-stack developer who have a genuine passion for web development and always looking to learn new technologies.&lt;/p&gt; &lt;p&gt;&lt;strong&gt;You build things daily with&lt;/strong&gt;&lt;/p&gt; &lt;ul&gt; &lt;li&gt;Python and Django&lt;/li&gt; &lt;li&gt;JavaScript/CoffeeScript/ES6&lt;/li&gt; &lt;/ul&gt; &lt;p&gt;&lt;strong&gt;You know your way around&lt;/strong&gt;&lt;/p&gt; &lt;ul&gt; &lt;li&gt;ElasticSearch&lt;/li&gt; &lt;li&gt;Memcached and Redis&lt;/li&gt; &lt;li&gt;MySQL/PostgreSQL&lt;/li&gt; &lt;li&gt;RabbitMQ&lt;/li&gt; &lt;/ul&gt; &lt;p&gt;&lt;strong&gt;Played a bit with&lt;/strong&gt;&lt;/p&gt; &lt;ul&gt; &lt;li&gt;JavaScript MVC (Angular, Flux/React or similar)&lt;/li&gt; &lt;/ul&gt; &lt;p&gt;&lt;strong&gt;And sometimes tamper with&lt;/strong&gt;&lt;/p&gt; &lt;ul&gt; &lt;li&gt;LESS and CSS&lt;/li&gt; &lt;/ul&gt;]]&gt;</span><span class="nt">&lt;/skills&gt;</span>
+   <span class="nt">&lt;function&gt;</span><span class="cp">&lt;![CDATA[Software Development]]&gt;</span><span class="nt">&lt;/function&gt;</span>
+   <span class="nt">&lt;experience&gt;</span><span class="cp">&lt;![CDATA[Experienced]]&gt;</span><span class="nt">&lt;/experience&gt;</span>
+   <span class="nt">&lt;employment_type&gt;</span><span class="cp">&lt;![CDATA[Full-time]]&gt;</span><span class="nt">&lt;/employment_type&gt;</span>
+   <span class="nt">&lt;from_date&gt;</span>2016-04-21<span class="nt">&lt;/from_date&gt;</span>
+   <span class="nt">&lt;to_date&gt;</span>2019-12-31<span class="nt">&lt;/to_date&gt;</span>
+   <span class="nt">&lt;language&gt;</span><span class="cp">&lt;![CDATA[en]]&gt;</span><span class="nt">&lt;/language&gt;</span>
+   <span class="nt">&lt;locations&gt;</span>
+      <span class="nt">&lt;location&gt;</span>
+         <span class="nt">&lt;city_short&gt;</span><span class="cp">&lt;![CDATA[Stockholm]]&gt;</span><span class="nt">&lt;/city_short&gt;</span>
+         <span class="nt">&lt;area_1&gt;</span><span class="cp">&lt;![CDATA[Stockholms län]]&gt;</span><span class="nt">&lt;/area_1&gt;</span>
+         <span class="nt">&lt;postal_code&gt;</span><span class="cp">&lt;![CDATA[113 31]]&gt;</span><span class="nt">&lt;/postal_code&gt;</span>
+         <span class="nt">&lt;area_1_short&gt;</span><span class="cp">&lt;![CDATA[Stockholms län]]&gt;</span><span class="nt">&lt;/area_1_short&gt;</span>
+         <span class="nt">&lt;municipality&gt;</span><span class="cp">&lt;![CDATA[Stockholm]]&gt;</span><span class="nt">&lt;/municipality&gt;</span>
+         <span class="nt">&lt;country&gt;</span><span class="cp">&lt;![CDATA[Sweden]]&gt;</span><span class="nt">&lt;/country&gt;</span>
+         <span class="nt">&lt;url&gt;</span><span class="cp">&lt;![CDATA[https://maps.google.com/?q=H%C3%A4lsingegatan+49,+113+31+Stockholm,+Sweden&amp;ftid=0x465f9d76eae53039:0x1005e3c61fb0a66]]&gt;</span><span class="nt">&lt;/url&gt;</span>
+         <span class="nt">&lt;place_id&gt;</span><span class="cp">&lt;![CDATA[ChIJOTDl6nadX0YRZgr7YTxeAAE]]&gt;</span><span class="nt">&lt;/place_id&gt;</span>
+         <span class="nt">&lt;text&gt;</span><span class="cp">&lt;![CDATA[Hälsingegatan 49, Stockholm, Sweden]]&gt;</span><span class="nt">&lt;/text&gt;</span>
+         <span class="nt">&lt;city&gt;</span><span class="cp">&lt;![CDATA[Stockholm]]&gt;</span><span class="nt">&lt;/city&gt;</span>
+         <span class="nt">&lt;postal_code_short&gt;</span><span class="cp">&lt;![CDATA[113 31]]&gt;</span><span class="nt">&lt;/postal_code_short&gt;</span>
+         <span class="nt">&lt;country_short&gt;</span><span class="cp">&lt;![CDATA[SE]]&gt;</span><span class="nt">&lt;/country_short&gt;</span>
+      <span class="nt">&lt;/location&gt;</span>
+   <span class="nt">&lt;/locations&gt;</span>
+   <span class="nt">&lt;video&gt;</span>
+      <span class="nt">&lt;content&gt;</span>
+        <span class="nt">&lt;id&gt;</span>
+          <span class="cp">&lt;![CDATA[ v34S-hnm1Cg ]]&gt;</span>
+        <span class="nt">&lt;/id&gt;</span>
+        <span class="nt">&lt;url&gt;</span>
+          <span class="cp">&lt;![CDATA[ https://www.youtube.com/watch?v=v34S-hnm1Cg ]]&gt;</span>
+        <span class="nt">&lt;/url&gt;</span>
+        <span class="nt">&lt;src&gt;</span>
+          <span class="cp">&lt;![CDATA[ youtube ]]&gt;</span>
+        <span class="nt">&lt;/src&gt;</span>
+      <span class="nt">&lt;/content&gt;</span>
+      <span class="nt">&lt;url&gt;</span>
+      <span class="cp">&lt;![CDATA[ https://www.youtube.com/watch?v=v34S-hnm1Cg ]]&gt;</span>
+      <span class="nt">&lt;/url&gt;</span>
+   <span class="nt">&lt;/video&gt;</span>
+   <span class="nt">&lt;urls&gt;</span>
+      <span class="nt">&lt;ad&gt;</span><span class="cp">&lt;![CDATA[https://emp.jobylon.com/jobs/4069-jobylon-full-stack-pythondjango-developer/]]&gt;</span><span class="nt">&lt;/ad&gt;</span>
+      <span class="nt">&lt;apply&gt;</span><span class="cp">&lt;![CDATA[https://emp.jobylon.com/applications/jobs/4069/create/]]&gt;</span><span class="nt">&lt;/apply&gt;</span>
+   <span class="nt">&lt;/urls&gt;</span>
+<span class="nt">&lt;/job&gt;</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="w">
+</span><span class="err">&gt;</span><span class="w"> </span><span class="err">JSON</span><span class="w"> </span><span class="err">Example</span><span class="p">:</span><span class="w">
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+</span><span class="p">[</span><span class="w">
+   </span><span class="p">{</span><span class="w">
+   </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">4069</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"categories"</span><span class="p">:[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+         </span><span class="s2">"category"</span><span class="p">:{</span><span class="w">
+            </span><span class="s2">"text"</span><span class="p">:</span><span class="s2">"Tech"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">159</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="s2">"company"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"logo"</span><span class="p">:</span><span class="s2">"https://media-eu.jobylon.com/companies/company-logo/jobylon/social_squared_rgb.911b9470.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"slug"</span><span class="p">:</span><span class="s2">"jobylon"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"descr"</span><span class="p">:</span><span class="s2">"&lt;p&gt;Jobylon develops and offers a modern hiring software (SaaS) to companies who want to create and share &lt;strong&gt;beautiful job ads and manage their applicants with ease.&lt;/strong&gt; The recruitment industry has stayed unchanged for too long whilst the need for a simple and efficient tool has increased.&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;Jobylon was founded in 2011 and since then we've launched a number of exciting projects and ventures within the HR tech space. We've always had the same goal - &lt;strong&gt;to use technology and innovation to change and simplify what is today a traditional space.&lt;/strong&gt;&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;During this time we've also been awarded as one of &lt;strong&gt;Sweden's hottest entrepreneurs&lt;/strong&gt; and nominated for the &lt;strong&gt;Red Herring&lt;/strong&gt; award - we've done this with a small but dedicated team!&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;Today, we work with nearly &lt;strong&gt;1000 employers&lt;/strong&gt; from more than &lt;strong&gt;80 countries worldwide&lt;/strong&gt;, including amazing organisations such as 7-Eleven, Schibsted, Scandic Hotels, Vaimo, Bonnier and &lt;a href=</span><span class="se">\"</span><span class="s2">https://www.jobylon.com/testimonials/</span><span class="se">\"</span><span class="s2">&gt;many more!&lt;/a&gt;&lt;/p&gt;"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"website"</span><span class="p">:</span><span class="s2">"http://emp.jobylon.com/"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"industry"</span><span class="p">:</span><span class="s2">"Startup"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Jobylon"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"cover"</span><span class="p">:</span><span class="s2">"https://media-eu.jobylon.com/jobs/company-cover/full-stack-pythondjango-developer/cover.940fe1cc.jpg"</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="s2">"contact"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"phone"</span><span class="p">:</span><span class="s2">"+4670 487 25 18"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"email"</span><span class="p">:</span><span class="s2">"niklas@jobylon.com"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Niklas Emanuelsson"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"photo"</span><span class="p">:</span><span class="s2">"https://media-eu.jobylon.com/main_contact/f299a79d289ca240b00bc57529552caa.0622460b.jpg"</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="s2">"departments"</span><span class="p">:[</span><span class="w">
+     </span><span class="p">{</span><span class="w">
+       </span><span class="s2">"department"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="s2">"descr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IT"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1473</span><span class="w">
+       </span><span class="p">}</span><span class="w">
+     </span><span class="p">}</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="s2">"title"</span><span class="p">:</span><span class="s2">"Full-stack Python/Django developer "</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"slug"</span><span class="p">:</span><span class="s2">"full-stack-pythondjango-developer"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"descr"</span><span class="p">:</span><span class="s2">"&lt;p&gt;We're a growing start-up with big ambitions and even though we've come a long way, we have a lot of exciting challenges left to tackle! We are now looking for another &lt;strong&gt;dedicated, eager and passionate&lt;/strong&gt; developer to further help us realise our vision. We have &lt;a href=</span><span class="se">\"</span><span class="s2">https://emp.jobylon.com/customers</span><span class="se">\"</span><span class="s2">&gt;amazing clients&lt;/a&gt;, loads of ideas and an exciting roadmap, but mainly we're looking to change a traditional space and create value for our customers. &lt;strong&gt;That's why we need you!&lt;/strong&gt;&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;On a day to day basis, you'll be involved in all phases of the software life cycle, from specification to design, implementation and deployment.&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;You are keen to contribute with your own ideas and we expect that you'll grow into an important part in our expansion, owning and driving parts of the system.&lt;/p&gt;"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"skills"</span><span class="p">:</span><span class="s2">"&lt;p&gt;You are an experienced full-stack developer who have a genuine passion for web development and always looking to learn new technologies.&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;&lt;strong&gt;You build things daily with&lt;/strong&gt;&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;ul&gt;</span><span class="se">\n</span><span class="s2">&lt;li&gt;Python and Django&lt;/li&gt;</span><span class="se">\n</span><span class="s2">&lt;li&gt;JavaScript/CoffeeScript/ES6&lt;/li&gt;</span><span class="se">\n</span><span class="s2">&lt;/ul&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;&lt;strong&gt;You know your way around&lt;/strong&gt;&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;ul&gt;</span><span class="se">\n</span><span class="s2">&lt;li&gt;ElasticSearch&lt;/li&gt;</span><span class="se">\n</span><span class="s2">&lt;li&gt;Memcached and Redis&lt;/li&gt;</span><span class="se">\n</span><span class="s2">&lt;li&gt;MySQL/PostgreSQL&lt;/li&gt;</span><span class="se">\n</span><span class="s2">&lt;li&gt;RabbitMQ&lt;/li&gt;</span><span class="se">\n</span><span class="s2">&lt;/ul&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;&lt;strong&gt;Played a bit with&lt;/strong&gt;&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;ul&gt;</span><span class="se">\n</span><span class="s2">&lt;li&gt;JavaScript MVC (Angular, Flux/React or similar)&lt;/li&gt;</span><span class="se">\n</span><span class="s2">&lt;/ul&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;&lt;strong&gt;And sometimes tamper with&lt;/strong&gt;&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;ul&gt;</span><span class="se">\n</span><span class="s2">&lt;li&gt;LESS and CSS&lt;/li&gt;</span><span class="se">\n</span><span class="s2">&lt;/ul&gt;"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"function"</span><span class="p">:</span><span class="s2">"Software Development"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"experience"</span><span class="p">:</span><span class="s2">"Experienced"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"employment_type"</span><span class="p">:</span><span class="s2">"Full-time"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"from_date"</span><span class="p">:</span><span class="s2">"2016-04-21"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"to_date"</span><span class="p">:</span><span class="s2">"2019-12-31"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"language"</span><span class="p">:</span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"locations"</span><span class="p">:[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+         </span><span class="s2">"location"</span><span class="p">:{</span><span class="w">
+            </span><span class="s2">"city"</span><span class="p">:</span><span class="s2">"Stockholm"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"municipality"</span><span class="p">:</span><span class="s2">"Stockholm"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"postal_code_short"</span><span class="p">:</span><span class="s2">"113 31"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"country_short"</span><span class="p">:</span><span class="s2">"SE"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"area_1_short"</span><span class="p">:</span><span class="s2">"Stockholms l</span><span class="se">\u</span><span class="s2">00e4n"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"city_short"</span><span class="p">:</span><span class="s2">"Stockholm"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"area_1"</span><span class="p">:</span><span class="s2">"Stockholms l</span><span class="se">\u</span><span class="s2">00e4n"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"url"</span><span class="p">:</span><span class="s2">"https://maps.google.com/?q=H%C3%A4lsingegatan+49,+113+31+Stockholm,+Sweden&amp;ftid=0x465f9d76eae53039:0x1005e3c61fb0a66"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"place_id"</span><span class="p">:</span><span class="s2">"ChIJOTDl6nadX0YRZgr7YTxeAAE"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"text"</span><span class="p">:</span><span class="s2">"H</span><span class="se">\u</span><span class="s2">00e4lsingegatan 49, Stockholm, Sweden"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"country"</span><span class="p">:</span><span class="s2">"Sweden"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="s2">"113 31"</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="s2">"video"</span><span class="p">:{</span><span class="w">
+     </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.youtube.com/watch?v=v34S-hnm1Cg"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"v34S-hnm1Cg"</span><span class="p">,</span><span class="w">
+       </span><span class="s2">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"youtube"</span><span class="p">,</span><span class="w"> 
+       </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.youtube.com/watch?v=v34S-hnm1Cg"</span><span class="w">
+       </span><span class="p">}</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="s2">"urls"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"apply"</span><span class="p">:</span><span class="s2">"https://emp.jobylon.com/applications/jobs/4069/create/"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ad"</span><span class="p">:</span><span class="s2">"https://emp.jobylon.com/jobs/4069-jobylon-full-stack-pythondjango-developer/"</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
+<p><strong>Fields</strong></p>
+
 <table><thead>
 <tr>
-<th>Parameter</th>
-<th>Default</th>
+<th>Name</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>id</td>
+<td>integer</td>
+<td>Job ID</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>categories</td>
+<td>array</td>
+<td>Collection of <a href="?json#category">Category</a></td>
+</tr>
+<tr>
+<td>company</td>
+<td>object</td>
+<td><a href="?json#company">Company</a> object</td>
+</tr>
+<tr>
+<td>contact</td>
+<td>object</td>
+<td><a href="?json#contact">Contact</a> object</td>
+</tr>
+<tr>
+<td>departments</td>
+<td>array</td>
+<td>Collection of <a href="?json#department">Department</a></td>
+</tr>
+<tr>
+<td>descr</td>
+<td>string</td>
+<td>HTML-formatted string of text</td>
+</tr>
+<tr>
+<td>employment_type</td>
+<td>string</td>
+<td>Employment type</td>
+</tr>
+<tr>
+<td>experience</td>
+<td>string</td>
+<td>Experience level</td>
+</tr>
+<tr>
+<td>from_date</td>
+<td>string</td>
+<td>Job ad advertised from this date</td>
+</tr>
+<tr>
+<td>function</td>
+<td>string</td>
+<td>Job function</td>
+</tr>
+<tr>
+<td>language</td>
+<td>string</td>
+<td>Language used in job ad</td>
+</tr>
+<tr>
+<td>locations</td>
+<td>array</td>
+<td>Collection of <a href="?json#location">Location</a></td>
+</tr>
+<tr>
+<td>skills</td>
+<td>string</td>
+<td>HTML-formatted string of text</td>
+</tr>
+<tr>
+<td>slug</td>
+<td>string</td>
+<td>Job slug, without complete URL</td>
+</tr>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>Job title</td>
+</tr>
+<tr>
+<td>to_date</td>
+<td>string</td>
+<td>Job ad advertised from to date</td>
+</tr>
+<tr>
+<td>urls</td>
+<td>object</td>
+<td><a href="?json#url">URL</a> object</td>
+</tr>
+<tr>
+<td>video</td>
+<td>object</td>
+<td><a href="?json#video">Video</a> object</td>
 </tr>
 </tbody></table>
+<h3 id='category'>Category</h3>
+<p><strong>Fields</strong></p>
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Name</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>id</td>
+<td>integer</td>
+<td>Category ID</td>
+</tr>
+<tr>
+<td>text</td>
+<td>string</td>
+<td>Category name</td>
 </tr>
 </tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h3 id='company'>Company</h3>
+<p><strong>Fields</strong></p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Name</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
+<td>id</td>
+<td>integer</td>
+<td>Company ID</td>
+</tr>
+<tr>
+<td>cover</td>
+<td>url</td>
+<td>URL to cover image</td>
+</tr>
+<tr>
+<td>descr</td>
+<td>string</td>
+<td>Description of Company</td>
+</tr>
+<tr>
+<td>industry</td>
+<td>string</td>
+<td>Company industry</td>
+</tr>
+<tr>
+<td>logo</td>
+<td>url</td>
+<td>URL to logo</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Company name</td>
+</tr>
+<tr>
+<td>slug</td>
+<td>string</td>
+<td>Company slug, without complete URL</td>
+</tr>
+<tr>
+<td>website</td>
+<td>url</td>
+<td>URL for company website</td>
 </tr>
 </tbody></table>
-<h1 id='errors'>Errors</h1>
-<p>API uses the following error codes:</p>
+<h3 id='contact'>Contact</h3>
+<p><strong>Fields</strong></p>
 
 <table><thead>
 <tr>
-<th>Error Code</th>
-<th>Meaning</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>400</td>
-<td>Bad Request -- Your request is invalid.</td>
+<td>email</td>
+<td>string</td>
+<td>Email for contact</td>
 </tr>
 <tr>
-<td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
+<td>name</td>
+<td>string</td>
+<td>Full name of contact</td>
 </tr>
 <tr>
-<td>403</td>
-<td>Forbidden -- Permission denied</td>
+<td>phone</td>
+<td>string</td>
+<td>Phone number for contact</td>
 </tr>
 <tr>
-<td>404</td>
-<td>Not Found</td>
+<td>photo</td>
+<td>url</td>
+<td>URL to photo of contact</td>
+</tr>
+</tbody></table>
+<h3 id='department'>Department</h3>
+<p><strong>Fields</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>Department ID</td>
 </tr>
 <tr>
-<td>405</td>
-<td>Method Not Allowed -- You tried to access a endpoint with an invalid method.</td>
+<td>desc</td>
+<td>string</td>
+<td>Name of department</td>
+</tr>
+</tbody></table>
+<h3 id='location'>Location</h3>
+<p><strong>Fields</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>area_1_short</td>
+<td>string</td>
+<td>Short name of city area, default to full name</td>
 </tr>
 <tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
+<td>area_1</td>
+<td>string</td>
+<td>Name of city area</td>
 </tr>
 <tr>
-<td>410</td>
-<td>Gone</td>
+<td>city</td>
+<td>string</td>
+<td>Name of city</td>
 </tr>
 <tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
+<td>city_short</td>
+<td>string</td>
+<td>Short name of city, defaults to full name</td>
 </tr>
 <tr>
-<td>429</td>
-<td>Too Many Requests -- You&#39;ve sent too many requests! Slow down!</td>
+<td>country</td>
+<td>string</td>
+<td>Country of location</td>
 </tr>
 <tr>
-<td>500</td>
-<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
+<td>country_short</td>
+<td>string</td>
+<td>Country alpha-2 code</td>
 </tr>
 <tr>
-<td>503</td>
-<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+<td>municipality</td>
+<td>string</td>
+<td>Name of city municipality</td>
+</tr>
+<tr>
+<td>place_id</td>
+<td>string</td>
+<td>ID of location on Google maps</td>
+</tr>
+<tr>
+<td>postal_code</td>
+<td>string</td>
+<td>Postal code of location</td>
+</tr>
+<tr>
+<td>postal_code_short</td>
+<td>string</td>
+<td>Short postal code, default to full postal code</td>
+</tr>
+<tr>
+<td>text</td>
+<td>string</td>
+<td>Name or full address of location</td>
+</tr>
+<tr>
+<td>url</td>
+<td>url</td>
+<td>URL to location on Google maps</td>
+</tr>
+</tbody></table>
+<h3 id='video'>Video</h3>
+<p><strong>Fields</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>Video ID at source</td>
+</tr>
+<tr>
+<td>src</td>
+<td>string</td>
+<td>Source of video</td>
+</tr>
+<tr>
+<td>url</td>
+<td>url</td>
+<td>URL to video</td>
+</tr>
+</tbody></table>
+<h3 id='url'>URL</h3>
+<p><strong>Fields</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>apply</td>
+<td>url</td>
+<td>URL to application form</td>
+</tr>
+<tr>
+<td>ad</td>
+<td>url</td>
+<td>URL to ad</td>
 </tr>
 </tbody></table>
 
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
-                <a href="#" data-language-name="javascript">javascript</a>
+                <a href="#" data-language-name="xml">xml</a>
+                <a href="#" data-language-name="json">json</a>
           </div>
       </div>
     </div>
