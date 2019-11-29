@@ -281,15 +281,19 @@
 <h2 id='getting-started'>Getting started</h2>
 <p>Our customer support can set up feeds on request. Once configured, you will recieve a URL for the specific feed. The default content format is XML, but by appending ?format=json to any URL the content will be formatted in JSON.</p>
 <h2 id='endpoints'>Endpoints</h2><h3 id='job-list'>Job list</h3>
-<p>GET /feeds/<hash>/</p>
+<p>GET <code>/feeds/&lt;hash&gt;/</code></p>
 
 <p><strong>Query String Parameters</strong></p>
 
-<p>[comment]: &lt;&gt; | Name      | Type    | Description                     |
-[comment]: &lt;&gt; |-----------|---------|---------------------------------|
-[comment]: &lt;&gt; | internal  | string  | Show internal/external/all jobs |
-[comment]: &lt;&gt; The options asre the strings  internal/external/all and defaults to external
-None</p>
+<!-- | Name     | Type   | Description                     | -->
+
+<!-- |----------|--------|---------------------------------| -->
+
+<!-- | internal | string | Show internal/external/all jobs | -->
+
+<!-- The options asre the strings  internal/external/all and defaults to external -->
+
+<p>None</p>
 
 <p><strong>Response</strong></p>
 
@@ -303,11 +307,11 @@ None</p>
 <tr>
 <td>jobs</td>
 <td>array</td>
-<td>Collection of <a href="?json#job">Job</a></td>
+<td>Collection of <a href="#job">Job</a></td>
 </tr>
 </tbody></table>
 <h3 id='job-detail'>Job detail</h3>
-<p>GET /feeds/<hash>/<job_id></p>
+<p>GET <code>/feeds/&lt;hash&gt;/&lt;job_id&gt;</code></p>
 
 <p><strong>Query String Parameters</strong></p>
 
@@ -325,7 +329,7 @@ None</p>
 <tr>
 <td>job</td>
 <td>object</td>
-<td><a href="?json#job">Job</a></td>
+<td><a href="#job">Job</a> object</td>
 </tr>
 </tbody></table>
 <h2 id='structure'>Structure</h2><h3 id='job'>Job</h3><pre class="highlight xml tab-xml"><code>&gt; XSD Schema:
@@ -618,22 +622,22 @@ None</p>
 <tr>
 <td>categories</td>
 <td>array</td>
-<td>Collection of <a href="?json#category">Category</a></td>
+<td>Collection of <a href="#category">Category</a></td>
 </tr>
 <tr>
 <td>company</td>
 <td>object</td>
-<td><a href="?json#company">Company</a> object</td>
+<td><a href="#company">Company</a> object</td>
 </tr>
 <tr>
 <td>contact</td>
 <td>object</td>
-<td><a href="?json#contact">Contact</a> object</td>
+<td><a href="#contact">Contact</a> object</td>
 </tr>
 <tr>
 <td>departments</td>
 <td>array</td>
-<td>Collection of <a href="?json#department">Department</a></td>
+<td>Collection of <a href="#department">Department</a></td>
 </tr>
 <tr>
 <td>descr</td>
@@ -668,7 +672,7 @@ None</p>
 <tr>
 <td>locations</td>
 <td>array</td>
-<td>Collection of <a href="?json#location">Location</a></td>
+<td>Collection of <a href="#location">Location</a></td>
 </tr>
 <tr>
 <td>skills</td>
@@ -693,12 +697,12 @@ None</p>
 <tr>
 <td>urls</td>
 <td>object</td>
-<td><a href="?json#url">URL</a> object</td>
+<td><a href="#url">URL</a> object</td>
 </tr>
 <tr>
 <td>video</td>
 <td>object</td>
-<td><a href="?json#video">Video</a> object</td>
+<td><a href="#video">Video</a> object</td>
 </tr>
 </tbody></table>
 <h3 id='category'>Category</h3>
