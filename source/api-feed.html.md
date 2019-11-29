@@ -6,7 +6,7 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - json
 
 toc_footers:
-  - <a href='mailto:info@jobylon.com?subject=PushAPI-credentials'>Email us to get your credentials</a>
+  - <a href='mailto:info@jobylon.com?subject=FeedAPI-credentials'>Email us to get your credentials</a>
   - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
 
 search: true
@@ -20,15 +20,11 @@ The Feed API allows you as a Jobylon-customer to retrieve job data in XML/JSON-f
 
 Our customer support can set up feeds on request. Once configured, you will recieve a URL for the specific feed. The default content format is XML, but by appending ?format=json to any URL the content will be formatted in JSON.
 
-## Example implementations
-
-- [Futurice careers](https://www.futurice.com/careers)
-
-# Formatters
+## Structure
 
 Depending on your usage scenario we can provide different formatters. The basic formatter should suffice most custom implementations, but we also provide prepared feeds for services such as Monster and Linkedin.
 
-## Basic
+### Basic
 
 ```xml
 > XSD Schema:
@@ -304,15 +300,3 @@ The basic formatter is suitable for most custom implementations.
 | locations       | string  | Location of the job              |
 | video           | string  | Job video                        |
 | urls            | string  | URLs for ad and application      |
-
-## CareerBuilder
-
-...
-
-## LinkedIn Limited Listings
-
-...
-
-## Monster
-
-...
