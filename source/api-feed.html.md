@@ -311,19 +311,19 @@ Our customer support can set up feeds on request. Once configured, you will reci
 | company         | object  | [Company](?json#company) object              |
 | contact         | object  | [Contact](?json#contact) object              |
 | departments     | array   | Collection of [Department](?json#department) |
-| title           | string  | Job title                                    |
-| slug            | string  | Job slug, without complete URL               |
 | descr           | string  | HTML-formatted string of text                |
-| skills          | string  | HTML-formatted string of text                |
-| function        | string  | Job function                                 |
-| experience      | string  | Experience level                             |
 | employment_type | string  | Employment type                              |
+| experience      | string  | Experience level                             |
 | from_date       | string  | Job ad advertised from this date             |
-| to_date         | string  | Job ad advertised from to date               |
+| function        | string  | Job function                                 |
 | language        | string  | Language used in job ad                      |
-| locations       | string  | Collection of [Location](?json#location)     |
-| video           | string  | [Video](?json#video) object                  |
-| urls            | string  | [URL](?json#url) object                      |
+| locations       | array   | Collection of [Location](?json#location)     |
+| skills          | string  | HTML-formatted string of text                |
+| slug            | string  | Job slug, without complete URL               |
+| title           | string  | Job title                                    |
+| to_date         | string  | Job ad advertised from to date               |
+| urls            | object  | [URL](?json#url) object                      |
+| video           | object  | [Video](?json#video) object                  |
 
 ### Category
 
@@ -331,8 +331,8 @@ Our customer support can set up feeds on request. Once configured, you will reci
 
 | Name | Type    | Description   |
 |------|---------|---------------|
-| text | string  | Category name |
 | id   | integer | Category ID   |
+| text | string  | Category name |
 
 ### Company
 
@@ -340,14 +340,14 @@ Our customer support can set up feeds on request. Once configured, you will reci
 
 | Name     | Type    | Description                        |
 |----------|---------|------------------------------------|
-| logo     | string  | URL to logo                        |
-| slug     | string  | Company slug, without complete URL |
-| descr    | string  | Description of Company             |
-| website  | string  | URL for company website            |
 | id       | integer | Company ID                         |
+| cover    | url     | URL to cover image                 |
+| descr    | string  | Description of Company             |
 | industry | string  | Company industry                   |
+| logo     | url     | URL to logo                        |
 | name     | string  | Company name                       |
-| cover    | string  | URL to cover image                 |
+| slug     | string  | Company slug, without complete URL |
+| website  | url     | URL for company website            |
 
 ### Contact
 
@@ -355,10 +355,10 @@ Our customer support can set up feeds on request. Once configured, you will reci
 
 | Name  | Type   | Description              |
 |-------|--------|--------------------------|
-| phone | string | Phone number for contact |
 | email | string | Email for contact        |
 | name  | string | Full name of contact     |
-| photo | string | Photo of contact         |
+| phone | string | Phone number for contact |
+| photo | url    | URL to photo of contact  |
 
 ### Department
 
@@ -366,8 +366,8 @@ Our customer support can set up feeds on request. Once configured, you will reci
 
 | Name | Type    | Description        |
 |------|---------|--------------------|
-| desc | string  | Name of department |
 | id   | integer | Department ID      |
+| desc | string  | Name of department |
 
 ### Location
 
@@ -375,18 +375,18 @@ Our customer support can set up feeds on request. Once configured, you will reci
 
 | Name              | Type   | Description                                    |
 |-------------------|--------|------------------------------------------------|
-| city              | string | Name of city                                   |
-| municipality      | string | Name of city municipality                      |
-| postal_code_short | string | Short postal code, default to full postal code |
-| country_short     | string | Country alpha-2 code                           |
 | area_1_short      | string | Short name of city area, default to full name  |
-| city_short        | string | Short name of city, defaults to full name      |
 | area_1            | string | Name of city area                              |
-| url               | string | URL to location on Google maps                 |
-| place_id          | string | ID of location on Google maps                  |
-| text              | string | Name or full address of location               |
+| city              | string | Name of city                                   |
+| city_short        | string | Short name of city, defaults to full name      |
 | country           | string | Country of location                            |
+| country_short     | string | Country alpha-2 code                           |
+| municipality      | string | Name of city municipality                      |
+| place_id          | string | ID of location on Google maps                  |
 | postal_code       | string | Postal code of location                        |
+| postal_code_short | string | Short postal code, default to full postal code |
+| text              | string | Name or full address of location               |
+| url               | url    | URL to location on Google maps                 |
 
 ### Video
 
@@ -395,8 +395,8 @@ Our customer support can set up feeds on request. Once configured, you will reci
 | Name | Type   | Description        |
 |------|--------|--------------------|
 | id   | string | Video ID at source |
-| url  | string | URL to video       |
 | src  | string | Source of video    |
+| url  | url    | URL to video       |
 
 ### URL
 
@@ -404,5 +404,5 @@ Our customer support can set up feeds on request. Once configured, you will reci
 
 | Name  | Type   | Description             |
 |-------|--------|-------------------------|
-| apply | string | URL to application form |
-| ad    | string | URL to ad               |
+| apply | url    | URL to application form |
+| ad    | url    | URL to ad               |
