@@ -30,14 +30,14 @@ Our customer support can set up feeds on request. Once configured, you will reci
   <xs:element name="job">
     <xs:complexType>
       <xs:sequence>
-        <xs:element type="xs:int" name="id"/>
+        <xs:element type="xs:short" name="id"/>
         <xs:element name="categories">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="category">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element type="xs:byte" name="id"/>
+                    <xs:element type="xs:short" name="id"/>
                     <xs:element type="xs:string" name="text"/>
                   </xs:sequence>
                 </xs:complexType>
@@ -48,14 +48,14 @@ Our customer support can set up feeds on request. Once configured, you will reci
         <xs:element name="company">
           <xs:complexType>
             <xs:sequence>
-              <xs:element type="xs:string" name="industry"/>
+              <xs:element type="xs:byte" name="id"/>
               <xs:element type="xs:string" name="slug"/>
-              <xs:element type="xs:string" name="descr"/>
               <xs:element type="xs:string" name="logo"/>
-              <xs:element type="xs:string" name="website"/>
               <xs:element type="xs:string" name="cover"/>
-              <xs:element type="xs:short" name="id"/>
+              <xs:element type="xs:string" name="industry"/>
               <xs:element type="xs:string" name="name"/>
+              <xs:element type="xs:string" name="descr"/>
+              <xs:element type="xs:anyURI" name="website"/>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -63,8 +63,8 @@ Our customer support can set up feeds on request. Once configured, you will reci
           <xs:complexType>
             <xs:sequence>
               <xs:element type="xs:string" name="name"/>
-              <xs:element type="xs:string" name="photo"/>
               <xs:element type="xs:string" name="email"/>
+              <xs:element type="xs:string" name="photo"/>
               <xs:element type="xs:string" name="phone"/>
             </xs:sequence>
           </xs:complexType>
@@ -72,15 +72,8 @@ Our customer support can set up feeds on request. Once configured, you will reci
         <xs:element name="departments">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="department">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element type="xs:string" name="descr"/>
-                    <xs:element type="xs:short" name="id"/>
-                    <xs:element type="xs:string" name="name"/>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
+              <xs:element type="xs:string" name="descr"/>
+              <xs:element type="xs:short" name="id"/>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -100,15 +93,18 @@ Our customer support can set up feeds on request. Once configured, you will reci
               <xs:element name="location">
                 <xs:complexType>
                   <xs:sequence>
+                    <xs:element type="xs:string" name="city_short"/>
+                    <xs:element type="xs:string" name="area_1"/>
+                    <xs:element type="xs:string" name="postal_code"/>
                     <xs:element type="xs:string" name="area_1_short"/>
-                    <xs:element type="xs:string" name="text"/>
+                    <xs:element type="xs:string" name="municipality"/>
+                    <xs:element type="xs:string" name="country"/>
                     <xs:element type="xs:string" name="url"/>
                     <xs:element type="xs:string" name="place_id"/>
-                    <xs:element type="xs:string" name="country"/>
-                    <xs:element type="xs:string" name="area_1"/>
-                    <xs:element type="xs:string" name="country_short"/>
+                    <xs:element type="xs:string" name="text"/>
                     <xs:element type="xs:string" name="city"/>
-                    <xs:element type="xs:string" name="city_short"/>
+                    <xs:element type="xs:string" name="postal_code_short"/>
+                    <xs:element type="xs:string" name="country_short"/>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
@@ -118,7 +114,15 @@ Our customer support can set up feeds on request. Once configured, you will reci
         <xs:element name="video">
           <xs:complexType>
             <xs:sequence>
-              <xs:element type="xs:string" name="content"/>
+              <xs:element name="content">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="id"/>
+                    <xs:element type="xs:string" name="url"/>
+                    <xs:element type="xs:string" name="src"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
               <xs:element type="xs:string" name="url"/>
             </xs:sequence>
           </xs:complexType>
