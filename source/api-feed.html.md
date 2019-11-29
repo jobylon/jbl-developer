@@ -22,9 +22,7 @@ Our customer support can set up feeds on request. Once configured, you will reci
 
 ## Structure
 
-Depending on your usage scenario we can provide different formatters. The basic formatter should suffice most custom implementations, but we also provide prepared feeds for services such as Monster and Linkedin.
-
-### Basic
+### Job
 
 ```xml
 > XSD Schema:
@@ -164,7 +162,10 @@ Depending on your usage scenario we can provide different formatters. The basic 
       <photo><![CDATA[https://media-eu.jobylon.com/main_contact/f299a79d289ca240b00bc57529552caa.0622460b.jpg]]></photo>
       <phone><![CDATA[+4670 487 25 18]]></phone>
    </contact>
-   <departments />
+   <departments>
+     <descr>IT</descr>
+     <id>1473</id>
+   </departments>
    <title><![CDATA[Full-stack Python/Django developer]]></title>
    <slug><![CDATA[full-stack-pythondjango-developer]]></slug>
    <descr><![CDATA[<p>We're a growing start-up with big ambitions and even though we've come a long way, we have a lot of exciting challenges left to tackle! We are now looking for another <strong>dedicated, eager and passionate</strong> developer to further help us realise our vision. We have <a href="https://emp.jobylon.com/customers">amazing clients</a>, loads of ideas and an exciting roadmap, but mainly we're looking to change a traditional space and create value for our customers. <strong>That's why we need you!</strong></p> <p>On a day to day basis, you'll be involved in all phases of the software life cycle, from specification to design, implementation and deployment.</p> <p>You are keen to contribute with your own ideas and we expect that you'll grow into an important part in our expansion, owning and driving parts of the system.</p>]]></descr>
@@ -192,8 +193,20 @@ Depending on your usage scenario we can provide different formatters. The basic 
       </location>
    </locations>
    <video>
-      <content />
-      <url />
+      <content>
+        <id>
+          <![CDATA[ v34S-hnm1Cg ]]>
+        </id>
+        <url>
+          <![CDATA[ https://www.youtube.com/watch?v=v34S-hnm1Cg ]]>
+        </url>
+        <src>
+          <![CDATA[ youtube ]]>
+        </src>
+      </content>
+      <url>
+      <![CDATA[ https://www.youtube.com/watch?v=v34S-hnm1Cg ]]>
+      </url>
    </video>
    <urls>
       <ad><![CDATA[https://emp.jobylon.com/jobs/4069-jobylon-full-stack-pythondjango-developer/]]></ad>
@@ -234,7 +247,12 @@ Depending on your usage scenario we can provide different formatters. The basic 
       "photo":"https://media-eu.jobylon.com/main_contact/f299a79d289ca240b00bc57529552caa.0622460b.jpg"
    },
    "departments":[
-
+     {
+       "department": {
+         "descr": "IT",
+         "id": 1473
+       }
+     }
    ],
    "title":"Full-stack Python/Django developer ",
    "slug":"full-stack-pythondjango-developer",
@@ -265,8 +283,12 @@ Depending on your usage scenario we can provide different formatters. The basic 
       }
    ],
    "video":{
-      "content":null,
-      "url":""
+     "url": "https://www.youtube.com/watch?v=v34S-hnm1Cg",
+     "content": {
+       "id": "v34S-hnm1Cg",
+       "src": "youtube", 
+       "url": "https://www.youtube.com/watch?v=v34S-hnm1Cg"
+       }
    },
    "urls":{
       "apply":"https://emp.jobylon.com/applications/jobs/4069/create/",
@@ -276,27 +298,107 @@ Depending on your usage scenario we can provide different formatters. The basic 
 ]
 ```
 
-The basic formatter is suitable for most custom implementations.
+**Fields**
+
+| Name            | Type    | Description                                  |
+|-----------------|---------|----------------------------------------------|
+| id              | integer | Job ID                                       |
+| categories      | array   | Collection of [Category](?json#category)     |
+| company         | object  | [Company](?json#company) object              |
+| contact         | object  | [Contact](?json#contact) object              |
+| departments     | array   | Collection of [Department](?json#department) |
+| title           | string  | Job title                                    |
+| slug            | string  | Job slug, without complete URL               |
+| descr           | string  | HTML-formatted string of text                |
+| skills          | string  | HTML-formatted string of text                |
+| function        | string  | Job function                                 |
+| experience      | string  | Experience level                             |
+| employment_type | string  | Employment type                              |
+| from_date       | string  | Job ad advertised from this date             |
+| to_date         | string  | Job ad advertised from to date               |
+| language        | string  | Language used in job ad                      |
+| locations       | string  | Collection of [Location](?json#location)     |
+| video           | string  | [Video](?json#video) object                  |
+| urls            | string  | [URL](?json#url) object                      |
+
+### Category
 
 **Fields**
 
-| Name            | Type    | Description                      |
-|-----------------|---------|----------------------------------|
-| id              | integer | Job ID                           |
-| categories      | array   | Categories added on job          |
-| company         | object  | ...                              |
-| contract        | object  | ...                              |
-| departments     | array   | Departments added to job         |
-| title           | string  | Job title                        |
-| slug            | string  | Job slug, without complete URL   |
-| descr           | string  | HTML-formatted string of text    |
-| skills          | string  | HTML-formatted string of text    |
-| function        | string  | Job function                     |
-| experience      | string  | Experience level                 |
-| employment_type | string  | Employment type                  |
-| from_date       | string  | Job ad advertised from this date |
-| to_date         | string  | Job ad advertised from to date   |
-| language        | string  | Language used in job ad          |
-| locations       | string  | Location of the job              |
-| video           | string  | Job video                        |
-| urls            | string  | URLs for ad and application      |
+| Name | Type    | Description   |
+|------|---------|---------------|
+| text | string  | Category name |
+| id   | integer | Category ID   |
+
+### Company
+
+**Fields**
+
+| Name     | Type    | Description                        |
+|----------|---------|------------------------------------|
+| logo     | string  | URL to logo                        |
+| slug     | string  | Company slug, without complete URL |
+| descr    | string  | Description of Company             |
+| website  | string  | URL for company website            |
+| id       | integer | Company ID                         |
+| industry | string  | Company industry                   |
+| name     | string  | Company name                       |
+| cover    | string  | URL to cover image                 |
+
+### Contact
+
+**Fields**
+
+| Name  | Type   | Description              |
+|-------|--------|--------------------------|
+| phone | string | Phone number for contact |
+| email | string | Email for contact        |
+| name  | string | Full name of contact     |
+| photo | string | Photo of contact         |
+
+### Department
+
+**Fields**
+
+| Name | Type    | Description        |
+|------|---------|--------------------|
+| desc | string  | Name of department |
+| id   | integer | Department ID      |
+
+### Location
+
+**Fields**
+
+| Name              | Type   | Description                                    |
+|-------------------|--------|------------------------------------------------|
+| city              | string | Name of city                                   |
+| municipality      | string | Name of city municipality                      |
+| postal_code_short | string | Short postal code, default to full postal code |
+| country_short     | string | Country alpha-2 code                           |
+| area_1_short      | string | Short name of city area, default to full name  |
+| city_short        | string | Short name of city, defaults to full name      |
+| area_1            | string | Name of city area                              |
+| url               | string | URL to location on Google maps                 |
+| place_id          | string | ID of location on Google maps                  |
+| text              | string | Name or full address of location               |
+| country           | string | Country of location                            |
+| postal_code       | string | Postal code of location                        |
+
+### Video
+
+**Fields**
+
+| Name | Type   | Description        |
+|------|--------|--------------------|
+| id   | string | Video ID at source |
+| url  | string | URL to video       |
+| src  | string | Source of video    |
+
+### URL
+
+**Fields**
+
+| Name  | Type   | Description             |
+|-------|--------|-------------------------|
+| apply | string | URL to application form |
+| ad    | string | URL to ad               |
