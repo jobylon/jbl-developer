@@ -268,14 +268,15 @@ Content-Type: application/json
     "status": {
       "id": 2,
       "name": "In Progress",
-      "group": 1,
+      "group": 1
     },
     "owner": {
       "id": 1,
       "name": "Application Owner",
+      "email": "owner@company.com"
     },
     "rejection_sent": false,
-    "ab_test": 'ab-test-1',
+    "ab_test": "ab-test-1",
     "job": {
       "id": 1,
       "title": "Some title",
@@ -286,15 +287,15 @@ Content-Type: application/json
       "contact_email": "manager@company.com",
       "employment_type": {
         "id": 1,
-        "text": "Full-time",
+        "text": "Full-time"
       },
       "experience": {
         "id": 1,
-        "text": "Entry level",
+        "text": "Entry level"
       },
       "function": {
         "id": 1,
-        "text": "IT & Infrastructure",
+        "text": "IT & Infrastructure"
       },
       "language": "sv",
       "location_set": [
@@ -309,31 +310,32 @@ Content-Type: application/json
             "area_1_short": "Stockholm County", 
             "area_1": "Stockholm County", 
             "city_short": "Stockholm"
-          },
-        },
+          }
+        }
       ],
       "categories": [
         {
           "id": 1,
-          "text": "Technology",
-        },
+          "text": "Technology"
+        }
       ],
       "departments": [
         {
           "id": 1,
-          "text": "IT",
-        },
+          "text": "IT"
+        }
       ],
       "company": {
         "id": 1,
-        "name": "Some Company",
+        "name": "Some Company"
       },
       "owner": {
         "id": 2,
         "name": "Job Owner",
-      },
-    },
-  },
+        "email": "owner@company.com"
+      }
+    }
+  }
 }
 ```
 
