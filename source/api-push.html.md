@@ -273,7 +273,7 @@ Content-Type: application/json
     "owner": {
       "id": 1,
       "name": "Application Owner",
-      "email": "owner@company.com"
+      "email": "application.owner@company.com"
     },
     "rejection_sent": false,
     "ab_test": "ab-test-1",
@@ -332,7 +332,7 @@ Content-Type: application/json
       "owner": {
         "id": 2,
         "name": "Job Owner",
-        "email": "owner@company.com"
+        "email": "job.owner@company.com"
       }
     }
   }
