@@ -355,7 +355,7 @@ None
 | experience      | string  | Experience level                        |
 | from_date       | string  | Job ad advertised from this date        |
 | function        | string  | Job function                            |
-| language        | string  | Language used in job ad                 |
+| language        | string  | Language used in job ad (ISO 639-1)     |
 | locations       | array   | Collection of [Location](#location)     |
 | skills          | string  | HTML-formatted string of text           |
 | slug            | string  | Job slug, without complete URL          |
@@ -381,7 +381,7 @@ None
 |----------|---------|------------------------------------|
 | id       | integer | Company ID                         |
 | cover    | url     | URL to cover image                 |
-| descr    | string  | Description of Company             |
+| descr    | string  | HTML-formatted string of text      |
 | industry | string  | Company industry                   |
 | logo     | url     | URL to logo                        |
 | name     | string  | Company name                       |
@@ -403,10 +403,10 @@ None
 
 **Fields**
 
-| Name | Type    | Description        |
-|------|---------|--------------------|
-| id   | integer | Department ID      |
-| desc | string  | Name of department |
+| Name | Type    | Description                   |
+|------|---------|-------------------------------|
+| id   | integer | Department ID                 |
+| desc | string  | HTML-formatted string of text |
 
 ### Location
 
