@@ -131,6 +131,19 @@ Content-Type: application/json
 {'id': 123}
 ```
 
+> Example using a local JSON file
+
+```shell
+
+# Request
+curl -i \
+    -X POST "$HOST/$API_VERSION/applications/" \
+    -H "X-App-Id: $APP_ID" \
+    -H "X-App-Key: $APP_KEY" \
+    -H "Content-Type: application/json"
+    -d @<PATH-TO-FILE>
+```
+
 > Example with files attached (multipart/form-data):
 
 ```shell
