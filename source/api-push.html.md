@@ -277,6 +277,7 @@ Content-Type: application/json
     "first_name": "Kalle",
     "last_name": "Kula",
     "email": "kalle@kula.se",
+    "url": "https://staging.jobylon.com/application/1/",
     "source_type": "applied",
     "status": {
       "id": 2,
