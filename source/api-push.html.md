@@ -393,18 +393,19 @@ Status Code: 2XX
 
 ### Application
 
-| Name           | Type    | Description                                                                   |
-| ---            | ---     | ---                                                                           |
-| id             | integer | Application ID                                                                |
-| first_name     | string  | First name                                                                    |
-| last_name      | string  | Last name                                                                     |
-| email          | string  | Email                                                                         |
-| rejection_sent | boolean | Info regarding if the rejection has been communicated to the applicant or not |
-| status         | object  | The [status](#status) object                                                  |
-| source_type    | string  | The [source](#source-type) where the application was received                 |
-| job            | object  | The [job](#job) object                                                        |
-| owner          | object  | The [user](#user) that owns the application                                   |
-| ab_test        | string  | A unique identifier used for A/B testing                                      |
+| Name           | Type         | Description                                                                   |
+| ---            | ---          | ---                                                                           |
+| id             | integer      | Application ID                                                                |
+| first_name     | string       | First name                                                                    |
+| last_name      | string       | Last name                                                                     |
+| email          | string       | Email                                                                         |
+| url            | string (URL) | Deep link to the application in Jobylon                                       |
+| rejection_sent | boolean      | Info regarding if the rejection has been communicated to the applicant or not |
+| status         | object       | The [status](#status) object                                                  |
+| source_type    | string       | The [source](#source-type) where the application was received                 |
+| job            | object       | The [job](#job) object                                                        |
+| owner          | object       | The [user](#user) that owns the application                                   |
+| ab_test        | string       | A unique identifier used for A/B testing                                      |
 
 ### Source Type
 
