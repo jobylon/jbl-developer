@@ -64,6 +64,7 @@ curl -i \
         "email": "kalle@kula.se",
         "phone": "+4670-123456789",
         "ln_url": "https://www.linkedin.com/in/kalle-kula-123a4567",
+        "cv_url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
         "message": "Message from the applicant...",
         "source_type": "applied",
         "source_json": {
@@ -112,7 +113,7 @@ curl -i \
                     ]
                 }, {
                   "order": 4,
-                  "question": "Do they have a EU work permit?", 
+                  "question": "Do they have a EU work permit?",
                   "question_type": "select-one",
                   "answer": "yes"
                 }
@@ -194,14 +195,21 @@ None
 | message            | string  |            | Message from the applicant                 |
 | source_type        | string  | yes        | Source type (applied/applied-silent/recommended/sourced). If set to applied, a thank-you email will be sent to the applicant. |
 | source_json        | object  | yes        | Additional source data (partner dependent, but using the data from the example will be nicely styled in Jobylon. |
-| cv                 | file    |            | Application file (supported using multipart/form-data)  |
-| cover_letter       | file    |            | Application file (supported using multipart/form-data)  |
-| other_1            | file    |            | Application file (supported using multipart/form-data)  |
-| other_2            | file    |            | Application file (supported using multipart/form-data)  |
-| other_3            | file    |            | Application file (supported using multipart/form-data)  |
-| other_4            | file    |            | Application file (supported using multipart/form-data)  |
-| other_5            | file    |            | Application file (supported using multipart/form-data)  |
-| ab_test            | string  |            | A unique identifier used for A/B testing                |
+| cv                 | file    |            | Application file (supported using multipart/form-data)    |
+| cv_url             | URL     |            | URL to the file to be downloaded and assigned to the field|
+| cover_letter       | file    |            | Application file (supported using multipart/form-data)    |
+| cover_letter_url   | URL     |            | URL to the file to be downloaded and assigned to the field|
+| other_1            | file    |            | Application file (supported using multipart/form-data)    |
+| other_1_url        | URL     |            | URL to the file to be downloaded and assigned to the field|
+| other_2            | file    |            | Application file (supported using multipart/form-data)    |
+| other_2_url        | URL     |            | URL to the file to be downloaded and assigned to the field|
+| other_3            | file    |            | Application file (supported using multipart/form-data)    |
+| other_3_url        | URL     |            | URL to the file to be downloaded and assigned to the field|
+| other_4            | file    |            | Application file (supported using multipart/form-data)    |
+| other_4_url        | URL     |            | URL to the file to be downloaded and assigned to the field|
+| other_5            | file    |            | Application file (supported using multipart/form-data)    |
+| other_5_url        | URL     |            | URL to the file to be downloaded and assigned to the field|
+| ab_test            | string  |            | A unique identifier used for A/B testing                  |
 | original_referrer  | string  |            | Value used to keep track on the application origin (used in analytics) |
 
 
@@ -316,13 +324,13 @@ Content-Type: application/json
         {
           "location": "Stockholm",
           "location_json": {
-            "country_short": "SE", 
-            "city": "Stockholm", 
-            "url": "https://maps.google.com/?q=Stockholm,+Sweden&ftid=0x465f763119640bcb:0xa80d27d3679d7766", 
-            "country": "Sweden", 
-            "place_id": "ChIJywtkGTF2X0YRZnedZ9MnDag", 
-            "area_1_short": "Stockholm County", 
-            "area_1": "Stockholm County", 
+            "country_short": "SE",
+            "city": "Stockholm",
+            "url": "https://maps.google.com/?q=Stockholm,+Sweden&ftid=0x465f763119640bcb:0xa80d27d3679d7766",
+            "country": "Sweden",
+            "place_id": "ChIJywtkGTF2X0YRZnedZ9MnDag",
+            "area_1_short": "Stockholm County",
+            "area_1": "Stockholm County",
             "city_short": "Stockholm"
           }
         }
