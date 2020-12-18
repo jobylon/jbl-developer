@@ -2,13 +2,13 @@ version: 2
 jobs:
   docs-build:
     docker:
-      - image: circleci/ruby:2.6.1-node
+      - image: circleci/ruby:2.3.3-node
 
     steps:
       - checkout
 
       - restore_cache:
-          key: circlev3-{{ checksum "Gemfile.lock" }}
+          key: circlev4-{{ checksum "Gemfile.lock" }}
       - run:
           name: Configure Bundler - https://discuss.circleci.com/t/using-bundler-2-0-during-ci-fails/27411/3
           command: |
