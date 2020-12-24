@@ -320,10 +320,10 @@
                           <li>
                             <a href="#through-the-push-api" class="toc-h3 toc-link" data-title="Through the Push API">Through the Push API</a>
                           </li>
+                          <li>
+                            <a href="#usecase-example" class="toc-h3 toc-link" data-title="Usecase example">Usecase example</a>
+                          </li>
                       </ul>
-                  </li>
-                  <li>
-                    <a href="#a-b-testing-and-webhooks-usecase-example" class="toc-h2 toc-link" data-title="A/B Testing and Webhooks usecase example">A/B Testing and Webhooks usecase example</a>
                   </li>
               </ul>
           </li>
@@ -380,6 +380,7 @@ curl -i <span class="se">\</span>
         "email": "kalle@kula.se",
         "phone": "+4670-123456789",
         "ln_url": "https://www.linkedin.com/in/kalle-kula-123a4567",
+        "cv_url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
         "message": "Message from the applicant...",
         "source_type": "applied",
         "source_json": {
@@ -428,7 +429,7 @@ curl -i <span class="se">\</span>
                     ]
                 }, {
                   "order": 4,
-                  "question": "Do they have a EU work permit?", 
+                  "question": "Do they have a EU work permit?",
                   "question_type": "select-one",
                   "answer": "yes"
                 }
@@ -442,6 +443,18 @@ Status Code: 201 Created
 Content-Type: application/json
 
 <span class="o">{</span><span class="s1">'id'</span>: 123<span class="o">}</span>
+</code></pre>
+<blockquote>
+<p>Example using a local JSON file</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+<span class="c"># Request</span>
+curl -i <span class="se">\</span>
+    -X POST <span class="s2">"</span><span class="nv">$HOST</span><span class="s2">/</span><span class="nv">$API_VERSION</span><span class="s2">/applications/"</span> <span class="se">\</span>
+    -H <span class="s2">"X-App-Id: </span><span class="nv">$APP_ID</span><span class="s2">"</span> <span class="se">\</span>
+    -H <span class="s2">"X-App-Key: </span><span class="nv">$APP_KEY</span><span class="s2">"</span> <span class="se">\</span>
+    -H <span class="s2">"Content-Type: application/json"</span>
+    -d @&lt;PATH-TO-FILE&gt;
 </code></pre>
 <blockquote>
 <p>Example with files attached (multipart/form-data):</p>
@@ -548,10 +561,22 @@ curl -i <span class="se">\</span>
 <td>Application file (supported using multipart/form-data)</td>
 </tr>
 <tr>
+<td>cv_url</td>
+<td>URL</td>
+<td></td>
+<td>URL to the file to be downloaded and assigned to the field</td>
+</tr>
+<tr>
 <td>cover_letter</td>
 <td>file</td>
 <td></td>
 <td>Application file (supported using multipart/form-data)</td>
+</tr>
+<tr>
+<td>cover_letter_url</td>
+<td>URL</td>
+<td></td>
+<td>URL to the file to be downloaded and assigned to the field</td>
 </tr>
 <tr>
 <td>other_1</td>
@@ -560,10 +585,22 @@ curl -i <span class="se">\</span>
 <td>Application file (supported using multipart/form-data)</td>
 </tr>
 <tr>
+<td>other_1_url</td>
+<td>URL</td>
+<td></td>
+<td>URL to the file to be downloaded and assigned to the field</td>
+</tr>
+<tr>
 <td>other_2</td>
 <td>file</td>
 <td></td>
 <td>Application file (supported using multipart/form-data)</td>
+</tr>
+<tr>
+<td>other_2_url</td>
+<td>URL</td>
+<td></td>
+<td>URL to the file to be downloaded and assigned to the field</td>
 </tr>
 <tr>
 <td>other_3</td>
@@ -572,16 +609,34 @@ curl -i <span class="se">\</span>
 <td>Application file (supported using multipart/form-data)</td>
 </tr>
 <tr>
+<td>other_3_url</td>
+<td>URL</td>
+<td></td>
+<td>URL to the file to be downloaded and assigned to the field</td>
+</tr>
+<tr>
 <td>other_4</td>
 <td>file</td>
 <td></td>
 <td>Application file (supported using multipart/form-data)</td>
 </tr>
 <tr>
+<td>other_4_url</td>
+<td>URL</td>
+<td></td>
+<td>URL to the file to be downloaded and assigned to the field</td>
+</tr>
+<tr>
 <td>other_5</td>
 <td>file</td>
 <td></td>
 <td>Application file (supported using multipart/form-data)</td>
+</tr>
+<tr>
+<td>other_5_url</td>
+<td>URL</td>
+<td></td>
+<td>URL to the file to be downloaded and assigned to the field</td>
 </tr>
 <tr>
 <td>ab_test</td>
@@ -677,18 +732,20 @@ Content-Type: application/json
     "first_name": "Kalle",
     "last_name": "Kula",
     "email": "kalle@kula.se",
+    "url": "https://staging.jobylon.com/application/1/",
     "source_type": "applied",
     "status": {
       "id": 2,
       "name": "In Progress",
-      "group": 1,
+      "group": 1
     },
     "owner": {
       "id": 1,
       "name": "Application Owner",
+      "email": "application.owner@company.com"
     },
     "rejection_sent": false,
-    "ab_test": 'ab-test-1',
+    "ab_test": "ab-test-1",
     "job": {
       "id": 1,
       "title": "Some title",
@@ -699,54 +756,55 @@ Content-Type: application/json
       "contact_email": "manager@company.com",
       "employment_type": {
         "id": 1,
-        "text": "Full-time",
+        "text": "Full-time"
       },
       "experience": {
         "id": 1,
-        "text": "Entry level",
+        "text": "Entry level"
       },
       "function": {
         "id": 1,
-        "text": "IT &amp; Infrastructure",
+        "text": "IT &amp; Infrastructure"
       },
       "language": "sv",
       "location_set": [
         {
           "location": "Stockholm",
           "location_json": {
-            "country_short": "SE", 
-            "city": "Stockholm", 
-            "url": "https://maps.google.com/?q=Stockholm,+Sweden&amp;ftid=0x465f763119640bcb:0xa80d27d3679d7766", 
-            "country": "Sweden", 
-            "place_id": "ChIJywtkGTF2X0YRZnedZ9MnDag", 
-            "area_1_short": "Stockholm County", 
-            "area_1": "Stockholm County", 
+            "country_short": "SE",
+            "city": "Stockholm",
+            "url": "https://maps.google.com/?q=Stockholm,+Sweden&amp;ftid=0x465f763119640bcb:0xa80d27d3679d7766",
+            "country": "Sweden",
+            "place_id": "ChIJywtkGTF2X0YRZnedZ9MnDag",
+            "area_1_short": "Stockholm County",
+            "area_1": "Stockholm County",
             "city_short": "Stockholm"
-          },
-        },
+          }
+        }
       ],
       "categories": [
         {
           "id": 1,
-          "text": "Technology",
-        },
+          "text": "Technology"
+        }
       ],
       "departments": [
         {
           "id": 1,
-          "text": "IT",
-        },
+          "text": "IT"
+        }
       ],
       "company": {
         "id": 1,
-        "name": "Some Company",
+        "name": "Some Company"
       },
       "owner": {
         "id": 2,
         "name": "Job Owner",
-      },
-    },
-  },
+        "email": "job.owner@company.com"
+      }
+    }
+  }
 }
 </code></pre><pre class="highlight plaintext"><code># Response
 Status Code: 2XX
@@ -873,6 +931,11 @@ Status Code: 2XX
 <td>email</td>
 <td>string</td>
 <td>Email</td>
+</tr>
+<tr>
+<td>url</td>
+<td>string (URL)</td>
+<td>Deep link to the application in Jobylon</td>
 </tr>
 <tr>
 <td>rejection_sent</td>
@@ -1293,6 +1356,11 @@ Status Code: 2XX
 <td>string</td>
 <td>Name</td>
 </tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>Email</td>
+</tr>
 </tbody></table>
 <h2 id='a-b-testing'>A/B Testing</h2>
 <p>A/B testing for customers who want to try different application flows</p>
@@ -1304,7 +1372,7 @@ Status Code: 2XX
 <aside class="notice">
 Please ensure that the <code>ab_test</code> parameter is less than <code>20 characters</code>
 </aside>
-<h2 id='a-b-testing-and-webhooks-usecase-example'>A/B Testing and Webhooks usecase example</h2>
+<h3 id='usecase-example'>Usecase example</h3>
 <p><a href="https://mermaid-js.github.io/mermaid-live-editor/#/edit/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG4gICAgcGFydGljaXBhbnQgQyBhcyBDYW5kaWRhdGVcbiAgICBwYXJ0aWNpcGFudCBXIGFzIFdlYlxuICAgIHBhcnRpY2lwYW50IEogYXMgSm9ieWxvblxuICAgIHBhcnRpY2lwYW50IEJJIGFzIEJJXG4gICAgQy0-Plc6IEZvbGxvdyBsaW5rIHRvIHNpdGVcbiAgICBhY3RpdmF0ZSBXXG4gICAgTm90ZSByaWdodCBvZiBDOiBTZXNzaW9uIGdldHMgdGFnZ2VkPGJyLz4gd2l0aCBhIHVuaXF1ZSBpZC48YnIvPiBFeDogWFlaMTIzXG4gICAgVy0-Pko6IEZvbGxvdyBsaW5rIHRvIEpvYnlsb25cbiAgICBkZWFjdGl2YXRlIFdcbiAgICBhY3RpdmF0ZSBKXG4gICAgTm90ZSByaWdodCBvZiBXOiBMaW5rIGNvbnRhaW5zIHF1ZXJ5PGJyLz4gcGFyYW1ldGVyIGFiX3Rlc3QuPGJyLz4gRXg6ID9hYl90ZXN0PVhZWjEyMyAgXG4gICAgSi0-Pko6IENhbmRpYXRlIGFwcGxpZXMgdG8gam9iXG4gICAgYWx0IEJJIERCIGFjY2Vzc1xuICAgICAgICBOb3RlIHJpZ2h0IG9mIEo6IE5pZ2h0bHkgZXhwb3J0IHRvPGJyLz4gZGVkaWNhdGVkIGRhdGFiYXNlPGJyLz4gaG9zdGVkIGJ5IEpvYnlsb248YnIvPiBhbmQgYWNjZXNzZWQgYnk8YnIvPiBCSSB0b29sLiBcbiAgICBlbHNlIENTViBleHBvcnRcbiAgICAgICAgTm90ZSByaWdodCBvZiBKOiBNYW51YWwgZXhwb3J0ZWQgYnk8YnIvPiBKb2J5bG9uIFN1cHBvcnQ8YnIvPiBpbXBvcnRlZCBpbnRvIEJJPGJyLz4gYnkgY2xpZW50LlxuICAgIGVsc2UgV2ViaG9va3NcbiAgICAgICAgSi0-PkJJOiBBcHBsaWNhdGlvbkV2ZW50OmNyZWF0ZWRcbiAgICAgICAgYWN0aXZhdGUgQklcbiAgICAgICAgTm90ZSByaWdodCBvZiBKOiBBbGwgYXBwbGljYXRpb24gZGF0YTxici8-IGluYy4gaWQsIGFiX3Rlc3QuLi5cbiAgICAgICAgQkktPj5CSTogUHJvY2VzcyBkYXRhIGFuZCBjb25uZWN0PGJyLz4gdG8gb3RoZXIgZGF0YSBzb3VyY2VzXG4gICAgICAgIEJJLS0-Pko6IFxuICAgICAgICBkZWFjdGl2YXRlIEJJXG4gICAgICAgIGRlYWN0aXZhdGUgSlxuICAgICAgICBsb29wIFN0YXR1cyBjaGFuZ2VkXG4gICAgICAgICAgICBhY3RpdmF0ZSBKXG4gICAgICAgICAgICBKLT4-Qkk6IEFwcGxpY2F0aW9uRXZlbnQ6c3RhdHVzX2NoYW5nZWRcbiAgICAgICAgICAgIGFjdGl2YXRlIEJJXG4gICAgICAgICAgICBOb3RlIHJpZ2h0IG9mIEo6IEFsbCBhcHBsaWNhdGlvbiBkYXRhPGJyLz4gaW5jLiBpZCwgYWJfdGVzdC4uLlxuICAgICAgICAgICAgQkktPj5CSTogUHJvY2VzcyBkYXRhIGFuZCBhZGQ8YnIvPiBzdGF0dXMgY2hhbmdlc1xuICAgICAgICAgICAgQkktLT4-SjogXG4gICAgICAgICAgICBkZWFjdGl2YXRlIEJJXG4gICAgICAgICAgICBkZWFjdGl2YXRlIEpcbiAgICAgICAgZW5kXG4gICAgZW5kIiwibWVybWFpZCI6eyJ0aGVtZSI6ImRlZmF1bHQifX0"><img src="https://mermaid.ink/img/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG4gICAgcGFydGljaXBhbnQgQyBhcyBDYW5kaWRhdGVcbiAgICBwYXJ0aWNpcGFudCBXIGFzIFdlYlxuICAgIHBhcnRpY2lwYW50IEogYXMgSm9ieWxvblxuICAgIHBhcnRpY2lwYW50IEJJIGFzIEJJXG4gICAgQy0-Plc6IEZvbGxvdyBsaW5rIHRvIHNpdGVcbiAgICBhY3RpdmF0ZSBXXG4gICAgTm90ZSByaWdodCBvZiBDOiBTZXNzaW9uIGdldHMgdGFnZ2VkPGJyLz4gd2l0aCBhIHVuaXF1ZSBpZC48YnIvPiBFeDogWFlaMTIzXG4gICAgVy0-Pko6IEZvbGxvdyBsaW5rIHRvIEpvYnlsb25cbiAgICBkZWFjdGl2YXRlIFdcbiAgICBhY3RpdmF0ZSBKXG4gICAgTm90ZSByaWdodCBvZiBXOiBMaW5rIGNvbnRhaW5zIHF1ZXJ5PGJyLz4gcGFyYW1ldGVyIGFiX3Rlc3QuPGJyLz4gRXg6ID9hYl90ZXN0PVhZWjEyMyAgXG4gICAgSi0-Pko6IENhbmRpYXRlIGFwcGxpZXMgdG8gam9iXG4gICAgYWx0IEJJIERCIGFjY2Vzc1xuICAgICAgICBOb3RlIHJpZ2h0IG9mIEo6IE5pZ2h0bHkgZXhwb3J0IHRvPGJyLz4gZGVkaWNhdGVkIGRhdGFiYXNlPGJyLz4gaG9zdGVkIGJ5IEpvYnlsb248YnIvPiBhbmQgYWNjZXNzZWQgYnk8YnIvPiBCSSB0b29sLiBcbiAgICBlbHNlIENTViBleHBvcnRcbiAgICAgICAgTm90ZSByaWdodCBvZiBKOiBNYW51YWwgZXhwb3J0ZWQgYnk8YnIvPiBKb2J5bG9uIFN1cHBvcnQ8YnIvPiBpbXBvcnRlZCBpbnRvIEJJPGJyLz4gYnkgY2xpZW50LlxuICAgIGVsc2UgV2ViaG9va3NcbiAgICAgICAgSi0-PkJJOiBBcHBsaWNhdGlvbkV2ZW50OmNyZWF0ZWRcbiAgICAgICAgYWN0aXZhdGUgQklcbiAgICAgICAgTm90ZSByaWdodCBvZiBKOiBBbGwgYXBwbGljYXRpb24gZGF0YTxici8-IGluYy4gaWQsIGFiX3Rlc3QuLi5cbiAgICAgICAgQkktPj5CSTogUHJvY2VzcyBkYXRhIGFuZCBjb25uZWN0PGJyLz4gdG8gb3RoZXIgZGF0YSBzb3VyY2VzXG4gICAgICAgIEJJLS0-Pko6IFxuICAgICAgICBkZWFjdGl2YXRlIEJJXG4gICAgICAgIGRlYWN0aXZhdGUgSlxuICAgICAgICBsb29wIFN0YXR1cyBjaGFuZ2VkXG4gICAgICAgICAgICBhY3RpdmF0ZSBKXG4gICAgICAgICAgICBKLT4-Qkk6IEFwcGxpY2F0aW9uRXZlbnQ6c3RhdHVzX2NoYW5nZWRcbiAgICAgICAgICAgIGFjdGl2YXRlIEJJXG4gICAgICAgICAgICBOb3RlIHJpZ2h0IG9mIEo6IEFsbCBhcHBsaWNhdGlvbiBkYXRhPGJyLz4gaW5jLiBpZCwgYWJfdGVzdC4uLlxuICAgICAgICAgICAgQkktPj5CSTogUHJvY2VzcyBkYXRhIGFuZCBhZGQ8YnIvPiBzdGF0dXMgY2hhbmdlc1xuICAgICAgICAgICAgQkktLT4-SjogXG4gICAgICAgICAgICBkZWFjdGl2YXRlIEJJXG4gICAgICAgICAgICBkZWFjdGl2YXRlIEpcbiAgICAgICAgZW5kXG4gICAgZW5kIiwibWVybWFpZCI6eyJ0aGVtZSI6ImRlZmF1bHQifX0" alt="Eyjjb2rlijoic2vxdwvuy2veawfncmftxg4gicagcgfydgljaxbhbnqgqybhcybdyw5kawrhdgvcbiagicbwyxj0awnpcgfudcbxigfzifdlylxuicagihbhcnrpy2lwyw50ieogyxmgsm9iewxvblxuicagihbhcnrpy2lwyw50iejjigfziejjxg4gicagqy0 plc6iezvbgxvdybsaw5rihrvihnpdgvcbiagicbhy3rpdmf0zsbxxg4gicagtm90zsbyawdodcbvzibdoibtzxnzaw9uigdldhmgdgfnz2vkpgjylz4gd2l0acbhihvuaxf1zsbpzc48ynivpibfedogwflamtizxg4gicagvy0 pko6iezvbgxvdybsaw5rihrviepvynlsb25cbiagicbkzwfjdgl2yxrlifdcbiagicbhy3rpdmf0zsbkxg4gicagtm90zsbyawdodcbvzibxoibmaw5rignvbnrhaw5zihf1zxj5pgjylz4gcgfyyw1ldgvyigfix3rlc3qupgjylz4grxg6id9hyl90zxn0pvhzwjeymyagxg4gicagsi0 pko6ienhbmrpyxrligfwcgxpzxmgdg8gam9ixg4gicagywx0iejjiercigfjy2vzc1xuicagicagicbob3rlihjpz2h0ig9mieo6ie5pz2h0bhkgzxhwb3j0ihrvpgjylz4gzgvkawnhdgvkigrhdgfiyxnlpgjylz4gag9zdgvkigj5iepvynlsb248ynivpibhbmqgywnjzxnzzwqgynk8ynivpibcssb0b29slibcbiagicblbhnlientviblehbvcnrcbiagicagicagtm90zsbyawdodcbvzibkoibnyw51ywwgzxhwb3j0zwqgynk8ynivpibkb2j5bg9uifn1chbvcnq8ynivpibpbxbvcnrlzcbpbnrviejjpgjylz4gynkgy2xpzw50llxuicagigvsc2ugv2viag9va3ncbiagicagicagsi0 pkjjoibbchbsawnhdglvbkv2zw50omnyzwf0zwrcbiagicagicagywn0axzhdgugqklcbiagicagicagtm90zsbyawdodcbvzibkoibbbgwgyxbwbgljyxrpb24gzgf0ytxici8 igluyy4gawqsigfix3rlc3quli5cbiagicagicagqkktpj5cstoguhjvy2vzcybkyxrhigfuzcbjb25uzwn0pgjylz4gdg8gb3rozxigzgf0ysbzb3vyy2vzxg4gicagicagiejjls0 pko6ifxuicagicagicbkzwfjdgl2yxrliejjxg4gicagicagigrlywn0axzhdgugslxuicagicagicbsb29wifn0yxr1cybjagfuz2vkxg4gicagicagicagicbhy3rpdmf0zsbkxg4gicagicagicagicbklt4 qkk6iefwcgxpy2f0aw9urxzlbnq6c3rhdhvzx2noyw5nzwrcbiagicagicagicagigfjdgl2yxrliejjxg4gicagicagicagicbob3rlihjpz2h0ig9mieo6iefsbcbhchbsawnhdglvbibkyxrhpgjylz4gaw5jlibpzcwgywjfdgvzdc4ullxuicagicagicagicagqkktpj5cstoguhjvy2vzcybkyxrhigfuzcbhzgq8ynivpibzdgf0dxmgy2hhbmdlc1xuicagicagicagicagqkktlt4 sjogxg4gicagicagicagicbkzwfjdgl2yxrliejjxg4gicagicagicagicbkzwfjdgl2yxrliepcbiagicagicagzw5kxg4gicagzw5kiiwibwvybwfpzci6eyj0agvtzsi6imrlzmf1bhqifx0" /></a></p>
 <h1 id='errors'>Errors</h1>
 <p>API uses the following error codes:</p>
