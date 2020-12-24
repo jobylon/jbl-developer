@@ -15,6 +15,8 @@ jobs:
            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
            source $BASH_ENV
            gem install bundler
+      # This needs more investigation, but works for now
+      - run: gem uninstall bundler -v ">= 2.0"
       - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
       - save_cache:
           key: circlev2-{{ checksum "Gemfile.lock" }}
