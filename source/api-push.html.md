@@ -285,6 +285,7 @@ Content-Type: application/json
     "first_name": "Kalle",
     "last_name": "Kula",
     "email": "kalle@kula.se",
+    "phone_number": "+4670123456789",
     "url": "https://staging.jobylon.com/application/1/",
     "source_type": "applied",
     "status": {
@@ -408,6 +409,7 @@ Status Code: 2XX
 | first_name     | string       | First name                                                                    |
 | last_name      | string       | Last name                                                                     |
 | email          | string       | Email                                                                         |
+| phone_number   | string       | Phone number                                                                  |
 | url            | string (URL) | Deep link to the application in Jobylon                                       |
 | rejection_sent | boolean      | Info regarding if the rejection has been communicated to the applicant or not |
 | status         | object       | The [status](#status) object                                                  |
