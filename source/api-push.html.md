@@ -227,6 +227,318 @@ None
 | 403    | Permission denied                                    |
 | 405    | Method not supported                                 |
 
+
+## ApplicationUser
+
+> To run the examples:
+
+```
+export HOST='https://staging.jobylon.com'
+export API_VERSION='p1'
+export APP_ID='0123456789123456'
+export APP_KEY='AbC123XyZ'
+```
+
+> Basic example:
+
+```shell
+# Request
+curl -i \
+    -X GET "$HOST/$API_VERSION/applications/1/users/eyJpZCI6MX0:1lJeOm:DZ3qH1ASZOCg5unqZyC_s9GlkJo/" \
+    -H "X-App-Id: $APP_ID" \
+    -H "X-App-Key: $APP_KEY" \
+    -H "Content-Type: application/json"
+```
+
+```shell
+# Response
+Status Code: 200 Ok
+Content-Type: application/json
+
+{
+  'count': 6,
+  'next': '$HOST/$API_VERSION/applications/1/users/eyJpZs45XdX0:1lJeOm:DZ3qH1ASZOCg5scD43yC_s9GlkJo/?page=4',
+  'previous': '$HOST/$API_VERSION/applications/1/users/eyJpZs45XdX0:1lJeOm:DZ3qH1ASZOCg5scD43yC_s9GlkJo/?page=2',
+  'results': [
+    {
+      'id': 1,
+      'role': 'admin',
+      'first_name': 'Kalle',
+      'last_name': 'Kula',
+      'email_primary': 'kalle@kulla.com',
+      'emails': ['kula@kalle.com', 'kalle@kulla.com']
+    },
+    {
+      'id': 2,
+      'role': 'owner',
+      'first_name': 'Kalle',
+      'last_name': 'Kula',
+      'email_primary': 'kalle@kulla.com',
+      'emails': ['kula@kalle.com', 'kalle@kulla.com']
+    },{
+      'id': 3,
+      'role': 'job_owner',
+      'first_name': 'Kalle',
+      'last_name': 'Kula',
+      'email_primary': 'kalle@kulla.com',
+      'emails': ['kula@kalle.com', 'kalle@kulla.com']
+    },
+    {
+      'id': 4,
+      'role': 'collaborator',
+      'first_name': 'Kalle',
+      'last_name': 'Kula',
+      'email_primary': 'kalle@kulla.com',
+      'emails': ['kula@kalle.com', 'kalle@kulla.com']
+    },
+    {
+      'id': 5,
+      'role': 'viewer',
+      'first_name': 'Kalle',
+      'last_name': 'Kula',
+      'email_primary': 'kalle@kulla.com',
+      'emails': ['kula@kalle.com', 'kalle@kulla.com']
+    },
+    {
+      'id': 6,
+      'role': 'application_interviewer',
+      'first_name': 'Kalle',
+      'last_name': 'Kula',
+      'email_primary': 'kalle@kulla.com',
+      'emails': ['kula@kalle.com', 'kalle@kulla.com']
+    }
+  ]
+}
+```
+
+### List
+
+GET `/applications/<application_pk>/users/<sign_hash>`
+
+**Query String Parameters**
+
+| Name  | Type   | Mandatory? | Description                                     |
+| ---   | ---    | ---        | ---                                             |
+| roles | string | no         | [Roles](#roles) that can be use to filter users |
+
+**Response**
+
+| Name     | Type         | Description                                                          |
+| ---      | ---          | ---                                                                  |
+| count    | integer      | Total number of results                                              |
+| next     | string (URL) | Link to the next page                                                |
+| previous | string (URL) | Link to the previous page                                            |
+| results  | array        | Collection of [users](#userrole) that have access to the application |
+
+**Exceptions**
+
+| Status | Description           |
+| ---    | ---                   |
+| 403    | Permission denied     |
+| 405    | Method not supported  |
+
+## JobUser
+
+> To run the examples:
+
+```
+export HOST='https://staging.jobylon.com'
+export API_VERSION='p1'
+export APP_ID='0123456789123456'
+export APP_KEY='AbC123XyZ'
+```
+
+> Basic example:
+
+```shell
+# Request
+curl -i \
+    -X GET "$HOST/$API_VERSION/jobs/1/users/eyJpZCI6MX0:1lJeOm:DZ3qH1ASZOCg5unqZyC_s9GlkJo/" \
+    -H "X-App-Id: $APP_ID" \
+    -H "X-App-Key: $APP_KEY" \
+    -H "Content-Type: application/json"
+```
+
+```shell
+# Response
+Status Code: 200 Ok
+Content-Type: application/json
+
+{
+  'count': 6,
+  'next': '$HOST/$API_VERSION/jobs/1/users/eyJpZs45XdX0:1lJeOm:DZ3qH1ASZOCg5scD43yC_s9GlkJo/?page=4',
+  'previous': '$HOST/$API_VERSION/jobs/1/users/eyJpZs45XdX0:1lJeOm:DZ3qH1ASZOCg5scD43yC_s9GlkJo/?page=2',
+  'results': [
+    {
+      'id': 1,
+      'role': 'admin',
+      'first_name': 'Kalle',
+      'last_name': 'Kula',
+      'email_primary': 'kalle@kulla.com',
+      'emails': ['kula@kalle.com', 'kalle@kulla.com']
+    },
+    {
+      'id': 2,
+      'role': 'owner',
+      'first_name': 'Kalle',
+      'last_name': 'Kula',
+      'email_primary': 'kalle@kulla.com',
+      'emails': ['kula@kalle.com', 'kalle@kulla.com']
+    },{
+      'id': 3,
+      'role': 'job_owner',
+      'first_name': 'Kalle',
+      'last_name': 'Kula',
+      'email_primary': 'kalle@kulla.com',
+      'emails': ['kula@kalle.com', 'kalle@kulla.com']
+    },
+    {
+      'id': 4,
+      'role': 'collaborator',
+      'first_name': 'Kalle',
+      'last_name': 'Kula',
+      'email_primary': 'kalle@kulla.com',
+      'emails': ['kula@kalle.com', 'kalle@kulla.com']
+    },
+    {
+      'id': 5,
+      'role': 'viewer',
+      'first_name': 'Kalle',
+      'last_name': 'Kula',
+      'email_primary': 'kalle@kulla.com',
+      'emails': ['kula@kalle.com', 'kalle@kulla.com']
+    },
+    {
+      'id': 6,
+      'role': 'job_interviewer',
+      'first_name': 'Kalle',
+      'last_name': 'Kula',
+      'email_primary': 'kalle@kulla.com',
+      'emails': ['kula@kalle.com', 'kalle@kulla.com']
+    }
+  ]
+}
+```
+
+### List
+
+GET `/jobs/<job_pk>/users/<sign_hash>`
+
+**Query String Parameters**
+
+| Name  | Type   | Mandatory? | Description                                         |
+| ---   | ---    | ---        | ---                                                 |
+| roles | string | no         | [Roles](#roles) that can be use to filter the users |
+
+**Response**
+
+| Name     | Type         | Description                                                  |
+| ---      | ---          | ---                                                          |
+| count    | integer      | Total number of results                                      |
+| next     | string (URL) | Link to the next page                                        |
+| previous | string (URL) | Link to the previous page                                    |
+| results  | array        | Collection of [users](#userrole) that have access to the job |
+
+**Exceptions**
+
+| Status | Description           |
+| ---    | ---                   |
+| 403    | Permission denied     |
+| 405    | Method not supported  |
+
+## CompanyUser
+
+> To run the examples:
+
+```
+export HOST='https://staging.jobylon.com'
+export API_VERSION='p1'
+export APP_ID='0123456789123456'
+export APP_KEY='AbC123XyZ'
+```
+
+> Basic example:
+
+```shell
+# Request
+curl -i \
+    -X GET "$HOST/$API_VERSION/companies/1/users/eyJpZCI6MX0:1lJeOm:DZ3qH1ASZOCg5unqZyC_s9GlkJo/" \
+    -H "X-App-Id: $APP_ID" \
+    -H "X-App-Key: $APP_KEY" \
+    -H "Content-Type: application/json"
+```
+
+```shell
+# Response
+Status Code: 200 Ok
+Content-Type: application/json
+
+{
+  'count': 4,
+  'next': '$HOST/$API_VERSION/companies/1/users/eyJpZs45XdX0:1lJeOm:DZ3qH1ASZOCg5scD43yC_s9GlkJo/?page=4',
+  'previous': '$HOST/$API_VERSION/companies/1/users/eyJpZs45XdX0:1lJeOm:DZ3qH1ASZOCg5scD43yC_s9GlkJo/?page=2',
+  'results': [
+    {
+      'id': 1,
+      'role': 'admin',
+      'first_name': 'Kalle',
+      'last_name': 'Kula',
+      'email_primary': 'kalle@kulla.com',
+      'emails': ['kula@kalle.com', 'kalle@kulla.com']
+    },
+    {
+      'id': 2,
+      'role': 'owner',
+      'first_name': 'Kalle',
+      'last_name': 'Kula',
+      'email_primary': 'kalle@kulla.com',
+      'emails': ['kula@kalle.com', 'kalle@kulla.com']
+    },{
+      'id': 3,
+      'role': 'Manager',
+      'first_name': 'Kalle',
+      'last_name': 'Kula',
+      'email_primary': 'kalle@kulla.com',
+      'emails': ['kula@kalle.com', 'kalle@kulla.com']
+    },
+    {
+      'id': 4,
+      'role': 'member',
+      'first_name': 'Kalle',
+      'last_name': 'Kula',
+      'email_primary': 'kalle@kulla.com',
+      'emails': ['kula@kalle.com', 'kalle@kulla.com']
+    },
+  ]
+}
+```
+
+### List
+
+GET `/companies/<company_pk>/users/<sign_hash>`
+
+**Query String Parameters**
+
+| Name  | Type   | Mandatory? | Description                                         |
+| ---   | ---    | ---        | ---                                                 |
+| roles | string | no         | [Roles](#roles) that can be use to filter the users |
+
+**Response**
+
+| Name     | Type         | Description                                 |
+| ---      | ---          | ---                                         |
+| count    | integer      | Total number of results                     |
+| next     | string (URL) | Link to the next page                       |
+| previous | string (URL) | Link to the previous page                   |
+| results  | array        | Collection of company's [users](#userrole)  |
+
+**Exceptions**
+
+| Status | Description           |
+| ---    | ---                   |
+| 403    | Permission denied     |
+| 405    | Method not supported  |
+
 # Webhooks
 
 Callback API for our intergration partners who want to receive and act upon
@@ -300,6 +612,7 @@ Content-Type: application/json
     },
     "rejection_sent": false,
     "ab_test": "ab-test-1",
+    "users_url": "https://staging.jobylon.com/p1/applications/1/users/eyJpZCI6MTkyfQ:1lJG3AKd3PF-luZh0d3dgVn2mATllDe-w",
     "job": {
       "id": 1,
       "title": "Some title",
@@ -308,6 +621,7 @@ Content-Type: application/json
       "status": 1,
       "contact_name": "Manager's Name",
       "contact_email": "manager@company.com",
+      "users_url": "https://staging.jobylon.com/p1/jobs/1/users/eyJpZSDCd6MTkyfQ:1lJG3AKd3dsVDaZh0d3dgVn2mATllDe-w",
       "employment_type": {
         "id": 1,
         "text": "Full-time"
@@ -350,7 +664,8 @@ Content-Type: application/json
       ],
       "company": {
         "id": 1,
-        "name": "Some Company"
+        "name": "Some Company",
+        "users_url": "https://staging.jobylon.com/p1/companies/1/users/eyJpZSDaBf8TkyfQ:1lJG3AKd3dsVF0S96dSdgVn2mATllDe-w"
       },
       "owner": {
         "id": 2,
@@ -403,20 +718,21 @@ Status Code: 2XX
 
 ### Application
 
-| Name           | Type         | Description                                                                   |
-| ---            | ---          | ---                                                                           |
-| id             | integer      | Application ID                                                                |
-| first_name     | string       | First name                                                                    |
-| last_name      | string       | Last name                                                                     |
-| email          | string       | Email                                                                         |
-| phone_number   | string       | Phone number                                                                  |
-| url            | string (URL) | Deep link to the application in Jobylon                                       |
-| rejection_sent | boolean      | Info regarding if the rejection has been communicated to the applicant or not |
-| status         | object       | The [status](#status) object                                                  |
-| source_type    | string       | The [source](#source-type) where the application was received                 |
-| job            | object       | The [job](#job) object                                                        |
-| owner          | object       | The [user](#user) that owns the application                                   |
-| ab_test        | string       | A unique identifier used for A/B testing                                      |
+| Name           | Type         | Description                                                                               |
+| ---            | ---          | ---                                                                                       |
+| id             | integer      | Application ID                                                                            |
+| first_name     | string       | First name                                                                                |
+| last_name      | string       | Last name                                                                                 |
+| email          | string       | Email                                                                                     |
+| phone_number   | string       | Phone number                                                                              |
+| url            | string (URL) | Deep link to the application in Jobylon                                                   |
+| rejection_sent | boolean      | Info regarding if the rejection has been communicated to the applicant or not             |
+| status         | object       | The [status](#status) object                                                              |
+| source_type    | string       | The [source](#source-type) where the application was received                             |
+| job            | object       | The [job](#job) object                                                                    |
+| owner          | object       | The [user](#user) that owns the application                                               |
+| ab_test        | string       | A unique identifier used for A/B testing                                                  |
+| users_url      | string (URL) | Time-limited link to an list of users that have access to the application and their roles |
 
 ### Source Type
 
@@ -449,24 +765,25 @@ Status Code: 2XX
 
 ### Job
 
-| Name            | Type                   | Description                                             |
-| ---             | ---                    | ---                                                     |
-| id              | integer                | Job ID                                                  |
-| title           | string                 | Title of the job                                        |
-| from_date       | string (date-time UTC) | Datetime job first created                              |
-| to_date         | string (date-time UTC) | Deadline for the job                                    |
-| contact_name    | string                 | Contact name                                            |
-| contact_email   | string                 | Contact email                                           |
-| language        | string                 | The [language](#language) of the job                    |
-| location_set    | array                  | The [location(s)](#location) of the job                 |
-| categories      | array                  | The [categories](#category) that this job belongs to    |
-| departments     | array                  | The [departments](#department) that this job belongs to |
-| status          | string                 | The [job status](#job-status) value                     |
-| company         | object                 | The [company](#company) object                          |
-| owner           | object                 | The [user](#user) that owns the job                     |
-| employment_type | object                 | The [employment type](#employtment-type) object         |
-| experience      | object                 | The [experience](#experience) object                    |
-| function        | object                 | The [function](#function) object                        |
+| Name            | Type                   | Description                                                                       |
+| ---             | ---                    | ---                                                                               |
+| id              | integer                | Job ID                                                                            |
+| title           | string                 | Title of the job                                                                  |
+| from_date       | string (date-time UTC) | Datetime job first created                                                        |
+| to_date         | string (date-time UTC) | Deadline for the job                                                              |
+| contact_name    | string                 | Contact name                                                                      |
+| contact_email   | string                 | Contact email                                                                     |
+| language        | string                 | The [language](#language) of the job                                              |
+| location_set    | array                  | The [location(s)](#location) of the job                                           |
+| categories      | array                  | The [categories](#category) that this job belongs to                              |
+| departments     | array                  | The [departments](#department) that this job belongs to                           |
+| status          | string                 | The [job status](#job-status) value                                               |
+| company         | object                 | The [company](#company) object                                                    |
+| owner           | object                 | The [user](#user) that owns the job                                               |
+| employment_type | object                 | The [employment type](#employtment-type) object                                   |
+| experience      | object                 | The [experience](#experience) object                                              |
+| function        | object                 | The [function](#function) object                                                  |
+| users_url       | string (URL)           | Time-limited link to an list of users that have access to the job and their roles |
 
 ### Job Status
 
@@ -486,10 +803,12 @@ Status Code: 2XX
 
 ### Company
 
-| Name  | Type    | Description  |
-| ---   | ---     | ---          |
-| id    | integer | Company ID   |
-| name  | string  | Name         |
+| Name       | Type         | Description                                                                       |
+| ---        | ---          | ---                                                                               |
+| id         | integer      | Company ID                                                                        |
+| name       | string       | Name                                                                              |
+| users_url  | string (URL) | Time-limited link to an list of users that have access to the job and their roles |
+
 
 ### Department
 
@@ -547,9 +866,35 @@ Status Code: 2XX
 | name  | string  | Name         |
 | email | string  | Email        |
 
+### UserRole
+
+| Name          | Type    | Description         |
+| ---           | ---     | ---                 |
+| id            | integer | User ID             |
+| first_name    | string  | First name          |
+| last_name     | string  | Last name           |
+| role          | string  | User [role](#roles) |
+| email_primary | string  | Email               |
+| emails        | array   | Email               |
+
 ## A/B Testing
 
 A/B testing for customers who want to try different application flows
+
+## Roles
+UserRole object can return one of this roles depending on what object/event (job/application) was called.
+
+| Name                    | Description                    |
+| ---                     | ---                            |
+| owner                   | Owner of the company           |
+| admin                   | Administrator of the company   |
+| manager                 | Manager of the company         | 
+| member                  | Member of the company          |
+| collaborator            | Collaborator of the job        |
+| viewer                  | Viewer of the job              |
+| job_owner               | Owner of the job               |
+| job_interviewer         | Interviewer of the job         |
+| application_interviewer | Interviewer of the application |
 
 ### Through Jobylon
 
