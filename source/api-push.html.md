@@ -300,6 +300,7 @@ Content-Type: application/json
     },
     "rejection_sent": false,
     "ab_test": "ab-test-1",
+    "users_url": "https://staging.jobylon.com/p1/applications/1/users/eyJpZCI6MTkyfQ:1lJG3AKd3PF-luZh0d3dgVn2mATllDe-w",
     "job": {
       "id": 1,
       "title": "Some title",
@@ -308,6 +309,7 @@ Content-Type: application/json
       "status": 1,
       "contact_name": "Manager's Name",
       "contact_email": "manager@company.com",
+      "users_url": "https://staging.jobylon.com/p1/jobs/1/users/eyJpZSDCd6MTkyfQ:1lJG3AKd3dsVDaZh0d3dgVn2mATllDe-w",
       "employment_type": {
         "id": 1,
         "text": "Full-time"
@@ -350,7 +352,8 @@ Content-Type: application/json
       ],
       "company": {
         "id": 1,
-        "name": "Some Company"
+        "name": "Some Company",
+        "users_url": "https://staging.jobylon.com/p1/companies/1/users/eyJpZSDaBf8TkyfQ:1lJG3AKd3dsVF0S96dSdgVn2mATllDe-w"
       },
       "owner": {
         "id": 2,
@@ -403,20 +406,21 @@ Status Code: 2XX
 
 ### Application
 
-| Name           | Type         | Description                                                                   |
-| ---            | ---          | ---                                                                           |
-| id             | integer      | Application ID                                                                |
-| first_name     | string       | First name                                                                    |
-| last_name      | string       | Last name                                                                     |
-| email          | string       | Email                                                                         |
-| phone_number   | string       | Phone number                                                                  |
-| url            | string (URL) | Deep link to the application in Jobylon                                       |
-| rejection_sent | boolean      | Info regarding if the rejection has been communicated to the applicant or not |
-| status         | object       | The [status](#status) object                                                  |
-| source_type    | string       | The [source](#source-type) where the application was received                 |
-| job            | object       | The [job](#job) object                                                        |
-| owner          | object       | The [user](#user) that owns the application                                   |
-| ab_test        | string       | A unique identifier used for A/B testing                                      |
+| Name           | Type         | Description                                                                               |
+| ---            | ---          | ---                                                                                       |
+| id             | integer      | Application ID                                                                            |
+| first_name     | string       | First name                                                                                |
+| last_name      | string       | Last name                                                                                 |
+| email          | string       | Email                                                                                     |
+| phone_number   | string       | Phone number                                                                              |
+| url            | string (URL) | Deep link to the application in Jobylon                                                   |
+| rejection_sent | boolean      | Info regarding if the rejection has been communicated to the applicant or not             |
+| status         | object       | The [status](#status) object                                                              |
+| source_type    | string       | The [source](#source-type) where the application was received                             |
+| job            | object       | The [job](#job) object                                                                    |
+| owner          | object       | The [user](#user) that owns the application                                               |
+| ab_test        | string       | A unique identifier used for A/B testing                                                  |
+| users_url      | string (URL) | Time-limited link to an list of users that have access to the application and their roles |
 
 ### Source Type
 
@@ -449,24 +453,25 @@ Status Code: 2XX
 
 ### Job
 
-| Name            | Type                   | Description                                             |
-| ---             | ---                    | ---                                                     |
-| id              | integer                | Job ID                                                  |
-| title           | string                 | Title of the job                                        |
-| from_date       | string (date-time UTC) | Datetime job first created                              |
-| to_date         | string (date-time UTC) | Deadline for the job                                    |
-| contact_name    | string                 | Contact name                                            |
-| contact_email   | string                 | Contact email                                           |
-| language        | string                 | The [language](#language) of the job                    |
-| location_set    | array                  | The [location(s)](#location) of the job                 |
-| categories      | array                  | The [categories](#category) that this job belongs to    |
-| departments     | array                  | The [departments](#department) that this job belongs to |
-| status          | string                 | The [job status](#job-status) value                     |
-| company         | object                 | The [company](#company) object                          |
-| owner           | object                 | The [user](#user) that owns the job                     |
-| employment_type | object                 | The [employment type](#employtment-type) object         |
-| experience      | object                 | The [experience](#experience) object                    |
-| function        | object                 | The [function](#function) object                        |
+| Name            | Type                   | Description                                                                       |
+| ---             | ---                    | ---                                                                               |
+| id              | integer                | Job ID                                                                            |
+| title           | string                 | Title of the job                                                                  |
+| from_date       | string (date-time UTC) | Datetime job first created                                                        |
+| to_date         | string (date-time UTC) | Deadline for the job                                                              |
+| contact_name    | string                 | Contact name                                                                      |
+| contact_email   | string                 | Contact email                                                                     |
+| language        | string                 | The [language](#language) of the job                                              |
+| location_set    | array                  | The [location(s)](#location) of the job                                           |
+| categories      | array                  | The [categories](#category) that this job belongs to                              |
+| departments     | array                  | The [departments](#department) that this job belongs to                           |
+| status          | string                 | The [job status](#job-status) value                                               |
+| company         | object                 | The [company](#company) object                                                    |
+| owner           | object                 | The [user](#user) that owns the job                                               |
+| employment_type | object                 | The [employment type](#employtment-type) object                                   |
+| experience      | object                 | The [experience](#experience) object                                              |
+| function        | object                 | The [function](#function) object                                                  |
+| users_url       | string (URL)           | Time-limited link to an list of users that have access to the job and their roles |
 
 ### Job Status
 
@@ -486,10 +491,12 @@ Status Code: 2XX
 
 ### Company
 
-| Name  | Type    | Description  |
-| ---   | ---     | ---          |
-| id    | integer | Company ID   |
-| name  | string  | Name         |
+| Name       | Type         | Description                                                                       |
+| ---        | ---          | ---                                                                               |
+| id         | integer      | Company ID                                                                        |
+| name       | string       | Name                                                                              |
+| users_url  | string (URL) | Time-limited link to an list of users that have access to the job and their roles |
+
 
 ### Department
 
